@@ -15,8 +15,12 @@ class Karyawan extends Authenticatable
      *
      * @var array
      */
+    protected $table = 'karyawan';
+    
     protected $fillable = [
-        'name', 'email', 'password',
+        'gambar_karyawan', 'asal_karyawan', 'foto_ktp_karyawan',
+        'alamat_karyawan', 'tanggal_lahir_karyawan', 'no_handphone_karyawan',
+        'name_karyawan', 'email_karyawan', 'password_karyawan'
     ];
 
     /**
@@ -25,7 +29,7 @@ class Karyawan extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password_karyawan', 'remember_token',
     ];
 
     /**
