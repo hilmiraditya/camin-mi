@@ -13,7 +13,11 @@ class StokCabang extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('stok_cabang', function (Blueprint $table) {
+            $table->increments('idStokCabang');
+            $table->integer('jumlah_stok_cabang');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +27,6 @@ class StokCabang extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('stok_cabang');
     }
 }

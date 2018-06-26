@@ -13,7 +13,15 @@ class Katalog extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('katalog', function (Blueprint $table) {
+            $table->increments('idKatalog');
+            $table->string('nama_katalog');
+            $table->string('gambar_katalog');
+            $table->integer('harga_katalog');
+            $table->string('keterangan_cabang');
+            $table->string('no_cabang');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +31,6 @@ class Katalog extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('katalog');
     }
 }

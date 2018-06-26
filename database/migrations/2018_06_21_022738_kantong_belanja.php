@@ -13,7 +13,12 @@ class KantongBelanja extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('kantong_belanja', function (Blueprint $table) {
+            $table->increments('idKantongBelanja');
+            $table->integer('jumlah_kantong_belanja');
+            $table->string('keterangan_kantong_belanja');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +28,6 @@ class KantongBelanja extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('kantong_belanja');
     }
 }

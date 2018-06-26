@@ -13,7 +13,13 @@ class Penjualan extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('penjualan', function (Blueprint $table) {
+            $table->increments('idPenjualan');
+            $table->integer('jumlah_penjualan');
+            $table->string('keterangan_penjualan');
+            $table->string('atas_nama_penjualan');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +29,6 @@ class Penjualan extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('penjualan');
     }
 }
