@@ -16,7 +16,7 @@ class Penjualan extends Migration
         Schema::create('penjualan', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('jumlah');
-            $table->string('keterangan');
+            $table->string('keterangan')->nullable();
             $table->string('atas_nama');
             $table->unsignedInteger('katalog_id');
             $table->foreign('katalog_id')->references('id')->on('katalog')->onDelete('cascade');

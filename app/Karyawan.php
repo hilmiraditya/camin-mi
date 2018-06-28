@@ -42,4 +42,9 @@ class Karyawan extends Authenticatable
     {
         $this->notify(new KaryawanResetPassword($token));
     }
+
+    public function cabang()
+    {
+        return $this->belongsTo('App\Cabang');
+    }
 }

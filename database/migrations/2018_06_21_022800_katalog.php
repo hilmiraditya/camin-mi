@@ -16,10 +16,10 @@ class Katalog extends Migration
         Schema::create('katalog', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nama');
-            $table->string('gambar');
+            $table->string('gambar')->nullable();
             $table->integer('harga');
-            $table->integer('diskon');
-            $table->string('keterangan');
+            $table->integer('diskon')->nullable();
+            $table->string('keterangan')->nullable();
             $table->timestamps();
         });
     }

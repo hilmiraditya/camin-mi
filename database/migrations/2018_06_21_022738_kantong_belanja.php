@@ -16,7 +16,7 @@ class KantongBelanja extends Migration
         Schema::create('kantong_belanja', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('jumlah');
-            $table->string('keterangan');
+            $table->string('keterangan')->nullable();
             $table->unsignedInteger('katalog_id');
             $table->foreign('katalog_id')->references('id')->on('katalog')->onDelete('cascade');
             $table->timestamps();

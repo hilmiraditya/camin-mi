@@ -14,12 +14,12 @@ class CreateKaryawansTable extends Migration
     {
         Schema::create('karyawan', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('gambar');
-            $table->string('asal');
-            $table->string('foto');
-            $table->string('alamat');
-            $table->date('tanggal_lahir');
-            $table->string('no');            
+            $table->string('gambar')->nullable();
+            $table->string('asal')->nullable();
+            $table->string('foto')->nullable();
+            $table->string('alamat')->nullable();
+            $table->date('tanggal_lahir')->nullable();
+            $table->string('no')->nullable();            
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
