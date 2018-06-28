@@ -14,12 +14,12 @@ class Cabang extends Migration
     public function up()
     {
         Schema::create('cabang', function (Blueprint $table) {
-            $table->increments('idCabang');
-            $table->string('nama_cabang');
-            $table->string('gambar_cabang');
-            $table->string('alamat_cabang');
-            $table->string('keterangan_cabang');
-            $table->string('no_cabang');
+            $table->increments('id');
+            $table->string('nama');
+            $table->string('gambar');
+            $table->string('alamat');
+            $table->string('keterangan');
+            $table->string('no');
             $table->timestamps();
         });
     }

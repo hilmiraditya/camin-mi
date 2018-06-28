@@ -14,10 +14,12 @@ class Penjualan extends Migration
     public function up()
     {
         Schema::create('penjualan', function (Blueprint $table) {
-            $table->increments('idPenjualan');
-            $table->integer('jumlah_penjualan');
-            $table->string('keterangan_penjualan');
-            $table->string('atas_nama_penjualan');
+            $table->increments('id');
+            $table->integer('jumlah');
+            $table->string('keterangan');
+            $table->string('atas_nama');
+            $table->unsignedInteger('katalog_id');
+            $table->foreign('katalog_id')->references('id')->on('katalog')->onDelete('cascade');
             $table->timestamps();
         });
     }

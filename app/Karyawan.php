@@ -16,7 +16,7 @@ class Karyawan extends Authenticatable
      * @var array
      */
     protected $table = 'karyawan';
-    
+
     protected $fillable = [
         'gambar_karyawan', 'asal_karyawan', 'foto_ktp_karyawan',
         'alamat_karyawan', 'tanggal_lahir_karyawan', 'no_handphone_karyawan',
@@ -41,5 +41,10 @@ class Karyawan extends Authenticatable
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new KaryawanResetPassword($token));
+    }
+
+    public function cabang()
+    {
+        return $this->belongsTo('App\cabang');
     }
 }

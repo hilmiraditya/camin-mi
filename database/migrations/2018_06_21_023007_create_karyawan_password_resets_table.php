@@ -13,7 +13,7 @@ class CreateKaryawanPasswordResetsTable extends Migration
     public function up()
     {
         Schema::create('karyawan_password_resets', function (Blueprint $table) {
-            $table->string('email_karyawan')->index();
+            $table->string('email')->index();
             $table->string('token')->index();
             $table->timestamp('created_at')->nullable();
         });

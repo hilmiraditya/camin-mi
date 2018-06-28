@@ -13,16 +13,20 @@ class CreateKaryawansTable extends Migration
     public function up()
     {
         Schema::create('karyawan', function (Blueprint $table) {
-            $table->increments('idKaryawan');
-            $table->string('gambar_karyawan');
-            $table->string('asal_karyawan');
-            $table->string('foto_ktp_karyawan');
-            $table->string('alamat_karyawan');
-            $table->date('tanggal_lahir_karyawan');
-            $table->string('no_handphone_karyawan');            
-            $table->string('name_karyawan');
-            $table->string('email_karyawan')->unique();
-            $table->string('password_karyawan');
+            $table->increments('id');
+            $table->string('gambar');
+            $table->string('asal');
+            $table->string('foto');
+            $table->string('alamat');
+            $table->date('tanggal_lahir');
+            $table->string('no');            
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->string('password');
+
+            $table->unsignedInteger('cabang_id');
+            $table->foreign('cabang_id')->references('id')->on('cabang')->onDelete('cascade');
+
             $table->rememberToken();
             $table->timestamps();
         });
