@@ -62,25 +62,22 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="{{url('adminlte/dist/img/user2-160x160.jpg')}}" class="user-image" alt="User Image">
-              <span class="hidden-xs">Alexander Pierce</span>
+              <img src="{{url('adminlte/guest.png')}}" class="user-image" alt="User Image">
+              <span class="hidden-xs">Admin</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="{{url('adminlte/dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
+                <img src="{{url('adminlte/guest.png')}}" class="img-circle" alt="User Image">
 
                 <p>
-                  Alexander Pierce - Web Developer
-                  <small>Member since Nov. 2012</small>
+                  Admin
+                  <small>Satean</small>
                 </p>
               </li>
               <!-- Menu Footer-->
               <li class="user-footer">
-                <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
-                </div>
-                <div class="pull-right">
+                <div align="center">
                   <a href="#" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
@@ -96,7 +93,7 @@
     <section class="sidebar">
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
-        <li class="active treeview">
+        <li>
           <a href="{{url('admin/index')}}">
             <i class="fa fa-dashboard"></i><span>Dashboard</span>
           </a>
@@ -111,13 +108,8 @@
             <i class="fa fa-location-arrow"></i><span>Cabang</span>
           </a>
         </li>
-        <li>
-          <a href="{{url('admin/kategori')}}">
-            <i class="fa fa-folder-open"></i><span>Kategori Menu</span>
-          </a>
-        </li>
         <li class="treeview">
-          <a href="{{url('admin/menu')}}">
+          <a>
             <i class="fa fa-cutlery"></i>
             <span>Menu</span>
             <span class="pull-right-container">
@@ -125,9 +117,9 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="pages/charts/chartjs.html"></i>Kategori Belum Ada</a></li>
-            <li><a href="pages/charts/chartjs.html"><i class="fa fa-circle-o"></i>Lihat Menu</a></li>
-            <li><a href="pages/charts/chartjs.html"><i class="fa fa-circle-o"></i>Lihat Menu</a></li>
+            <li><a href="pages/charts/chartjs.html"></i>Tambah Kategori</a></li>
+            <li><a href="{{url('admin/menu')}}"><i class="fa fa-circle-o"></i>Makanan</a></li>
+            <li><a href="{{url('admin/menu')}}"><i class="fa fa-circle-o"></i>Minuman</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -139,19 +131,9 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="pages/tables/laporan_penjualan.html"><i class="fa fa-circle-o"></i>Semua Cabang</a></li>
-            <li><a href="pages/charts/morris.html"><i class="fa fa-circle-o"></i>Cabang A</a></li>
-            <li><a href="pages/charts/flot.html"><i class="fa fa-circle-o"></i>Cabang B</a></li>
-            <li><a href="pages/charts/inline.html"><i class="fa fa-circle-o"></i>Cabang C</a></li>
+            <li><a href="{{url('admin/menu')}}"><i class="fa fa-circle-o"></i>Semua Cabang</a></li>
+            <li><a href="{{url('admin/penjualan')}}"><i class="fa fa-circle-o"></i>Cabang A</a></li>
           </ul>
-        </li>
-        <li>
-          <a href="pages/mailbox/mailbox.html">
-            <i class="fa fa-envelope"></i> <span>Email Admin</span>
-            <span class="pull-right-container">
-              <small class="label pull-right bg-red">5</small>
-            </span>
-          </a>
         </li>
       </ul>
     </section>

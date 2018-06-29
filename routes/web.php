@@ -43,16 +43,12 @@ Route::group(['prefix' => 'admin'], function () {
     return view('admin.cabang');
   });
 
-  Route::get('/kategori', function () {
-    return view('admin.kategorimenu');
-  });
-
   Route::get('/menu', function () {
     return view('admin.menu');
   });
 
   Route::get('/penjualan', function () {
-    return view('admin.penjualan');
+    return view('admin.laporanpenjualan');
   });
 });
 

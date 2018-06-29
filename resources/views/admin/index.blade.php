@@ -81,4 +81,4 @@
       <!-- /.row -->
     </section>
     <!-- /.content -->
-  @endsection
+@endsection
