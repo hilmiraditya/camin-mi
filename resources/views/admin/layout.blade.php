@@ -109,7 +109,7 @@
           </a>
         </li>
         <li class="treeview">
-          <a>
+          <a href="#">
             <i class="fa fa-cutlery"></i>
             <span>Menu</span>
             <span class="pull-right-container">
@@ -123,7 +123,7 @@
           </ul>
         </li>
         <li class="treeview">
-          <a href="{{url('admin/penjualan')}}">
+          <a href="#">
             <i class="fa fa-pie-chart"></i>
             <span>Laporan Penjualan</span>
             <span class="pull-right-container">
@@ -131,8 +131,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="{{url('admin/menu')}}"><i class="fa fa-circle-o"></i>Semua Cabang</a></li>
-            <li><a href="{{url('admin/penjualan')}}"><i class="fa fa-circle-o"></i>Cabang A</a></li>
+            <li><a href="{{url('admin/laporanpenjualan')}}"><i class="fa fa-circle-o"></i>Semua Cabang</a></li>
+            <li><a href="{{url('admin/laporanpenjualan')}}"><i class="fa fa-circle-o"></i>Cabang A</a></li>
           </ul>
         </li>
       </ul>

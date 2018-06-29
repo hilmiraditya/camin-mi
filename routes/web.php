@@ -47,8 +47,8 @@ Route::group(['prefix' => 'admin'], function () {
     return view('admin.menu');
   });
 
-  Route::get('/penjualan', function () {
-    return view('admin.laporanpenjualan');
+  Route::get('/laporanpenjualan', function () {
+    return view('admin.penjualan');
   });
 });
 
