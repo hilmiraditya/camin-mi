@@ -27,6 +27,33 @@ Route::group(['prefix' => 'admin'], function () {
   Route::post('/password/reset', 'AdminAuth\ResetPasswordController@reset')->name('password.email');
   Route::get('/password/reset', 'AdminAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
   Route::get('/password/reset/{token}', 'AdminAuth\ResetPasswordController@showResetForm');
+
+
+  /* cuman buat nguji front end doang */
+
+  Route::get('/index', function () {
+    return view('admin.index');
+  });
+
+  Route::get('/akunkaryawan', function () {
+    return view('admin.karyawan');
+  });
+
+  Route::get('/cabang', function () {
+    return view('admin.cabang');
+  });
+
+  Route::get('/kategori', function () {
+    return view('admin.kategorimenu');
+  });
+
+  Route::get('/menu', function () {
+    return view('admin.menu');
+  });
+
+  Route::get('/penjualan', function () {
+    return view('admin.penjualan');
+  });
 });
 
 Route::group(['prefix' => 'karyawan'], function () {
