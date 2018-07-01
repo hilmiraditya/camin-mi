@@ -9,7 +9,7 @@ class Cabang extends Model
     ];
     public function karyawan()
     {
-        return $this->hasMany('App\Karyawan');
+        return $this->hasMany('App\Users');
     }
     public function stokcabang()
     {
