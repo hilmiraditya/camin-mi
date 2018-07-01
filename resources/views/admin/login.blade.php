@@ -35,7 +35,7 @@
   <!-- /.login-logo -->
   <div class="login-box-body">
     <p class="login-box-msg">Login Admin</p>
-      <form class="form-horizontal" role="form" method="POST" action="{{ url('/admin/register') }}">
+      <form class="form-horizontal" role="form" method="POST" action="{{ url('/admin/login') }}">
       {{ csrf_field() }}
       <div class="form-group has-feedback">
         <input id="email" type="email" class="form-control" name="email" placeholder="Email Address">
