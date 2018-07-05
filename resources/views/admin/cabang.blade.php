@@ -1,5 +1,5 @@
 @extends('admin.layout')
-@section('title', 'Daftar Menu')
+@section('title', 'Cabang')
 @section('content')
     <!-- Content Header (Page header) -->
     <section class="content-header">

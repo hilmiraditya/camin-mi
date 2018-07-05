@@ -47,7 +47,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini">POS</span>
       <!-- logo for regular state and mobile devices -->
@@ -106,12 +106,12 @@
           </a>
         </li>
         <li>
-          <a href="{{url('admin/akunkaryawan')}}">
+          <a href="{{url('Admin/AkunKaryawan')}}">
             <i class="fa fa-users"></i><span>Akun Karyawan</span>
           </a>
         </li>
         <li>
-          <a href="{{url('admin/cabang')}}">
+          <a href="{{url('Admin/Cabang')}}">
             <i class="fa fa-location-arrow"></i><span>Cabang</span>
           </a>
         </li>
@@ -125,8 +125,8 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="pages/charts/chartjs.html"></i>Tambah Kategori</a></li>
-            <li><a href="{{url('admin/menu')}}"><i class="fa fa-circle-o"></i>Makanan</a></li>
-            <li><a href="{{url('admin/menu')}}"><i class="fa fa-circle-o"></i>Minuman</a></li>
+            <li><a href="{{url('Admin/Menu')}}"><i class="fa fa-circle-o"></i>Makanan</a></li>
+            <li><a href="{{url('Admin/Menu')}}"><i class="fa fa-circle-o"></i>Minuman</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -138,8 +138,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="{{url('admin/laporanpenjualan')}}"><i class="fa fa-circle-o"></i>Semua Cabang</a></li>
-            <li><a href="{{url('admin/laporanpenjualan')}}"><i class="fa fa-circle-o"></i>Cabang A</a></li>
+            <li><a href="{{url('Admin/LaporanPenjualan')}}"><i class="fa fa-circle-o"></i>Semua Cabang</a></li>
+            <li><a href="{{url('Admin/LaporanPenjualan')}}"><i class="fa fa-circle-o"></i>Cabang A</a></li>
           </ul>
         </li>
       </ul>

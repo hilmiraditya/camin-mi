@@ -14,12 +14,19 @@
 Route::get('/', function () {
     return redirect('/login');
     //return view('welcome');
-});
+})->middleware('auth');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'Admin'], function () {
+	Route::get('AkunKaryawan', 'Admin\AkunKaryawan@index');
+	Route::get('Cabang', 'Admin\Cabang@index');
+	Route::get('Menu', 'Admin\Menu@index');
+	Route::get('LaporanPenjualan', 'Admin\LaporanPenjualan@index');
+});
+
+Route::group(['prefix' => 'karyawan'], function () {
 	
 });

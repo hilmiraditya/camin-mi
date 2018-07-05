@@ -23,12 +23,12 @@
             <div class="inner">
               <h3>150</h3>
 
-              <p>Transaksi</p>
+              <p>Cabang</p>
             </div>
             <div class="icon">
-              <i class="ion ion-bag"></i>
+              <i class="ion ion-home"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{url('/Admin/Cabang')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -36,14 +36,13 @@
           <!-- small box -->
           <div class="small-box bg-red">
             <div class="inner">
-              <h3>53 <sup style="font-size: 20px">IDR</sup></h3>
-
-              <p>Pendapatan Kotor</p>
+              <h3>3</h3>
+              <p>Akun Terdaftar</p>
             </div>
             <div class="icon">
-              <i class="ion ion-cash"></i>
+              <i class="ion ion-ios-people"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{url('/Admin/AkunKaryawan')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -58,7 +57,7 @@
             <div class="icon">
               <i class="ion ion-pizza"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{ url('/Admin/LaporanPenjualan') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -66,14 +65,14 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>53 <sup style="font-size: 20px">IDR</sup></h3>
+              <h3>53 <sup style="font-size: 20px">000</sup></h3>
 
-              <p>Pendapatan Bersih</p>
+              <p>Pendapatan Kotor</p>
             </div>
             <div class="icon">
               <i class="ion ion-cash"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{ url('/Admin/LaporanPenjualan') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
