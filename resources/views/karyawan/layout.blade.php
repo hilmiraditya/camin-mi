@@ -86,8 +86,13 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div align="center">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                  <a class="btn btn-default btn-flat" href="{{ route('logout') }}"] onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                    Logout
+                  </a>
                 </div>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                  {{ csrf_field() }} 
+                </form>
               </li>
             </ul>
           </li>

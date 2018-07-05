@@ -79,7 +79,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Point Of Sales
                 </div>
 
                 <div class="links">

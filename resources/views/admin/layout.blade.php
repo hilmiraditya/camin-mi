@@ -8,6 +8,8 @@
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
   <link rel="stylesheet" href="{{url('adminlte/bower_components/bootstrap/dist/css/bootstrap.min.css')}}">
+  <!-- CSRF Token -->
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="{{url('adminlte/bower_components/font-awesome/css/font-awesome.min.css')}}">
   <!-- Ionicons -->
@@ -78,8 +80,13 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div align="center">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                  <a class="btn btn-default btn-flat" href="{{ route('logout') }}"] onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                    Logout
+                  </a>
                 </div>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                  {{ csrf_field() }} 
+                </form>
               </li>
             </ul>
           </li>
@@ -94,7 +101,7 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li>
-          <a href="{{url('admin/index')}}">
+          <a href="{{url('/home')}}">
             <i class="fa fa-dashboard"></i><span>Dashboard</span>
           </a>
         </li>
