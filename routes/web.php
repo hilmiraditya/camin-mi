@@ -23,6 +23,8 @@ Route::get('/home', 'HomeController@index');
 Route::group(['prefix' => 'Admin'], function () {
 	Route::get('Dashboard', 'Admin\Dashboard@index');	
 	Route::get('AkunKaryawan', 'Admin\AkunKaryawan@index');
+	Route::post('TambahAkun', 'Admin\AkunKaryawan@create');
+	Route::get('HapusAkun/{id}', 'Admin\AkunKaryawan@delete');
 	Route::get('Cabang', 'Admin\Cabang@index');
 	Route::get('Menu', 'Admin\Menu@index');
 	Route::get('LaporanPenjualan', 'Admin\LaporanPenjualan@index');

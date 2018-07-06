@@ -29,7 +29,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function cabang()
+    public function Cabang()
     {
         return $this->belongsTo('App\Cabang');
     }

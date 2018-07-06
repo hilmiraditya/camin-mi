@@ -4,7 +4,7 @@
   <!-- Content Wrapper. Contains page content -->
     <section class="content-header">
       <h1>
-        Penjualan Bulan Ini
+        Dashboard
         <small>Semua Cabang</small>
       </h1>
       <ol class="breadcrumb">
@@ -21,7 +21,7 @@
           <!-- small box -->
           <div class="small-box bg-aqua">
             <div class="inner">
-              <h3>150</h3>
+              <h3>{{ $data['cabang'] }}</h3>
 
               <p>Cabang</p>
             </div>
@@ -36,7 +36,7 @@
           <!-- small box -->
           <div class="small-box bg-red">
             <div class="inner">
-              <h3>3</h3>
+              <h3>{{ $data['akun'] }}</h3>
               <p>Akun Karyawan</p>
             </div>
             <div class="icon">
@@ -50,12 +50,12 @@
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>44</h3>
+              <h3>{{ $data['penjualan'] }}</h3>
 
               <p>Porsi Terjual</p>
             </div>
             <div class="icon">
-              <i class="ion ion-pizza"></i>
+              <i class="ion ion-cash"></i>
             </div>
             <a href="{{ url('/Admin/LaporanPenjualan') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
@@ -65,12 +65,12 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>53 <sup style="font-size: 20px">000</sup></h3>
+              <h3>{{ $data['menu'] }}</h3>
 
-              <p>Pendapatan Kotor</p>
+              <p>Menu</p>
             </div>
             <div class="icon">
-              <i class="ion ion-cash"></i>
+              <i class="ion ion-coffee"></i>
             </div>
             <a href="{{ url('/Admin/LaporanPenjualan') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>

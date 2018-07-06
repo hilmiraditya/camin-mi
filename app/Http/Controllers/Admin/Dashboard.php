@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Cabang;
 use App\User;
 use App\Penjualan;
+use App\Katalog;
 
 class Dashboard extends Controller
 {
@@ -29,12 +30,12 @@ class Dashboard extends Controller
      */
     public function index()
     {
-		$Cabang = Cabang::all()->count();
-		$Akun = User::where('isAdmin',0)->count();
-		$Penjualan = Penjualan::all();
-		$PorsiLaku = $Penjualan->count();
-		$Untung= $Penjualan->katalog_id();
-		return $Untung;
-        //return view('admin.index');
+        $data = [
+            'cabang'  => Cabang::all()->count(),
+            'akun'   => User::where('isAdmin',0)->count(),
+            'penjualan' => Penjualan::all()->count(),
+            'menu' => Katalog::all()->count()
+        ];
+        return view('admin.index')->with('data', $data);
     }
 }

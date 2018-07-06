@@ -9,9 +9,9 @@ class Cabang extends Model
     protected $fillable = [
         'nama', 'gambar', 'alamat', 'keterangan', 'no'
     ];
-    public function karyawan()
+    public function User()
     {
-        return $this->hasMany('App\Users');
+        return $this->hasMany('App\User');
     }
     public function stokcabang()
     {

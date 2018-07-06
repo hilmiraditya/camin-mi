@@ -15,8 +15,8 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
                 $table->increments('id');
-                $table->string('gambar')->nullable();
-                $table->string('asal')->nullable();
+                $table->string('gambar')->nullable(); //hapus aja
+                $table->string('asal')->nullable(); //hapus aja
                 $table->string('foto')->nullable();
                 $table->string('alamat')->nullable();
                 $table->date('tanggal_lahir')->nullable();
