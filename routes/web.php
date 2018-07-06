@@ -18,15 +18,16 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index');
 
 Route::group(['prefix' => 'Admin'], function () {
+	Route::get('Dashboard', 'Admin\Dashboard@index');	
 	Route::get('AkunKaryawan', 'Admin\AkunKaryawan@index');
 	Route::get('Cabang', 'Admin\Cabang@index');
 	Route::get('Menu', 'Admin\Menu@index');
 	Route::get('LaporanPenjualan', 'Admin\LaporanPenjualan@index');
 });
 
-Route::group(['prefix' => 'karyawan'], function () {
-	
+Route::group(['prefix' => 'Karyawan'], function () {
+	Route::get('Dashboard', 'Karyawan\Dashboard@index');	
 });

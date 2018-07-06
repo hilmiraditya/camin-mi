@@ -12,7 +12,7 @@ class Penjualan extends Model
     	'jumlah', 'keterangan', 'atas_nama', 'katalog_id'
     ];
 
-    public function katalog()
+    public function Katalog()
     {
     	return $this->belongsTo('App\Katalog');
     }

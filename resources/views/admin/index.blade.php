@@ -37,7 +37,7 @@
           <div class="small-box bg-red">
             <div class="inner">
               <h3>3</h3>
-              <p>Akun Terdaftar</p>
+              <p>Akun Karyawan</p>
             </div>
             <div class="icon">
               <i class="ion ion-ios-people"></i>
