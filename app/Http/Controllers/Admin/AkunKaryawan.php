@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\Model;
 use App\User;
 use App\Cabang;
+
 class AkunKaryawan extends Controller
 {
     /**
@@ -30,38 +31,24 @@ class AkunKaryawan extends Controller
         $karyawan = User::where('isAdmin', 0)->get();
         $cabang = Cabang::all();
         $cekJumlahCabang = Cabang::all()->count();
+        $cekJumlahKaryawan = User::where('isAdmin', 0)->count();
 
         return view('admin.karyawan')
                 ->with('karyawan', $karyawan)
                 ->with('cabang', $cabang)
-                ->with('cekJumlahCabang', $cekJumlahCabang);
+                ->with('cekJumlahCabang', $cekJumlahCabang)
+                ->with('cekJumlahKaryawan', $cekJumlahKaryawan);
     }
 
     public function create(Request $request)
     {
         $karyawan = new User;
- 
-        if($request->hasfile('FotoProfil'))
-        {
-            $file = $request->file('FotoProfil');
-            $namafile = time().$file->getClientOriginalName();
-            $file->move(public_path().'/FotoProfil/', $namafile);
-            $karyawan->foto = $namafile;
-        }
-
-        $karyawan->alamat = $request->get('alamat');
-
-        $karyawan->tanggal_lahir = $request->get('tanggal_lahir');
 
         $karyawan->no = $request->get('no');
-
         $karyawan->name = $request->get('name');
-
         $karyawan->email = $request->get('email');
-
         $password = $request->get('password');
         $karyawan->password = bcrypt($password);
-
         $karyawan->no = $request->get('cabang_id');
 
         $karyawan->save();
@@ -69,9 +56,20 @@ class AkunKaryawan extends Controller
         return redirect('Admin/AkunKaryawan');
     }
 
-    public function update($id)
+    public function update(Request $request, $id)
     {
+        $karyawan = User::find($id);
+ 
+        $karyawan->no = $request->get('no');
+        $karyawan->name = $request->get('name');
+        $karyawan->email = $request->get('email');
+        $password = $request->get('password');
+        $karyawan->password = bcrypt($password);
+        $karyawan->no = $request->get('cabang_id');
 
+        $karyawan->save();
+
+        return redirect('Admin/AkunKaryawan');
     }
 
 
