@@ -15,31 +15,39 @@
 
     <!-- Main content -->
     <section class="content">
-
+    @if($cekJumlahCabang > 0)
       <div class="row">
+      @foreach($cabang as $cabang)
         <div class="col-md-6">
           <!-- Line chart -->
           <div class="box box-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title">Cabang Bintaro</h3>
-
+            <div class="box-header with-border" align="center">
+              <h3 class="box-title">Cabang {{$cabang->nama}}</h3>
             </div>
             <div class="box-body">
               <div class="row">
                 <img class="col-md-12" style="width: 100%;height:100%;max-height:250px;" src="{{url('adminlte/restaurant.png')}}">
               </div>
               <div align="center">
-                <h3><b><strike>Rp. 30.000,-</strike></b> <a style="color: red;"><b>Rp. 20.000,-</b></a></h3>
+                @if($cabang->alamat != NULL) <h5>{{$cabang->alamat}}</h5>
+                @else <h5>Alamat Belum Diisi</h5>
+                @endif
+
+                @if($cabang->no != NULL) <h3>{{$cabang->no}}</h3>
+                @else <h3>Nomor Belum Diisi</h3>
+                @endif
               </div>
               <br>
               <div align="center">
-      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#tambahakun">
-        Lihat Karyawan
-      </button>      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#hapusstok">
-        Hapus Cabang
-      </button>      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambahstok">
-        Ubah Data Cabang
-      </button>
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#tambahakun">
+                  Lihat Stok Menu
+                </button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambahstok">
+                  Tambah Stok Menu
+                </button>
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#hapuscabang{{$cabang->id}}">
+                  Hapus Cabang
+                </button>
               </div>
             </div>
             <!-- /.box-body-->
@@ -47,152 +55,52 @@
           <!-- /.box -->
         </div>
         <!-- /.col -->
-
-        <div class="col-md-6">
-          <!-- Line chart -->
-          <div class="box box-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title">Cabang Bintaro</h3>
-
-
-            </div>
-            <div class="box-body">
-              <div class="row">
-                <img class="col-md-12"  style="width: 100%;height:100%;max-height:250px;" src="{{url('adminlte/restaurant.png')}}">
-              </div>
-              <div align="center">
-                <h3><b>Rp. 30.000,-</b></h3>
-              </div>
-              <br>
-              <div align="center">
-                <a class="btn btn-primary">Lihat Karyawan</a>
-                <a class="btn btn-danger">Hapus Cabang</a>
-                <a class="btn btn-success">Tambah Stok</a>
-              </div>
-            </div>
-            <!-- /.box-body-->
-          </div>
-          <!-- /.box -->
+      @endforeach
+        <div class="col-md-12" align="center">
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambahcabang">
+            Tambah Cabang
+          </button>
         </div>
-        <!-- /.col -->
-
-        <div class="col-md-6">
-          <!-- Line chart -->
-          <div class="box box-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title">Cabang Bintaro</h3>
-
-
-            </div>
-            <div class="box-body">
-              <div class="row">
-                <img class="col-md-12" style="width: 100%;height:100%;max-height:250px;" src="{{url('adminlte/restaurant.png')}}">
-              </div>
-              <div align="center">
-                <h3><b>Rp. 30.000,-</b></h3>
-              </div>
-              <br>
-              <div align="center">
-                <a class="btn btn-primary">Ubah</a>
-                <a class="btn btn-danger">Hapus</a>
-                <a class="btn btn-success">Tambah Stok</a>
-              </div>
-            </div>
-            <!-- /.box-body-->
-          </div>
-          <!-- /.box -->
-        </div>
-        <!-- /.col -->
-
-        <div class="col-md-6">
-          <!-- Line chart -->
-          <div class="box box-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title">Cabang Bintaro</h3>
-
-
-            </div>
-            <div class="box-body">
-              <div class="row">
-                <img class="col-md-12" style="width: 100%;height:100%;max-height:250px;" src="{{url('adminlte/restaurant.png')}}">
-              </div>
-              <div align="center">
-                <h3><b>Rp. 30.000,-</b></h3>
-              </div>
-              <br>
-              <div align="center">
-                <a class="btn btn-primary">Ubah</a>
-                <a class="btn btn-danger">Hapus</a>
-                <a class="btn btn-success">Tambah Stok</a>
-              </div>
-            </div>
-            <!-- /.box-body-->
-          </div>
-          <!-- /.box -->
-        </div>
-        <!-- /.col -->
-
       </div>
       <!-- /.row -->
+    @else
+      <div class="row">
+        <div class="col-md-12" align="center">
+          <h4>Tidak ada Cabang</h4>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambahcabang">
+            Tambah Cabang
+          </button>
+        </div>
+      </div>
+    @endif
     </section>
     <!-- /.content -->
 @endsection
 
 
 @section('modal')
-<!-- Modal untuk tambah akun-->
+<!-- Lihat Stok Cabang-->
 <div class="modal fade" id="tambahakun" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
   <form action="/action_page.php">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="exampleModalLabel">Tambah Akun Karyawan</h4>
+        <h4 class="modal-title" id="exampleModalLabel">Lihat Stok Cabang</h4>
       </div>
       <div class="modal-body">
         <div class="form-group">
-          <label>Nama Lengkap :</label>
-          <input type="nama" class="form-control" id="nama">
-        </div>
-        <div class="form-group">
-          <label>Alamat Email :</label>
-          <input type="email" class="form-control" id="email">
-        </div>
-        <div class="form-group">
-          <label>Password :</label>
-          <input type="password" class="form-control" id="pwd">
-        </div>
-        <div class="form-group">
-          <label>Ketik Ulang Password :</label>
-          <input type="password" class="form-control" id="pwd">
-        </div>
-        <div class="form-group">
-          <label>Cabang :</label>
-          <br>
-          <label class="radio-inline">
-            <input type="radio" name="optradio">Cabang 1
-          </label>
-          <label class="radio-inline">
-            <input type="radio" name="optradio">Cabang 2
-          </label>
-          <label class="radio-inline">
-            <input type="radio" name="optradio">Cabang 3
-          </label>
-        </div>
-        <div class="form-group">
-          <label>Upload Foto Profil : </label>
-          <br>
-          <input type="file" name="pic" accept="image/*">
+          <label>Sate Ayam :</label>
+          <input type="number" class="form-control" id="nama">
         </div>
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">Tambah Akun</button>
         <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">Cancel</button>
       </div>
     </form> 
     </div>
   </div>
 </div>
-<!-- Modal untuk tambah stok -->
+<!-- Tambah Stok Cabang -->
 <div class="modal fade" id="tambahstok" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
   <form action="/action_page.php">
@@ -202,8 +110,8 @@
       </div>
       <div class="modal-body">
         <div class="form-group">
-          <label>Nama Lengkap :</label>
-          <input type="nama" class="form-control" id="nama">
+          <label>Sate Ayam :</label>
+          <input type="number" class="form-control" id="nama">
         </div>
       </div>
       <div class="modal-footer">
@@ -215,20 +123,58 @@
   </div>
 </div>
 <!-- Modal untuk hapus stok -->
-<div class="modal fade" id="hapusstok" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+@foreach($hapuscabang as $hapuscabang)
+<div class="modal fade" id="hapuscabang{{$hapuscabang->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="exampleModalLabel">Hapus Stok</h5>
+        <h4 class="modal-title" id="exampleModalLabel">Hapus Cabang</h5>
       </div>
       <div class="modal-body">
-        Apakah anda yakin akan menghapus stok ini ? 
+        Semua data cabang akan dihapus termasuk stok cabang dan akun karyawan.
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Iya</button>
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Tidak</button>
+        <a href="{{url('/Admin/HapusCabang').'/'.$hapuscabang->id}}" class="btn btn-primary">Hapus</a>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
       </div>
     </div>
   </div>
+</div>
+@endforeach
+<!-- Tambah Cabang-->
+<div>
+  <div class="modal fade" id="tambahcabang" tabindex="-3" role="dialog" aria-labelledby="tambah-akun" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+    <form method="POST" action="{{url('/Admin/TambahCabang')}}">
+      @csrf
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="exampleModalLabel">Buat Cabang Baru</h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Nama Cabang :</label>
+            <input type="text" class="form-control" name="nama">
+          </div>
+          <div class="form-group">
+            <label>Alamat :</label>
+            <input type="text" class="form-control" name="alamat">
+          </div>
+          <div class="form-group">
+            <label>No. Telfon :</label>
+            <input type="text" class="form-control" name="no">
+          </div>
+          <div class="form-group">
+            <label>Foto Cabang</label>
+            <input type="file" accept="image/*" name="foto-cabang">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Tambah Akun</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">Cancel</button>
+        </div>
+      </form> 
+      </div>
+    </div>
 </div>
 @endsection

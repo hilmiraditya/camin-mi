@@ -215,6 +215,7 @@
   })
 </script>
 @yield('modal')
+<!-- Tambah Kategori Modal -->
 
 </body>
 </html>

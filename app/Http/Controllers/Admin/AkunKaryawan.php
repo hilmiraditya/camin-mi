@@ -30,7 +30,10 @@ class AkunKaryawan extends Controller
     {
         $karyawan = User::where('isAdmin', 0)->get();
         $karyawanUpdate = User::where('isAdmin', 0)->get();
-        $cabang = Cabang::all();
+        
+        $tambah_karyawan_cabang = Cabang::all();
+        $edit_karyawan_cabang = Cabang::all();
+
         $cekJumlahCabang = Cabang::all()->count();
         $cekJumlahKaryawan = User::where('isAdmin', 0)->count();
         $admin = User::where('isAdmin', 1)->first();
@@ -39,7 +42,8 @@ class AkunKaryawan extends Controller
         return view('admin.karyawan')
                 ->with('karyawan', $karyawan)
                 ->with('karyawanUpdate', $karyawanUpdate)
-                ->with('cabang', $cabang)
+                ->with('tambah_karyawan_cabang', $tambah_karyawan_cabang)
+                ->with('edit_karyawan_cabang', $edit_karyawan_cabang)
                 ->with('cekJumlahCabang', $cekJumlahCabang)
                 ->with('cekJumlahKaryawan', $cekJumlahKaryawan)
                 ->with('admin', $admin);
@@ -49,12 +53,12 @@ class AkunKaryawan extends Controller
     {
         $karyawan = new User;
 
-        $karyawan->no = $request->get('no');
+        $karyawan->no_handphone = $request->get('nohape');
         $karyawan->name = $request->get('name');
         $karyawan->email = $request->get('email');
         $password = $request->get('password');
         $karyawan->password = bcrypt($password);
-        $karyawan->no = $request->get('cabang_id');
+        $karyawan->cabang_id = $request->get('cabang_id');
 
         $karyawan->save();
 
@@ -65,12 +69,15 @@ class AkunKaryawan extends Controller
     {
         $karyawan = User::find($id);
  
-        $karyawan->no = $request->get('no');
+        $karyawan->no_handphone = $request->get('nohape');
         $karyawan->name = $request->get('name');
         $karyawan->email = $request->get('email');
-        $password = $request->get('password');
-        $karyawan->password = bcrypt($password);
-        $karyawan->no = $request->get('cabang_id');
+        if ($request->get('password') != NULL)
+        {
+            $password = $request->get('password');
+            $karyawan->password = bcrypt($password);
+        }
+        $karyawan->cabang_id = $request->get('cabang_id');
 
         $karyawan->save();
 

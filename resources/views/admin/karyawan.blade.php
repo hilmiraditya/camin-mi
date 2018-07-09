@@ -45,20 +45,20 @@
                         <a class="btn btn-xs btn-warning">Belum Ditentukan oleh Admin !</a>
                       </td>
                     @else
+                      <td>
+                        {{$karyawan->Cabang->nama}}
+                      </td>
                     @endif
-                    @if($karyawan->no == NULL) 
+                    @if($karyawan->no_handphone == NULL) 
                       <td>
                         <a class="btn btn-xs btn-warning">Belum Diisi !</a>
                       </td>
                     @else
-                      <td>{{$karyawan->no}}</td>
+                      <td>{{$karyawan->no_handphone}}</td>
                     @endif
                     <td>
                       <button class="btn btn-xs btn-primary" type="button" data-toggle="modal" data-target="#editakun{{$karyawan->id}}">
                           Edit Akun
-                      </button>
-                      <button class="btn btn-xs btn-primary" type="button" data-toggle="modal" data-target="#hapusakun">
-                          Hapus Akun
                       </button>
                       <a href="{{url('Admin/HapusAkun').'/'.$karyawan->id}}" class="btn btn-xs btn-danger">Hapus Akun</a>
                     </td>
@@ -95,7 +95,8 @@
 
 @section('modal')
   <!--Tambah Akun Modal -->
-  <div class="modal fade" id="tambahakun" role="dialog">
+  <div>
+  <div class="modal fade" id="tambahakun" tabindex="-3" role="dialog" aria-labelledby="tambah-akun" aria-hidden="true">
     <div class="modal-dialog" role="document">
     <form method="POST" action="{{url('/Admin/TambahAkun')}}">
       @csrf
@@ -114,7 +115,7 @@
           </div>
           <div class="form-group">
             <label>No. Handphone :</label>
-            <input type="text" class="form-control" name="no">
+            <input type="text" class="form-control" name="nohape">
           </div>
           <div class="form-group">
             <label>Password :</label>
@@ -124,7 +125,7 @@
             <label>Cabang :</label>
             <br>
             @if($cekJumlahCabang > 0)
-              @foreach($cabang as $cabang)
+              @foreach($tambah_karyawan_cabang as $cabang)
               <label class="radio-inline">
                 <input type="radio" name="cabang_id" value="{{$cabang->id}}">
                   {{$cabang->nama}}
@@ -132,7 +133,7 @@
               @endforeach
             @else
             <label class="radio-inline">
-              <input type="radio" name="cabang_id" value="" disabled="disabled" readonly>Belum Ada Cabang
+              Belum Ada Cabang
             </label>
             @endif
           </div>
@@ -144,28 +145,31 @@
       </form> 
       </div>
     </div>
+  </div>
+
   <!-- Edit Akun Modal -->
+  <div>
   @foreach($karyawanUpdate as $karyawanUpdate)
-  <div class="modal fade" id="editakun{{$karyawanUpdate->id}}" role="dialog">
+  <div class="modal fade" id="editakun{{$karyawanUpdate->id}}" tabindex="-2" role="dialog" aria-labelledby="edit-akun" aria-hidden="true">
     <div class="modal-dialog" role="document">
-    <form method="POST" action="{{url('/Admin/TambahAkun')}}">
+    <form method="GET" action="{{url('Admin/UpdateAkun').'/'.$karyawanUpdate->id}}">
       @csrf
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title" id="exampleModalLabel">Tambah Akun Karyawan</h4>
+          <h4 class="modal-title" id="exampleModalLabel">Edit Akun Karyawan</h4>
         </div>
         <div class="modal-body">
           <div class="form-group">
             <label>Nama Lengkap :</label>
-            <input type="text" class="form-control" name="name" placeholder="{{$karyawanUpdate->name}}">
+            <input type="text" class="form-control" name="name" value="{{$karyawanUpdate->name}}" placeholder="{{$karyawanUpdate->name}}">
           </div>
           <div class="form-group">
             <label>Email :</label>
-            <input type="text" class="form-control" name="email" placeholder="{{$karyawanUpdate->email}}">
+            <input type="text" class="form-control" name="email" value="{{$karyawanUpdate->email}}" placeholder="{{$karyawanUpdate->email}}">
           </div>
           <div class="form-group">
             <label>No. Handphone :</label>
-            <input type="text" class="form-control" name="no" placeholder="{{$karyawanUpdate->no}}">
+            <input type="text" class="form-control" name="nohape" value="{{$karyawanUpdate->no_handphone}}" placeholder="{{$karyawanUpdate->no_handphone}}">
           </div>
           <div class="form-group">
             <label>Password :</label>
@@ -175,7 +179,7 @@
             <label>Cabang :</label>
             <br>
             @if($cekJumlahCabang > 0)
-              @foreach($cabang as $cabang)
+              @foreach($edit_karyawan_cabang as $cabang)
               <label class="radio-inline">
                 <input type="radio" name="cabang_id" value="{{$cabang->id}}">
                   {{$cabang->nama}}
@@ -183,21 +187,23 @@
               @endforeach
             @else
             <label class="radio-inline">
-              <input type="radio" name="cabang_id" value="" disabled="disabled" readonly>Belum Ada Cabang
+              Belum Ada Cabang
             </label>
             @endif
           </div>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">Tambah Akun</button>
+          <button type="submit" class="btn btn-primary">Edit Akun</button>
           <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">Cancel</button>
         </div>
       </form> 
       </div>
     </div>
   @endforeach
+</div>
   <!-- Hapus Akun Modal -->
-  <div class="modal fade" id="hapusakun" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div>
+  <div class="modal fade" id="hapusakun" tabindex="-1" role="dialog" aria-labelledby="hapus-akun" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -207,7 +213,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <p>Akun karyawan ini akan dihapus beserta berkas - berkasnya.</p>
+        <p>Akun karyawan ini akan dihapus.</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger">Hapus</button>
@@ -215,5 +221,6 @@
       </div>
     </div>
   </div>
+</div>
 </div>
 @endsection

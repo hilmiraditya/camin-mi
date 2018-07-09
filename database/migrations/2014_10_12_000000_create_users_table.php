@@ -14,13 +14,12 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-                $table->increments('id');
-                $table->string('no')->nullable();            
+                $table->increments('id');       
                 $table->string('name');
                 $table->string('email')->unique();
                 $table->string('password');
                 $table->boolean('isAdmin')->default(0);
-    
+                $table->string('no_handphone')->nullable();
                 $table->unsignedInteger('cabang_id')->nullable();
                 $table->foreign('cabang_id')->references('id')->on('cabang')->onDelete('cascade');
     
