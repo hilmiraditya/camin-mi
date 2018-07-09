@@ -29,15 +29,20 @@ class AkunKaryawan extends Controller
     public function index()
     {
         $karyawan = User::where('isAdmin', 0)->get();
+        $karyawanUpdate = User::where('isAdmin', 0)->get();
         $cabang = Cabang::all();
         $cekJumlahCabang = Cabang::all()->count();
         $cekJumlahKaryawan = User::where('isAdmin', 0)->count();
+        $admin = User::where('isAdmin', 1)->first();
 
+        //dd($karyawanUpdate);
         return view('admin.karyawan')
                 ->with('karyawan', $karyawan)
+                ->with('karyawanUpdate', $karyawanUpdate)
                 ->with('cabang', $cabang)
                 ->with('cekJumlahCabang', $cekJumlahCabang)
-                ->with('cekJumlahKaryawan', $cekJumlahKaryawan);
+                ->with('cekJumlahKaryawan', $cekJumlahKaryawan)
+                ->with('admin', $admin);
     }
 
     public function create(Request $request)

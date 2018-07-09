@@ -7,9 +7,9 @@
           Akun Karyawan
         </h1>
         <ol class="breadcrumb">
-          <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-          <li><a href="#">Tables</a></li>
-          <li class="active">Data tables</li>
+          <li><a href="#"><i class="fa fa-dashboard"></i> Point Of Sales</a></li>
+          <li><a href="#">Admin</a></li>
+          <li class="active">Akun Karyawan</li>
         </ol>
       </section>
   
@@ -54,13 +54,16 @@
                       <td>{{$karyawan->no}}</td>
                     @endif
                     <td>
-                      <button class="btn btn-xs btn-primary" type="button" data-toggle="modal" data-target="#ubahdata{{$karyawan->id}}">
-                          Ubah Data
+                      <button class="btn btn-xs btn-primary" type="button" data-toggle="modal" data-target="#editakun{{$karyawan->id}}">
+                          Edit Akun
+                      </button>
+                      <button class="btn btn-xs btn-primary" type="button" data-toggle="modal" data-target="#hapusakun">
+                          Hapus Akun
                       </button>
                       <a href="{{url('Admin/HapusAkun').'/'.$karyawan->id}}" class="btn btn-xs btn-danger">Hapus Akun</a>
                     </td>
-                  @endforeach
                   </tr>
+                  @endforeach
                   </tfoot>
                 </table>
               </div>
@@ -90,9 +93,9 @@
   @endsection
   
 
-  @section('modal')
+@section('modal')
   <!--Tambah Akun Modal -->
-  <div class="modal fade" id="tambahakun" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="tambahakun" role="dialog">
     <div class="modal-dialog" role="document">
     <form method="POST" action="{{url('/Admin/TambahAkun')}}">
       @csrf
@@ -142,7 +145,75 @@
       </div>
     </div>
   <!-- Edit Akun Modal -->
-  @foreach($karyawan as $karyawan)
-    <!-- Jangan Lupa Masukin Modal Oi -->
+  @foreach($karyawanUpdate as $karyawanUpdate)
+  <div class="modal fade" id="editakun{{$karyawanUpdate->id}}" role="dialog">
+    <div class="modal-dialog" role="document">
+    <form method="POST" action="{{url('/Admin/TambahAkun')}}">
+      @csrf
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="exampleModalLabel">Tambah Akun Karyawan</h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Nama Lengkap :</label>
+            <input type="text" class="form-control" name="name" placeholder="{{$karyawanUpdate->name}}">
+          </div>
+          <div class="form-group">
+            <label>Email :</label>
+            <input type="text" class="form-control" name="email" placeholder="{{$karyawanUpdate->email}}">
+          </div>
+          <div class="form-group">
+            <label>No. Handphone :</label>
+            <input type="text" class="form-control" name="no" placeholder="{{$karyawanUpdate->no}}">
+          </div>
+          <div class="form-group">
+            <label>Password :</label>
+            <input type="password" class="form-control" name="password">
+          </div>
+          <div class="form-group">
+            <label>Cabang :</label>
+            <br>
+            @if($cekJumlahCabang > 0)
+              @foreach($cabang as $cabang)
+              <label class="radio-inline">
+                <input type="radio" name="cabang_id" value="{{$cabang->id}}">
+                  {{$cabang->nama}}
+              </label>
+              @endforeach
+            @else
+            <label class="radio-inline">
+              <input type="radio" name="cabang_id" value="" disabled="disabled" readonly>Belum Ada Cabang
+            </label>
+            @endif
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Tambah Akun</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">Cancel</button>
+        </div>
+      </form> 
+      </div>
+    </div>
   @endforeach
-  @endsection
+  <!-- Hapus Akun Modal -->
+  <div class="modal fade" id="hapusakun" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Hapus Akun</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Akun karyawan ini akan dihapus beserta berkas - berkasnya.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger">Hapus</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+@endsection

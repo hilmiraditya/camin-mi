@@ -36,6 +36,7 @@ class Dashboard extends Controller
             'penjualan' => Penjualan::all()->count(),
             'menu' => Katalog::all()->count()
         ];
-        return view('admin.index')->with('data', $data);
+        $admin = User::where('isAdmin', 1)->first();
+        return view('admin.index')->with('data', $data)->with('admin', $admin);
     }
 }

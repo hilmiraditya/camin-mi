@@ -25,7 +25,7 @@ Route::group(['prefix' => 'Admin'], function () {
 	Route::get('AkunKaryawan', 'Admin\AkunKaryawan@index');
 	Route::post('TambahAkun', 'Admin\AkunKaryawan@create');
 	Route::get('HapusAkun/{id}', 'Admin\AkunKaryawan@delete');
-	Route::get('Cabang', 'Admin\Cabang@index');
+	Route::get('Cabang', 'Admin\CabangRestoran@index');
 	Route::get('Menu', 'Admin\Menu@index');
 	Route::get('LaporanPenjualan', 'Admin\LaporanPenjualan@index');
 });
