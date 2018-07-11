@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Point Of Sales | Login</title>
   <!-- Tell the browser to be responsive to screen width -->
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <meta content=" initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
   <link rel="stylesheet" href="{{url('adminlte/bower_components/bootstrap/dist/css/bootstrap.min.css')}}">
   <!-- Font Awesome -->
@@ -29,11 +29,12 @@
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
-  <div class="login-logo">
-    <a href="#">Point Of Sales</a>
-  </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
+    <div align="center">
+      <img src="{{url('satean.jpg')}}" style="width: 100px;height: 100px;">
+    </div>
+    <br>
     <p class="login-box-msg">Login Page</p>
       <form class="form-horizontal" role="form" method="POST" action="{{ route('login') }}">
       {{ csrf_field() }}
@@ -68,6 +69,7 @@
   <!-- /.login-box-body -->
 </div>
 <!-- /.login-box -->
+</body>
 
 <!-- jQuery 3 -->
 <script src="{{url('adminlte/bower_components/jquery/dist/jquery.min.js')}}"></script>
@@ -84,5 +86,4 @@
     });
   });
 </script>
-</body>
 </html>

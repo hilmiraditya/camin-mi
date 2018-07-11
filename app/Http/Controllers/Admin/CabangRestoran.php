@@ -31,6 +31,16 @@ class CabangRestoran extends Controller
   public function create(Request $request)
   {
     $cabang = new Cabang;
+
+    if($request->hasFile('gambar'))
+    {
+      $gambar = $request->file('gambar');
+      $namafile = time().'.'.$gambar->getClientOriginalExtension();
+      $folder = public_path('/fotocabang');
+      $gambar->move($folder,$namafile);
+      $cabang->gambar = $namafile;
+    }
+
     $cabang->nama = $request->get('nama');
     $cabang->alamat = $request->get('alamat');
     $cabang->no = $request->get('no');

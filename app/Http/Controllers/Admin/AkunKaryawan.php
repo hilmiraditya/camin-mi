@@ -43,7 +43,7 @@ class AkunKaryawan extends Controller
         $karyawan->no_handphone = $request->get('nohape');
         $karyawan->name = $request->get('name');
         $karyawan->email = $request->get('email');
-        $password = $request->get('password');
+        if($request->get('password') != NULL) $password = $request->get('password');
         $karyawan->password = bcrypt($password);
         $karyawan->cabang_id = $request->get('cabang_id');
 

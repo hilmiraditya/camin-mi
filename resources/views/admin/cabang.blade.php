@@ -26,7 +26,11 @@
             </div>
             <div class="box-body">
               <div class="row">
+              @if($cabang->gambar == NULL)
                 <img class="col-md-12" style="width: 100%;height:100%;max-height:250px;" src="{{url('adminlte/restaurant.png')}}">
+              @else
+                <img class="col-md-12" style="width: 100%;height:100%;max-height:250px;" src="{{url('fotocabang').'/'.$cabang->gambar}}"> 
+              @endif
               </div>
               <div align="center">
                 @if($cabang->alamat != NULL) <h5>{{$cabang->alamat}}</h5>
@@ -165,8 +169,8 @@
             <input type="text" class="form-control" name="no">
           </div>
           <div class="form-group">
-            <label>Foto Cabang</label>
-            <input type="file" accept="image/*" name="foto-cabang">
+            <label>Foto Cabang :</label>
+            <input type="file" accept="image/*" name="gambar" id="gambar">
           </div>
         </div>
         <div class="modal-footer">

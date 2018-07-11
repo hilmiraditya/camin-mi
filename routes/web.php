@@ -13,7 +13,6 @@
 
 Route::get('/', function () {
     return redirect('/login');
-    //return view('welcome');
 })->middleware('auth');
 
 Auth::routes();
@@ -45,10 +44,6 @@ Route::group(['prefix' => 'Admin'], function () {
 	Route::get('HapusMenu/{id}/{katalog_id}', 'Admin\MenuRestoran@delete');
 
 	//laporanpenjualan
-	Route::get('LaporanPenjualan', 'Admin\LaporanPenjualan@index');	
-
-	Route::get('Menu', 'Admin\Menu@index');
-	Route::get('LaporanPenjualan', 'Admin\LaporanPenjualan@index');
 });
 
 Route::group(['prefix' => 'Karyawan'], function () {
