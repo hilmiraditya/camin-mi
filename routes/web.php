@@ -41,7 +41,8 @@ Route::group(['prefix' => 'Admin'], function () {
 
 	//kategori-menu
 	Route::get('Menu/{id}', 'Admin\MenuRestoran@index');
-	Route::post('TambahMenu', 'Admin\MenuRestoran@create');	
+	Route::post('TambahMenu', 'Admin\MenuRestoran@create');
+	Route::get('HapusMenu/{id}/{katalog_id}', 'Admin\MenuRestoran@delete');
 
 	//laporanpenjualan
 	Route::get('LaporanPenjualan', 'Admin\LaporanPenjualan@index');	

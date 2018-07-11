@@ -29,13 +29,17 @@
             </div>
             <div class="box-body">
               <div class="row">
+                @if($katalog->gambar == NULL)
                 <img class="col-md-12" style="width: 100%;height:100%;max-height:250px;" src="https://media.travelingyuk.com/wp-content/uploads/2017/07/Ilustrasi-makanan-yang-biasa-dikonsumsi-masyarakat-Indonesia-1.jpg">
+                @else
+                <img class="col-md-12" style="width: 100%;height:100%;max-height:250px;" src="{{url('fotomenu').'/'.$katalog->gambar}}"> 
+                @endif
               </div>
               <div align="center">
                 @if($katalog->diskon != NULL)
                 <h3><b><strike>{{ $katalog->harga}}</strike></b> <a style="color: red;"><b>{{$katalog->diskon/100*$katalog->harga}}</b></a></h3>
                 @else
-                  <h3><b>{{$katalog->harga}}</b></h3>    
+                  <h3><b>{{ "Rp " . number_format($katalog->harga,2,',','.') }}</b></h3>    
                 @endif
               </div>
               <br>
@@ -85,7 +89,7 @@
 <!-- Modal untuk tambah akun-->
 <div class="modal fade" id="tambahstok" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
-  <form method="POST" action="{{url('Admin/TambahMenu')}}">
+  <form method="POST" action="{{url('Admin/TambahMenu')}}" enctype="multipart/form-data">
     @csrf
     <div class="modal-content">
       <div class="modal-header">
@@ -105,14 +109,14 @@
           <input type="text" class="form-control" id="keterangan">
         </div>
           <div class="form-group">
-            <label>Foto Makanan</label>
-            <input type="file" accept="image/*" name="gambar">
+            <label>Foto {{$kategori->nama}} :</label>
+            <input type="file" accept="image/*" name="gambar" id="gambar"/>
           </div>
           <input type="hidden" class="form-control" name="kategori_id" value="{{$kategori->id}}">
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">Tambah Akun</button>
-        <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">Cancel</button>
+        <button type="submit" class="btn btn-primary">Tambah Menu</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">Batal</button>
       </div>
     </form> 
     </div>
@@ -134,29 +138,33 @@
       </div>
       <div class="modal-footer">
         <button type="submit" class="btn btn-primary">Tambah Menu</button>
-        <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">Cancel</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">Batal</button>
       </div>
     </form> 
     </div>
   </div>
 </div>
-<!-- Modal untuk hapus stok -->
-<div class="modal fade" id="hapusstok" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+@foreach($hapusKatalog as $hapusKatalog)
+<!-- Modal untuk hapus katalof -->
+<div>
+<div class="modal fade" id="hapusstok{{$hapusKatalog->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="exampleModalLabel">Hapus Stok</h5>
+        <h4 class="modal-title" id="exampleModalLabel">Hapus Menu</h4>
       </div>
       <div class="modal-body">
-        Apakah anda yakin akan menghapus stok ini ? 
+        Apakah anda yakin akan menghapus Menu {{$hapusKatalog->nama}} ? 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Iya</button>
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Tidak</button>
+        <a href="{{url('Admin/HapusMenu'.'/'.$hapusKatalog->id.'/'.$kategori->id)}}" class="btn btn-primary">Lanjut</a>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
       </div>
     </div>
   </div>
 </div>
+</div>
+@endforeach
 <!-- Modal untuk hapus Kategori -->
 <div class="modal fade" id="hapuskategori" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -168,8 +176,8 @@
         Semua makanan yang ada di dalam kategori ini juga ikut dihapus.
       </div>
       <div class="modal-footer">
-        <a href="{{url('/Admin/HapusMenu').'/'.$kategori->id}}" class="btn btn-primary">Iya</a>
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Tidak</button>
+        <a href="{{url('/Admin/HapusMenu').'/'.$kategori->id}}" class="btn btn-primary">Lanjut</a>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
       </div>
     </div>
   </div>

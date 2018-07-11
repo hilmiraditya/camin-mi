@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 use App\Traits\DefaultLayout;
 use App\Kategori;
@@ -19,9 +21,11 @@ class MenuRestoran extends Controller
         $kategori = Kategori::where('id', $id)->first();
         $cekKatalog = Katalog::where('kategori_id', $id)->count();
     	$katalog = Katalog::where('kategori_id', $id)->get();
+        $hapusKatalog = Katalog::where('kategori_id', $id)->get();
     	return view('admin.menu')
     		->with('katalog', $katalog)
     		->with('kategori', $kategori)
+            ->with('hapusKatalog', $hapusKatalog)
             ->with('cekKatalog', $cekKatalog)
     		->with('layout', $layout);
     }
@@ -30,14 +34,13 @@ class MenuRestoran extends Controller
     {
         $menu = new Katalog;
 
-        if($Request->file('gambar') != NULL)
+        if($Request->hasFile('gambar'))
         {
             $gambar = $Request->file('gambar');
-            $namafile = time().'.'.$berkas->getClientOriginalExtension();
+            $namafile = time().'.'.$gambar->getClientOriginalExtension();
             $folder = public_path('/fotomenu');
             $gambar->move($folder,$namafile);
             $menu->gambar = $namafile;
-            dd($namafile);
         }
 
         $menu->nama = $Request->get('nama');
@@ -56,6 +59,8 @@ class MenuRestoran extends Controller
     {
         $menu = Katalog::find($id);
         $menu->delete();
+
+        File::delete(public_path('fotomenu/'.$menu->gambar));
         return redirect('Admin/Menu'.'/'.$kategori_id);
     }
 }

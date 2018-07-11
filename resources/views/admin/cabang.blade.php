@@ -145,7 +145,7 @@
 <div>
   <div class="modal fade" id="tambahcabang" tabindex="-3" role="dialog" aria-labelledby="tambah-akun" aria-hidden="true">
     <div class="modal-dialog" role="document">
-    <form method="POST" action="{{url('/Admin/TambahCabang')}}">
+    <form method="POST" action="{{url('/Admin/TambahCabang')}}" enctype="multipart/form-data">
       @csrf
       <div class="modal-content">
         <div class="modal-header">
