@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Kategori;
 
-class Menu extends Controller
+class KategoriMenu extends Controller
 {
     /**
      * Create a new controller instance.
@@ -23,8 +24,18 @@ class Menu extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function create(Request $Request)
     {
-        return view('admin.menu');
+        $kategori = new Kategori;
+        $kategori->nama = $Request->get('nama');
+        $kategori->save();
+        return redirect('Admin/Dashboard');
+    }
+
+    public function delete($id)
+    {
+        $kategori = Kategori::find($id);
+        $kategori->delete();
+        return redirect('Admin/Dashboard');
     }
 }

@@ -9,7 +9,7 @@ class Katalog extends Model
     protected $table = 'katalog';
 
     protected $fillable = [
-    	'nama', 'gambar', 'harga', 'diskon', 'keterangan'
+    	'nama', 'gambar', 'harga', 'diskon', 'keterangan', 'kategori_id'
     ];
 
     public function StokCabang()
@@ -25,5 +25,10 @@ class Katalog extends Model
     public function KantongBelanja()
     {
     	return $this->hasMany('App\KantongBelanja');
+    }
+
+    public function Kategori()
+    {
+        return $this->belongsTo('App\Kategori');
     }
 }

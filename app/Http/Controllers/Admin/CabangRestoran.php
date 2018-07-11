@@ -5,25 +5,24 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
+
+use App\Traits\DefaultLayout;
 use App\User;
 use App\Cabang;
 
 class CabangRestoran extends Controller
 {
-  public function __construct()
-  {
-    $this->middleware('admin');
-    $this->middleware('auth');
-  }
+  use DefaultLayout;
 
   public function index()
   {
+    $layout = $this->default();
     $cabang = Cabang::all();
     $hapuscabang = Cabang::all();
     $cekJumlahCabang = Cabang::all()->count();
-    $admin = User::where('isAdmin', 1)->first();
+
    	return view('admin.cabang')
-      ->with('admin', $admin)
+      ->with('layout', $layout)
       ->with('cabang', $cabang)
       ->with('hapuscabang', $hapuscabang)
       ->with('cekJumlahCabang', $cekJumlahCabang);

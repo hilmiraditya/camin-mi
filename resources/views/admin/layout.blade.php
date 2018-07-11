@@ -45,7 +45,7 @@
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
-  <header class="main-header">
+  <header class="main-header" style="color: black;">
     <!-- Logo -->
     <a class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
@@ -65,7 +65,7 @@
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="{{url('adminlte/guest.png')}}" class="user-image" alt="User Image">
-              <span class="hidden-xs">{{$admin->name}}</span>
+              <span class="hidden-xs">{{$layout['admin']->name}}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
@@ -73,7 +73,7 @@
                 <img src="{{url('adminlte/guest.png')}}" class="img-circle" alt="User Image">
 
                 <p>
-                  {{$admin->name}}
+                  {{$layout['admin']->name}}
                   <small>Satean</small>
                 </p>
               </li>
@@ -124,9 +124,12 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="pages/charts/chartjs.html"></i>Tambah Kategori</a></li>
-            <li><a href="{{url('Admin/Menu')}}"><i class="fa fa-circle-o"></i>Makanan</a></li>
-            <li><a href="{{url('Admin/Menu')}}"><i class="fa fa-circle-o"></i>Minuman</a></li>
+            <li><a href="#" data-toggle="modal" data-target="#tambahkategori"></i>Tambah Kategori</a></li>
+            @foreach($layout['listkategori'] as $menu)
+            <li>
+              <a href="{{url('Admin/Menu'.'/'.$menu->id)}}"><i class="fa fa-circle-o"></i>{{$menu->nama}}</a>
+            </li>
+            @endforeach
           </ul>
         </li>
         <li class="treeview">
@@ -138,7 +141,10 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="{{url('Admin/LaporanPenjualan')}}"><i class="fa fa-circle-o"></i>Semua Cabang</a></li>
+            <li>
+              <a href="{{url('Admin/LaporanPenjualan')}}"><i class="fa fa-circle-o"></i>Semua Cabang
+              </a>
+            </li>
             <li><a href="{{url('Admin/LaporanPenjualan')}}"><i class="fa fa-circle-o"></i>Cabang A</a></li>
           </ul>
         </li>
@@ -216,6 +222,27 @@
 </script>
 @yield('modal')
 <!-- Tambah Kategori Modal -->
-
+<div class="modal fade" id="tambahkategori" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Tambah Kategori Menu</h5>
+      </div>
+      <form method="POST" action="{{url('Admin/TambahKategori')}}">
+      <div class="modal-body">
+          @csrf
+          <div class="form-group">
+            <label>Nama Kategori :</label>
+            <input type="text" class="form-control" name="nama">
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Simpan</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
 </body>
 </html>

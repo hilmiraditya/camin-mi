@@ -5,29 +5,18 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\DefaultLayout;
+
 use App\User;
 use App\Cabang;
 
 class AkunKaryawan extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-        $this->middleware('admin');
-    }
+    use DefaultLayout;
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
+        $layout = $this->default();
         $karyawan = User::where('isAdmin', 0)->get();
         $karyawanUpdate = User::where('isAdmin', 0)->get();
         
@@ -36,9 +25,7 @@ class AkunKaryawan extends Controller
 
         $cekJumlahCabang = Cabang::all()->count();
         $cekJumlahKaryawan = User::where('isAdmin', 0)->count();
-        $admin = User::where('isAdmin', 1)->first();
 
-        //dd($karyawanUpdate);
         return view('admin.karyawan')
                 ->with('karyawan', $karyawan)
                 ->with('karyawanUpdate', $karyawanUpdate)
@@ -46,7 +33,7 @@ class AkunKaryawan extends Controller
                 ->with('edit_karyawan_cabang', $edit_karyawan_cabang)
                 ->with('cekJumlahCabang', $cekJumlahCabang)
                 ->with('cekJumlahKaryawan', $cekJumlahKaryawan)
-                ->with('admin', $admin);
+                ->with('layout', $layout);
     }
 
     public function create(Request $request)

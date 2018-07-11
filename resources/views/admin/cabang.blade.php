@@ -131,7 +131,7 @@
         <h4 class="modal-title" id="exampleModalLabel">Hapus Cabang</h5>
       </div>
       <div class="modal-body">
-        Semua data cabang akan dihapus termasuk stok cabang dan akun karyawan.
+        Semua data cabang akan dihapus termasuk stok cabang dan akun karyawan yang terdaftar di cabang ini.
       </div>
       <div class="modal-footer">
         <a href="{{url('/Admin/HapusCabang').'/'.$hapuscabang->id}}" class="btn btn-primary">Hapus</a>
