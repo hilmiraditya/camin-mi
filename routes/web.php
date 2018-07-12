@@ -46,7 +46,8 @@ Route::group(['prefix' => 'Admin'], function () {
 
 	//laporanpenjualan
 	Route::get('LaporanPenjualan/Harian', 'Admin\LaporanPenjualan@harian');
-	Route::get('Laporanpenjualan/Bulanan', 'Admin\LaporanPenjualan@bulanan');
+	Route::get('LaporanPenjualan/Bulanan', 'Admin\LaporanPenjualan@bulanan');
+	Route::get('HapusLaporanPenjualan/{date}/{id}', 'Admin\LaporanPenjualan@delete');
 });
 
 Route::group(['prefix' => 'Karyawan'], function () {

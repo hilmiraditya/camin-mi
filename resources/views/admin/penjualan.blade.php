@@ -5,7 +5,7 @@
     <section class="content-header">
       <h1>
         Laporan Transaksi
-        <small>Semua Cabang</small>
+        <small>{{$date}}</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i>Point Of Sales</a></li>
@@ -47,7 +47,7 @@
                   <td>{{$penjualan->jumlah*$penjualan->Katalog->keuntungan}}</td>
                   <td>{{$penjualan->created_at}}</td>
                   <td>{{$penjualan->keterangan}}</td>
-                  <td><a class="btn btn-danger">Hapus Transaksi></a></td>
+                  <td><a href="{{url('Admin/HapusLaporanPenjualan').'/'.$date.'/'.$penjualan->id}}" class="btn btn-danger">Hapus</a></td>
                 </tr>
                 @endforeach
                 </tbody>
