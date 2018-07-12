@@ -17,7 +17,8 @@ class Penjualan extends Migration
             $table->increments('id');
             $table->integer('jumlah');
             $table->string('keterangan')->nullable();
-            $table->string('atas_nama');
+            $table->string('idTransaksi');
+            $table->integer('keuntungan');
             $table->unsignedInteger('katalog_id');
             $table->foreign('katalog_id')->references('id')->on('katalog')->onDelete('cascade');
             $table->timestamps();

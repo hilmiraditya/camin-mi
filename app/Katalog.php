@@ -9,7 +9,7 @@ class Katalog extends Model
     protected $table = 'katalog';
 
     protected $fillable = [
-    	'nama', 'gambar', 'harga', 'diskon', 'keterangan', 'kategori_id'
+    	'nama', 'gambar', 'harga', 'diskon', 'keterangan', 'kategori_id', 'keuntungan'
     ];
 
     public function StokCabang()

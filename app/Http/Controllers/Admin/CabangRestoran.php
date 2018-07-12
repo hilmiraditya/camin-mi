@@ -62,6 +62,8 @@ class CabangRestoran extends Controller
   {
     $cabang = Cabang::find($id);
     $cabang->delete();
+
+
     return redirect('Admin/Cabang');
   }
 }

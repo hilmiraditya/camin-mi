@@ -37,14 +37,14 @@
               </div>
               <div align="center">
                 @if($katalog->diskon != NULL)
-                <h3><b><strike>{{ $katalog->harga}}</strike></b> <a style="color: red;"><b>{{$katalog->diskon/100*$katalog->harga}}</b></a></h3>
+                <h3><b><strike>{{ "Rp " . number_format($katalog->harga,2,',','.') }}</strike></b> <a style="color: red;"><b>{{ "Rp " . number_format($katalog->harga-($katalog->diskon/100*$katalog->harga),2,',','.') }}</b></a></h3>
                 @else
                   <h3><b>{{ "Rp " . number_format($katalog->harga,2,',','.') }}</b></h3>    
                 @endif
               </div>
               <br>
               <div align="center">
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#tambahakun">
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#editmenu{{$katalog->id}}">
                   Ubah
                 </button>
                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#hapusstok{{$katalog->id}}">
@@ -70,7 +70,7 @@
         @endif
 
         <div class="col-md-12" align="center">
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambahstok">
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambahmenu">
             Tambah Stok
           </button>
           <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#hapuskategori">
@@ -86,14 +86,14 @@
 
 
 @section('modal')
-<!-- Modal untuk tambah akun-->
-<div class="modal fade" id="tambahstok" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Modal untuk tambah stok-->
+<div class="modal fade" id="tambahmenu" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
   <form method="POST" action="{{url('Admin/TambahMenu')}}" enctype="multipart/form-data">
     @csrf
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="exampleModalLabel">Tambah Menu pada Kategori {{$kategori->nama}}</h4>
+        <h4 class="modal-title" id="exampleModalLabel">Tambah Menu pada kategori {{$kategori->nama}}</h4>
       </div>
       <div class="modal-body">
         <div class="form-group">
@@ -103,6 +103,10 @@
         <div class="form-group">
           <label>Harga :</label>
           <input type="text" class="form-control" name="harga">
+        </div>
+        <div class="form-group">
+          <label>Keuntungan :</label>
+          <input type="text" class="form-control" name="keuntungan">
         </div>
         <div class="form-group">
           <label>Keterangan :</label>
@@ -122,42 +126,67 @@
     </div>
   </div>
 </div>
-<!-- Modal untuk tambah stok -->
-<div class="modal fade" id="tambahstok" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+@foreach($editKatalog as $editKatalog)
+<!-- Modal untuk ubah stok-->
+<div class="modal fade" id="editmenu{{$editKatalog->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
-  <form action="/action_page.php">
+  <form method="POST" action="{{url('Admin/UbahMenu')}}" enctype="multipart/form-data">
+    @csrf
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="exampleModalLabel">Tambah Stok Menu</h4>
+        <h4 class="modal-title" id="exampleModalLabel">Ubah menu {{$editKatalog->nama}}</h4>
       </div>
       <div class="modal-body">
         <div class="form-group">
-          <label>Nama Lengkap :</label>
-          <input type="nama" class="form-control" id="nama">
+          <label>Nama Menu :</label>
+          <input type="text" class="form-control" name="nama" value="{{$editKatalog->nama}}" placeholder="{{$editKatalog->nama}}">
         </div>
+        <div class="form-group">
+          <label>Harga :</label>
+          <input type="text" class="form-control" name="harga" value="{{$editKatalog->harga}}" placeholder="{{$editKatalog->harga}}">
+        </div>
+        <div class="form-group">
+          <label>Keuntungan :</label>
+          <input type="text" class="form-control" name="keuntungan" value="{{$editKatalog->keuntungan}}" placeholder="{{$editKatalog->keuntungan}}">
+        </div>
+        <div class="form-group">
+          <label>Diskon :</label>
+          <input type="number"  class="form-control" name="diskon" min="0" max="100" value="{{$editKatalog->diskon}}" placeholder="{{$editKatalog->diskon}}">
+        </div>
+        <div class="form-group">
+          <label>Keterangan :</label>
+          <input type="text" class="form-control" id="keterangan" value="{{$editKatalog->diskon}}" placeholder="{{$editKatalog->keterangan}}">
+        </div>
+          <div class="form-group">
+            <label>Foto {{$editKatalog->nama}} :</label>
+            <input type="file" accept="image/*" name="gambar" id="gambar"/>
+          </div>
+          <input type="hidden" class="form-control" name="kategori_id" value="{{$kategori->id}}">
+          <input type="hidden" class="form-control" name="id" value="{{$editKatalog->id}}">
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">Tambah Menu</button>
+        <button type="submit" class="btn btn-primary">Ubah Menu</button>
         <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">Batal</button>
       </div>
     </form> 
     </div>
   </div>
 </div>
-@foreach($hapusKatalog as $hapusKatalog)
+
 <!-- Modal untuk hapus katalof -->
 <div>
-<div class="modal fade" id="hapusstok{{$hapusKatalog->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="hapusstok{{$editKatalog->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title" id="exampleModalLabel">Hapus Menu</h4>
       </div>
       <div class="modal-body">
-        Apakah anda yakin akan menghapus Menu {{$hapusKatalog->nama}} ? 
+        Apakah anda yakin akan menghapus Menu {{$editKatalog->nama}} ? 
       </div>
       <div class="modal-footer">
-        <a href="{{url('Admin/HapusMenu'.'/'.$hapusKatalog->id.'/'.$kategori->id)}}" class="btn btn-primary">Lanjut</a>
+        <a href="{{url('Admin/HapusMenu'.'/'.$editKatalog->id.'/'.$kategori->id)}}" class="btn btn-primary">Lanjut</a>
         <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
       </div>
     </div>
@@ -165,6 +194,8 @@
 </div>
 </div>
 @endforeach
+
+
 <!-- Modal untuk hapus Kategori -->
 <div class="modal fade" id="hapuskategori" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
