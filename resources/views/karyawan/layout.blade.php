@@ -46,7 +46,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini">POS</span>
       <!-- logo for regular state and mobile devices -->
@@ -70,17 +70,17 @@
           </li>
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="{{url('adminlte/guest.png')}}" class="user-image" alt="User Image">
-              <span class="hidden-xs">Karyawan</span>
+              <img src="{{url('satean.jpg')}}" class="user-image" alt="User Image">
+              <span class="hidden-xs">{{$karyawan->name}}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="{{url('adminlte/guest.png')}}" class="img-circle" alt="User Image">
+                <img src="{{url('satean.jpg')}}" class="img-circle" alt="User Image">
 
                 <p>
-                  Karyawan
-                  <small>Cabang Bintaro</small>
+                  {{$karyawan->name}}
+                  <small>Cabang {{$karyawan->Cabang->nama}}</small>
                 </p>
               </li>
               <!-- Menu Footer-->
@@ -115,8 +115,9 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="{{url('karyawan/menu')}}"><i class="fa fa-circle-o"></i>Makanan</a></li>
-            <li><a href="{{url('karyawan/menu')}}"><i class="fa fa-circle-o"></i>Minuman</a></li>
+            @foreach($kategori as $kategori)
+            <li><a href="#"><i class="fa fa-circle-o"></i>{{$kategori->nama}}</a></li>
+            @endforeach
           </ul>
         </li>
         <li>

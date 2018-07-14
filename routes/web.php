@@ -20,6 +20,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 
 Route::group(['prefix' => 'Admin'], function () {
+	//dashboard
 	Route::get('Dashboard', 'Admin\Dashboard@index');
 
 	//karyawan	
@@ -48,8 +49,16 @@ Route::group(['prefix' => 'Admin'], function () {
 	Route::get('LaporanPenjualan/Harian', 'Admin\LaporanPenjualan@harian');
 	Route::get('LaporanPenjualan/Bulanan', 'Admin\LaporanPenjualan@bulanan');
 	Route::get('HapusLaporanPenjualan/{date}/{id}', 'Admin\LaporanPenjualan@delete');
+
+	//kirimemail
+	Route::get('KirimEmail', 'Admin\Email@backup');
 });
 
 Route::group(['prefix' => 'Karyawan'], function () {
-	Route::get('Dashboard', 'Karyawan\Dashboard@index');	
+	//dashboard
+	Route::get('Dashboard', 'Karyawan\Dashboard@index');
+
+	//kategori-menu
+	Route::get('Menu/{id}', 'Karyawan\MenuRestoran@index');
+
 });

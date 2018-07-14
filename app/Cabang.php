@@ -6,15 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 class Cabang extends Model
 {
     protected $table = 'cabang';
+
     protected $fillable = [
         'nama', 'gambar', 'alamat', 'keterangan', 'no'
     ];
+    
     public function User()
     {
         return $this->hasMany('App\User');
-    }
-    public function stokcabang()
-    {
-        return $this->hasMany('App\StokCabang');
     }
 }

@@ -80,6 +80,7 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div align="center">
+                  <a class="btn btn-default btn-flat">Mode Karyawan</a>
                   <a class="btn btn-default btn-flat" href="{{ route('logout') }}"] onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                     Logout
                   </a>
@@ -108,6 +109,11 @@
         <li>
           <a href="{{url('Admin/AkunKaryawan')}}">
             <i class="fa fa-users"></i><span>Akun Karyawan</span>
+          </a>
+        </li>
+        <li>
+          <a href="{{url('Admin/KirimEmail')}}">
+            <i class="fa fa-users"></i><span>Kirim Email oi :(</span>
           </a>
         </li>
         <li>

@@ -68,9 +68,7 @@
               </table>
             </div>
             <div align="center">
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambahakun">
-              Kirim Email
-              </button>
+              <a class="btn btn-primary" href="{{url('Admin/KirimEmail')}}">Kirim Email</a>
               <button type="button" class="btn btn-success" data-toggle="modal" data-target="#tambahakun">
               Download Laporan
               </button>
