@@ -56,6 +56,11 @@ class CabangRestoran extends Controller
 
   public function update(Request $request)
   {
+    $validator  = $request->validate([
+      'nama'      => 'required',
+      'alamat'     => 'required',
+      'no'  => 'required'
+    ]);
     $cabang = Cabang::find($request->get('id'));
 
     if($request->hasFile('gambar'))
