@@ -39,7 +39,6 @@
             <div class="icon">
               <i class="ion ion-home"></i>
             </div>
-            <a href="{{url('/Admin/Cabang')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -53,7 +52,6 @@
             <div class="icon">
               <i class="ion ion-ios-people"></i>
             </div>
-            <a href="{{url('/Admin/AkunKaryawan')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -68,7 +66,6 @@
             <div class="icon">
               <i class="ion ion-cash"></i>
             </div>
-            <a href="{{ url('/Admin/LaporanPenjualan') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -83,7 +80,6 @@
             <div class="icon">
               <i class="ion ion-coffee"></i>
             </div>
-            <a href="{{ url('/Admin/LaporanPenjualan') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->

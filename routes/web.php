@@ -49,7 +49,7 @@ Route::group(['prefix' => 'Admin'], function () {
 	//laporanpenjualan
 	Route::get('LaporanPenjualan/Harian', 'Admin\LaporanPenjualan@harian');
 	Route::get('LaporanPenjualan/Bulanan', 'Admin\LaporanPenjualan@bulanan');
-	Route::get('HapusLaporanPenjualan/{date}/{id}', 'Admin\LaporanPenjualan@delete');
+	Route::get('HapusLaporanPenjualan/{id}', 'Admin\LaporanPenjualan@delete');
 
 	//kirimemail
 	Route::get('KirimEmail', 'Admin\Email@index');

@@ -26,6 +26,7 @@
           </ul>
         </div>
       </div></div>
+      <!-- sampe line sini beres gaada masalah -->
       @endif
             @if($cekJumlahKaryawan > 0)
             <div class="box">
@@ -73,7 +74,7 @@
                     </td>
                   </tr>
                   @endforeach
-                  </tfoot>
+                  </tbody>
                 </table>
               </div>
               <div align="center">
@@ -93,9 +94,6 @@
             </div>
             @endif
             <!-- /.box -->
-          </div>
-          <!-- /.col -->
-        </div>
         <!-- /.row -->
       </section>
       <!-- /.content -->

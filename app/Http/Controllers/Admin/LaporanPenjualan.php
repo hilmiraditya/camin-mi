@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Traits\DefaultLayout;
+use Illuminate\Support\Facades\Redirect;
 
 use App\Penjualan;
 use App\Katalog;
@@ -41,11 +42,10 @@ class LaporanPenjualan extends Controller
         	->with('cekPenjualan', $cekPenjualan);
     }
 
-    public function delete($date, $id)
+    public function delete($id)
     {
     	$penjualan = Penjualan::find($id);
     	$penjualan->delete();
-
-    	return redirect('Admin/LaporanPenjualan'.'/'.$date);
+    	return Redirect::back();
     }
 }

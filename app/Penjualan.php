@@ -9,7 +9,7 @@ class Penjualan extends Model
     protected $table = 'Penjualan';
 
     protected $fillable = [
-    	'jumlah', 'keterangan', 'idTransaksi', 'katalog_id', 'keuntungan', 'cabang_id'
+    	'jumlah', 'keterangan', 'idTransaksi', 'katalog_id', 'keuntungan', 'user_id', 'cabang_id'
     ];
 
     public function Katalog()

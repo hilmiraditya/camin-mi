@@ -31,23 +31,28 @@
                   <th>Kategori</th>
                   <th>Jumlah</th>
                   <th>Keuntungan</th>
+                  <th>Cabang</th>
                   <th>Tanggal</th>
                   <th>Keterangan</th>
                   <th>Opsi</th>
                 </tr>
                 </thead>
                 <tbody>
+                <?php $a=1 ?>
                 @foreach($penjualan as $penjualan)
                 <tr>
-                  <td></td>
-                  <td>{{$penjualan->idTransaksi}}</td>
+                  <td>{{$a++}}</td>
+                  <td>{{$penjualan->id}}</td>
                   <td>{{$penjualan->Katalog->nama}}</td>
-                  <td>{{$penjualan->Kategori->nama}}</td>
+                  <td>{{$penjualan->Katalog->Kategori->nama}}
                   <td>{{$penjualan->jumlah}}</td>
-                  <td>{{$penjualan->jumlah*$penjualan->Katalog->keuntungan}}</td>
+                  <td>{{ "Rp " . number_format($penjualan->jumlah*$penjualan->Katalog->keuntungan,2,',','.') }}</td>
+                  <td>{{$penjualan->Cabang->nama}}</td>
                   <td>{{$penjualan->created_at}}</td>
-                  <td>{{$penjualan->keterangan}}</td>
-                  <td><a href="{{url('Admin/HapusLaporanPenjualan').'/'.$date.'/'.$penjualan->id}}" class="btn btn-danger">Hapus</a></td>
+                  @if($penjualan->keterangan == NULL) <td>Tidak ada keterangan</td>
+                  @else<td>{{$penjualan->keterangan}}</td>
+                  @endif
+                  <td><a href="{{url('Admin/HapusLaporanPenjualan').'/'.$penjualan->id}}" class="btn btn-danger">Hapus</a></td>
                 </tr>
                 @endforeach
                 </tbody>
