@@ -9,7 +9,7 @@ class Penjualan extends Model
     protected $table = 'Penjualan';
 
     protected $fillable = [
-    	'jumlah', 'keterangan', 'idTransaksi', 'katalog_id', 'keuntungan', 'user_id', 'cabang_id'
+    	'jumlah', 'keterangan', 'katalog_id', 'cabang_id','kategori_id', 'karyawan_id'
     ];
 
     public function Katalog()
@@ -20,5 +20,15 @@ class Penjualan extends Model
     public function Cabang()
     {
     	return $this->belongsTo('App\Cabang');
+    }
+
+    public function Kategori()
+    {
+        return $this->belongsTo('App\Kategori');
+    }
+
+    public function Users()
+    {
+        return $this->belongsTo('App\User');
     }
 }

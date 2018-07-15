@@ -16,4 +16,9 @@ class Kategori extends Model
     {
     	return $this->hasMany('App\Katalog');
     }
+    
+    public function Penjualan()
+    {
+    	return $this->hasMany('App\Penjualan');
+    }
 }

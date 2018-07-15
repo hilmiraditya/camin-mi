@@ -12,11 +12,6 @@ class Katalog extends Model
     	'nama', 'gambar', 'harga', 'diskon', 'keterangan', 'kategori_id', 'keuntungan'
     ];
 
-    public function Penjualan()
-    {
-    	return $this->hasMany('App\Penjualan');
-    }
-
     public function KantongBelanja()
     {
     	return $this->hasMany('App\KantongBelanja');

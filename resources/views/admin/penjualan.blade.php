@@ -1,5 +1,5 @@
 @extends('admin.layout')
-@section('title', 'Akun Karyawan')
+@section('title', 'Laporan Penjualan')
 @section('content')
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -18,7 +18,7 @@
     <section class="content">
       <div class="row">
         <div class="col-xs-12">
-          @if($cekPenjualan > 0)
+          @if($penjualan->count() > 0)
           <div class="box">
             <!-- /.box-header -->
             <div class="box-body">
@@ -26,15 +26,13 @@
                 <thead>
                 <tr>
                   <th>No</th>
+                  <th>Atas Nama</th>
                   <th>ID Transaksi</th>
                   <th>Nama Menu</th>
                   <th>Kategori</th>
                   <th>Jumlah</th>
-                  <th>Keuntungan</th>
                   <th>Cabang</th>
                   <th>Tanggal</th>
-                  <th>Keterangan</th>
-                  <th>Opsi</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -42,43 +40,36 @@
                 @foreach($penjualan as $penjualan)
                 <tr>
                   <td>{{$a++}}</td>
+                  @if($penjualan->keterangan == NULL) <td><a class="btn btn-xs btn-warning">Tidak diisi</a></td>
+                  @else<td>{{$penjualan->keterangan}}</td>
+                  @endif
                   <td>{{$penjualan->id}}</td>
                   <td>{{$penjualan->Katalog->nama}}</td>
                   <td>{{$penjualan->Katalog->Kategori->nama}}
                   <td>{{$penjualan->jumlah}}</td>
-                  <td>{{ "Rp " . number_format($penjualan->jumlah*$penjualan->Katalog->keuntungan,2,',','.') }}</td>
                   <td>{{$penjualan->Cabang->nama}}</td>
                   <td>{{$penjualan->created_at}}</td>
-                  @if($penjualan->keterangan == NULL) <td>Tidak ada keterangan</td>
-                  @else<td>{{$penjualan->keterangan}}</td>
-                  @endif
-                  <td><a href="{{url('Admin/HapusLaporanPenjualan').'/'.$penjualan->id}}" class="btn btn-danger">Hapus</a></td>
                 </tr>
                 @endforeach
                 </tbody>
                 <tfoot>
                 <tr>
                   <th>No</th>
+                  <th>Atas Nama</th>
                   <th>ID Transaksi</th>
                   <th>Nama Menu</th>
                   <th>Kategori</th>
                   <th>Jumlah</th>
                   <th>Keuntungan</th>
-                  <th>Karyawan</th>
                   <th>Tanggal</th>
-                  <th>Keterangan</th>
-                  <th>Opsi</th>
                 </tr>
                 </tfoot>
               </table>
             </div>
             <div align="center">
-              <a class="btn btn-primary" href="{{url('Admin/KirimEmail')}}">Kirim Email</a>
+              <a class="btn btn-primary" href="{{url('Admin/NyobaPDF')}}">Download PDF</a>
               <button type="button" class="btn btn-success" data-toggle="modal" data-target="#tambahakun">
               Download Laporan
-              </button>
-              <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#tambahakun">
-              Hapus Laporan
               </button>
             </div>
             <br>

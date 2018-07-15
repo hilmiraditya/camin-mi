@@ -10,20 +10,19 @@ use Illuminate\Console\Scheduling\Schedule;
 use App\Cabang;
 use App\User;
 use App\Penjualan;
+use App\Kategori;
 
 class Email extends Controller
 {
 	public function index()
 	{
-		$cabang = Cabang::all();
-		$karyawan = User::where('isAdmin', 0)->get();
 		$penjualan = Penjualan::all();
-		$penjualan2 = Penjualan::all();
+		$cabang = Cabang::all();
+		$kategori = Kategori::all();
 		return view('admin.email')
-			->with('cabang', $cabang)
-			->with('karyawan', $karyawan)
 			->with('penjualan', $penjualan)
-			->with('penjualan2', $penjualan2);
+			->with('kategori', $kategori)
+			->with('cabang', $cabang);
 	}
 
 	public function backup()
