@@ -38,12 +38,18 @@ class AkunKaryawan extends Controller
 
     public function create(Request $request)
     {
+        $validator  = $request->validate([
+            'name'      => 'required',
+            'email'     => 'unique:users,email|required',
+            'password'  => 'required'
+        ]);
+
         $karyawan = new User;
 
         $karyawan->no_handphone = $request->get('nohape');
         $karyawan->name = $request->get('name');
         $karyawan->email = $request->get('email');
-        if($request->get('password') != NULL) $password = $request->get('password');
+        $password = $request->get('password');
         $karyawan->password = bcrypt($password);
         $karyawan->cabang_id = $request->get('cabang_id');
 
@@ -54,6 +60,11 @@ class AkunKaryawan extends Controller
 
     public function update(Request $request, $id)
     {
+        $validator  = $request->validate([
+            'name'      => 'required',
+            'email'     => 'unique:users,email|required',
+            'password'  => 'required'
+        ]);
         $karyawan = User::find($id);
  
         $karyawan->no_handphone = $request->get('nohape');

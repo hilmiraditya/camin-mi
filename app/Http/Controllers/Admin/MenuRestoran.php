@@ -33,6 +33,12 @@ class MenuRestoran extends Controller
 
     public function create(Request $Request)
     {
+        $validator  = $Request->validate([
+            'nama'      => 'unique:katalog,nama|required',
+            'harga'     => 'required',
+            'keuntungan' => 'required'
+        ]);
+
         $menu = new Katalog;
 
         if($Request->hasFile('gambar'))
@@ -58,6 +64,12 @@ class MenuRestoran extends Controller
 
     public function update(Request $Request)
     {
+        $validator  = $Request->validate([
+            'nama'      => 'required',
+            'harga'     => 'required',
+            'keuntungan' => 'required'
+        ]);
+
         $id = $Request->get('id');
         
         $menu = Katalog::find($id);

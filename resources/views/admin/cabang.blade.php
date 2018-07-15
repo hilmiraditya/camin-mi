@@ -15,6 +15,19 @@
 
     <!-- Main content -->
     <section class="content">
+    <div class="row">
+      <div class="col-md-12">
+      @if (count($errors) > 0)
+        <div class = "alert alert-danger">
+          <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+          </ul>
+        </div>
+      @endif
+      </div>
+    </div>
     @if($cekJumlahCabang > 0)
       <div class="row">
       @foreach($cabang as $cabang)
@@ -43,14 +56,11 @@
               </div>
               <br>
               <div align="center">
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#tambahakun">
-                  Lihat Stok Menu
-                </button>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambahstok">
-                  Tambah Stok Menu
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#ubahacabang{{$cabang->id}}">
+                  Ubah
                 </button>
                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#hapuscabang{{$cabang->id}}">
-                  Hapus Cabang
+                  Hapus
                 </button>
               </div>
             </div>
@@ -83,51 +93,44 @@
 
 
 @section('modal')
-<!-- Lihat Stok Cabang-->
-<div class="modal fade" id="tambahakun" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+@foreach($hapuscabang as $hapuscabang)
+<!-- Ubah Cabang-->
+<div class="modal fade" id="ubahacabang{{$hapuscabang->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
-  <form action="/action_page.php">
+  <form method="POST" action="{{url('/Admin/UpdateCabang')}}" enctype="multipart/form-data">
+  @csrf
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="exampleModalLabel">Lihat Stok Cabang</h4>
+        <h4 class="modal-title" id="exampleModalLabel">Ubah Data Cabang</h4>
       </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <label>Sate Ayam :</label>
-          <input type="number" class="form-control" id="nama">
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Nama Cabang :</label>
+            <input type="text" class="form-control" name="nama" placeholder="{{$hapuscabang->nama}}" value="{{$hapuscabang->nama}}">
+            <input type="hidden" name="id" value="{{$hapuscabang->id}}">
+          </div>
+          <div class="form-group">
+            <label>Alamat :</label>
+            <input type="text" class="form-control" name="alamat" placeholder="{{$hapuscabang->alamat}}" value="{{$hapuscabang->alamat}}">
+          </div>
+          <div class="form-group">
+            <label>No. Telfon :</label>
+            <input type="text" class="form-control" name="no" placeholder="{{$hapuscabang->no}}" value="{{$hapuscabang->no}}">
+          </div>
+          <div class="form-group">
+            <label>Foto Cabang :</label>
+            <input type="file" accept="image/*" name="gambar" id="gambar">
+          </div>
         </div>
-      </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">Cancel</button>
-      </div>
-    </form> 
-    </div>
-  </div>
-</div>
-<!-- Tambah Stok Cabang -->
-<div class="modal fade" id="tambahstok" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-  <form action="/action_page.php">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="exampleModalLabel">Tambah Stok Menu</h4>
-      </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <label>Sate Ayam :</label>
-          <input type="number" class="form-control" id="nama">
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">Tambah Menu</button>
-        <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">Cancel</button>
+        <button type="submit" class="btn btn-primary">Ubah</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">Batal</button>
       </div>
     </form> 
     </div>
   </div>
 </div>
 <!-- Modal untuk hapus stok -->
-@foreach($hapuscabang as $hapuscabang)
 <div class="modal fade" id="hapuscabang{{$hapuscabang->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -139,7 +142,7 @@
       </div>
       <div class="modal-footer">
         <a href="{{url('/Admin/HapusCabang').'/'.$hapuscabang->id}}" class="btn btn-primary">Hapus</a>
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
       </div>
     </div>
   </div>
@@ -175,7 +178,7 @@
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-primary">Tambah Akun</button>
-          <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">Cancel</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">Batal</button>
         </div>
       </form> 
       </div>

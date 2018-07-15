@@ -32,8 +32,9 @@ Route::group(['prefix' => 'Admin'], function () {
 	//cabang
 	Route::get('Cabang', 'Admin\CabangRestoran@index');
 	Route::post('TambahCabang', 'Admin\CabangRestoran@create');
+	Route::get('TambahCabang', 'Admin\CabangRestoran@create');
 	Route::get('HapusCabang/{id}', 'Admin\CabangRestoran@delete');
-	Route::get('UpdateCabang', 'Admin\CabangRestoran@update');
+	Route::post('UpdateCabang', 'Admin\CabangRestoran@update');
 
 	//kategori
 	Route::post('TambahKategori', 'Admin\KategoriMenu@create');
@@ -51,7 +52,7 @@ Route::group(['prefix' => 'Admin'], function () {
 	Route::get('HapusLaporanPenjualan/{date}/{id}', 'Admin\LaporanPenjualan@delete');
 
 	//kirimemail
-	Route::get('KirimEmail', 'Admin\Email@backup');
+	Route::get('KirimEmail', 'Admin\Email@index');
 });
 
 Route::group(['prefix' => 'Karyawan'], function () {

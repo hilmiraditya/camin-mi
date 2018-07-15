@@ -17,7 +17,17 @@
 
     <!-- Main content -->
     <section class="content">
-
+      @if (count($errors) > 0)
+      <div class="row"><div class="col-xs-12">
+        <div class = "alert alert-danger">
+          <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+          </ul>
+        </div>
+      </div></div>
+      @endif
       <div class="row" align="center">
         @if($cekKatalog > 0)
         @foreach($katalog as $katalog)
@@ -30,7 +40,7 @@
             <div class="box-body">
               <div class="row">
                 @if($katalog->gambar == NULL)
-                <img class="col-md-12" style="width: 100%;height:100%;max-height:250px;" src="https://media.travelingyuk.com/wp-content/uploads/2017/07/Ilustrasi-makanan-yang-biasa-dikonsumsi-masyarakat-Indonesia-1.jpg">
+                <img class="col-md-12" style="width: 100%;height:100%;max-height:250px;" src="{{url('adminlte/restaurant.png')}}">
                 @else
                 <img class="col-md-12" style="width: 100%;height:100%;max-height:250px;" src="{{url('fotomenu').'/'.$katalog->gambar}}"> 
                 @endif
@@ -50,9 +60,6 @@
                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#hapusstok{{$katalog->id}}">
                   Hapus
                 </button>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambahstok">
-                  Tambah Stok
-                </button>
               </div>
             </div>
             <!-- /.box-body-->
@@ -71,7 +78,7 @@
 
         <div class="col-md-12" align="center">
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambahmenu">
-            Tambah Stok
+            Tambah Menu
           </button>
           <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#hapuskategori">
             Hapus

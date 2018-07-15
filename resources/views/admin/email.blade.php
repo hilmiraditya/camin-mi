@@ -35,15 +35,23 @@
     			<div class="col-xs-6">
     				<address>
     				<strong>Cabang :</strong><br>
-    					Jl. qwertyuiop<br>
-    					Jl. qwertyuiop<br>
+                        @if($cabang->count() == NULL)
+                        Cabang Tidak Ada<br>
+                        @endif
+                        @foreach($cabang as $cabang)
+    					{{$cabang->alamat}}<br>
+    					@endforeach
     				</address>
     			</div>
     			<div class="col-xs-6 text-right">
     				<address>
         			<strong>Karyawan :</strong><br>
-    					Nama Orang<br>
-    					Nama Orang<br>
+                        @if($karyawan->count() == NULL)
+                        Karyawan Tidak Ada<br>
+                        @endif
+                        @foreach($karyawan as $karyawan)
+    					{{$karyawan->name}}<br>
+                        @endforeach
     				</address>
     			</div>
     		</div>
@@ -51,77 +59,104 @@
     </div>
     
     <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><strong>Transaksi Periode 7/5/2018</strong></h3>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-condensed">
+                            @if($penjualan->count() == NULL)
+                            <div align="center">
+                                <h5>Belum Ada Transaksi</h5>
+                            </div>
+                            @else
+                            <thead>
+                                <tr>
+                                    <td><strong>Menu</strong></td>
+                                    <td class="text-center"><strong>Harga</strong></td>
+                                    <td class="text-center"><strong>Keuntungan</strong></td>
+                                    <td class="text-center"><strong>Jumlah</strong></td>
+                                    <td class="text-center"><strong>Pendapatan Kotor</strong></td>
+                                    <td class="text-right"><strong>Total Keuntungan Bersih</strong></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- foreach ($order->lineItems as $line) or some such thing here -->
+                                @foreach($penjualan as $penjualan)
+                                <tr>
+                                    <td>{{$penjualan->Katalog->nama}}</td>
+                                    <td class="text-center">{{$penjualan->Katalog->harga}}</td>
+                                    <td class="text-center">{{$penjualan->Katalog->keuntungan}}</td>
+                                    <td class="text-center">{{$penjualan->jumlah}}</td>
+                                    <td class="text-center">{{$penjualan->Katalog->harga*$penjualan->jumlah}}</td>
+                                    <td class="text-right">{{$penjualan->jumlah*$penjualan->Katalog->keuntungan}}/td>
+                                </tr>
+                                @endforeach
+                                <tr>
+                                    <td class="thick-line"></td>
+                                    <td class="thick-line"></td>
+                                    <td class="thick-line"></td>
+                                    <td class="thick-line text-center"><strong>Total</strong></td>
+                                    <td class="thick-line text-center">$670.99</td>
+                                    <td class="thick-line text-right">$670.99</td>
+                                </tr>
+                                @endif
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
     	<div class="col-md-12">
     		<div class="panel panel-default">
     			<div class="panel-heading">
-    				<h3 class="panel-title"><strong>Order summary</strong></h3>
+    				<h3 class="panel-title"><strong>Detail Transaksi Periode 7/5/2018</strong></h3>
     			</div>
     			<div class="panel-body">
     				<div class="table-responsive">
     					<table class="table table-condensed">
+                            @if($penjualan->count() == NULL)
+                            <div align="center">
+                                <h5>Belum Ada Transaksi</h5>
+                            </div>
+                            @else
     						<thead>
                                 <tr>
-        							<td><strong>Menu</strong></td>
-        							<td class="text-center"><strong>Harga</strong></td>
-        							<td class="text-center"><strong>Keuntungan</strong></td>
+        							<td><strong>ID Transaksi</strong></td>
+        							<td class="text-center"><strong>Nama Item</strong></td>
+        							<td class="text-center"><strong>Cabang</strong></td>
         							<td class="text-center"><strong>Jumlah</strong></td>
-        							<td class="text-center"><strong>Pendapatan Kotor</strong></td>
-        							<td class="text-right"><strong>Total Keuntungan</strong></td>
+        							<td class="text-right"><strong>Tanggal Transaksi</strong></td>
                                 </tr>
     						</thead>
     						<tbody>
     							<!-- foreach ($order->lineItems as $line) or some such thing here -->
     							<tr>
-    								<td>Sate Mozarella</td>
-    								<td class="text-center">15000</td>
-    								<td class="text-center">5000</td>
-    								<td class="text-center">10</td>
-    								<td class="text-center">150000</td>
-    								<td class="text-right">50000</td>
-    							</tr>
-                                <tr>
-        							<td>BS-400</td>
-    								<td class="text-center">$20.00</td>
-    								<td class="text-center">3</td>
-    								<td class="text-right">$60.00</td>
-    							</tr>
-                                <tr>
-            						<td>BS-1000</td>
-    								<td class="text-center">$600.00</td>
-    								<td class="text-center">1</td>
-    								<td class="text-right">$600.00</td>
-    							</tr>
-    							<tr>
-    								<td class="thick-line"></td>
-    								<td class="thick-line"></td>
-    								<td class="thick-line"></td>
-    								<td class="thick-line"></td>
-    								<td class="thick-line text-center"><strong>Subtotal</strong></td>
-    								<td class="thick-line text-right">$670.99</td>
-    							</tr>
-    							<tr>
-    								<td class="no-line"></td>
-    								<td class="no-line"></td>
-    								<td class="no-line"></td>
-    								<td class="no-line"></td>
-    								<td class="no-line text-center"><strong>Shipping</strong></td>
-    								<td class="no-line text-right">$15</td>
-    							</tr>
-    							<tr>
-    								<td class="no-line"></td>
-    								<td class="no-line"></td>
-    								<td class="no-line"></td>
-    								<td class="no-line"></td>
-    								<td class="no-line text-center"><strong>Total</strong></td>
-    								<td class="no-line text-right">$685.99</td>
+                                    @foreach($penjualan2 as $penjualan2)
+    								<td>{{$penjualan2->idTransaksi}}</td>
+                                    <td class="text-center">{{$penjualan2->nama}}</td>
+    								<td class="text-center">{{$penjualan2->Cabang->nama}}</td>
+    								<td class="text-center">{{$penjualan2->jumlah}}</td>
+    								<td class="text-center">{{$penjualan2->created_at}}</td>
+                                    @endforeach
     							</tr>
     						</tbody>
+                            @endif
     					</table>
     				</div>
     			</div>
     		</div>
     	</div>
     </div>
+</div>
+<hr>
+<div align="center">
+    <h5>Develop by <b>raditya113@icloud.com</b></h5>
 </div>
 </body>
 </html>

@@ -15,6 +15,17 @@
 
     <!-- Main content -->
     <section class="content">
+      @if (count($errors) > 0)
+      <div class="row"><div class="col-xs-12">
+        <div class = "alert alert-danger">
+          <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+          </ul>
+        </div>
+      </div></div>
+      @endif
       <!-- Small boxes (Stat box) -->
       <div class="row">
         <div class="col-lg-3 col-xs-6">

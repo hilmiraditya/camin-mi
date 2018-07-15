@@ -14,8 +14,11 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         //
+        Commands\laporanharian::class,
+        Commands\laporanbulanan::class,
+        Commands\hapuslaporanbulanan::class
     ];
-
+    
     /**
      * Define the application's command schedule.
      *
@@ -24,7 +27,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->call('App\Http\Controllers\Admin\Email@backup')->everyMinute();
+        $schedule->command('laporan:harian')->hourlyAt(15);
+        $schedule->command('laporan:bulanan')->everyMinute();
+        $schedule->command('laporan:hapus')->everyMinute();
         // $schedule->command('inspire')
         //          ->hourly();
     }

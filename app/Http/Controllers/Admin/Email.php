@@ -7,12 +7,23 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Console\Scheduling\Schedule;
 
+use App\Cabang;
+use App\User;
+use App\Penjualan;
 
 class Email extends Controller
 {
 	public function index()
 	{
-		return view('admin.email');
+		$cabang = Cabang::all();
+		$karyawan = User::where('isAdmin', 0)->get();
+		$penjualan = Penjualan::all();
+		$penjualan2 = Penjualan::all();
+		return view('admin.email')
+			->with('cabang', $cabang)
+			->with('karyawan', $karyawan)
+			->with('penjualan', $penjualan)
+			->with('penjualan2', $penjualan2);
 	}
 
 	public function backup()

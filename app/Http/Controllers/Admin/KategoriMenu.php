@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Model;
+
 use App\Http\Controllers\Controller;
 use App\Kategori;
 
@@ -26,6 +28,9 @@ class KategoriMenu extends Controller
      */
     public function create(Request $Request)
     {
+        $validator  = $Request->validate([
+            'nama'     => 'unique:kategori,nama'
+        ]);
         $kategori = new Kategori;
         $kategori->nama = $Request->get('nama');
         $kategori->save();
