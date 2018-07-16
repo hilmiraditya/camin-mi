@@ -15,8 +15,8 @@ trait KaryawanDefaultLayout
 	public function default()
 	{
     	$layout = [
-    		'karyawan' => Auth::user(),
-    		'kategori' => Kategori::all()
+    		'user' => Auth::user(),
+    		'listkategori' => Kategori::all()
     	];
 
     	return $layout;

@@ -16,7 +16,7 @@ trait DefaultLayout
 	public function default()
 	{
     	$layout = [
-    		'admin' => User::where('isAdmin', 1)->first(),
+    		'user' => User::where('isAdmin', 1)->first(),
     		'listkategori' => Kategori::all()
     	];
 

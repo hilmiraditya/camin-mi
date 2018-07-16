@@ -65,7 +65,7 @@
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="{{url('satean.jpg')}}" class="user-image" alt="User Image">
-              <span class="hidden-xs">{{$layout['admin']->name}}</span>
+              <span class="hidden-xs">{{$layout['user']->name}}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
@@ -73,14 +73,14 @@
                 <img src="{{url('satean.jpg')}}" class="img-circle" alt="User Image">
 
                 <p>
-                  {{$layout['admin']->name}}
+                  {{$layout['user']->name}}
                   <small>Satean</small>
                 </p>
               </li>
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div align="center">
-                  <a class="btn btn-default btn-flat">Mode Karyawan</a>
+                  <a href="{{url('/Karyawan/Dashboard')}}" class="btn btn-default btn-flat">Mode Karyawan</a>
                   <a class="btn btn-default btn-flat" href="{{ route('logout') }}"] onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                     Logout
                   </a>

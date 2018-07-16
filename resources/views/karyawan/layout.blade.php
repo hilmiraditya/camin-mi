@@ -71,7 +71,7 @@
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="{{url('satean.jpg')}}" class="user-image" alt="User Image">
-              <span class="hidden-xs">{{$layout['karyawan']->name}}</span>
+              <span class="hidden-xs">{{$layout['user']->name}}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
@@ -79,13 +79,20 @@
                 <img src="{{url('satean.jpg')}}" class="img-circle" alt="User Image">
 
                 <p>
-                  {{$layout['karyawan']->name}}
-                  <small>Cabang {{$layout['karyawan']->Cabang->nama}}</small>
+                  {{$layout['user']->name}}
+                  @if($layout['user']->isAdmin == 0)
+                  <small>Cabang {{$layout['user']->Cabang->nama}}</small>
+                  @else
+                  <small>Admin dalam Mode Karyawan</small>
+                  @endif
                 </p>
               </li>
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div align="center">
+                  @if($layout['user']->isAdmin == 1)
+                  <a href="{{url('/Admin/Dashboard')}}" class="btn btn-default btn-flat">Kembali ke Mode Admin</a>
+                  @endif
                   <a class="btn btn-default btn-flat" href="{{ route('logout') }}"] onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                     Logout
                   </a>
@@ -115,7 +122,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            @foreach($layout['kategori'] as $kategori)
+            @foreach($layout['listkategori'] as $kategori)
             <li>
               <a href="{{url('Karyawan/Menu'.'/'.$kategori->id)}}">
                 <i class="fa fa-circle-o"></i>{{$kategori->nama}}
@@ -134,12 +141,12 @@
           </a>
           <ul class="treeview-menu">
             <li>
-              <a href="{{url('Karyawan/LaporanPenjualan/Harian'.'/'.$layout['karyawan']->cabang_id)}}">
+              <a href="{{url('Karyawan/LaporanPenjualan/Harian'.'/'.$layout['user']->cabang_id)}}">
                 <i class="fa fa-circle-o"></i>Harian
               </a>
             </li>
             <li>
-              <a href="{{url('Karyawan/LaporanPenjualan/Bulanan'.'/'.$layout['karyawan']->cabang_id)}}">
+              <a href="{{url('Karyawan/LaporanPenjualan/Bulanan'.'/'.$layout['user']->cabang_id)}}">
                 <i class="fa fa-circle-o"></i>Bulanan
               </a>
             </li>
