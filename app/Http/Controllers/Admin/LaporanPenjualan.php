@@ -33,7 +33,7 @@ class LaporanPenjualan extends Controller
 
     public function bulanan()
     {
-        $date = date("y-m");
+        $date = date("Y-m");
         $layout = $this->default();
         $penjualan =  Penjualan::whereYear('created_at', '=', date('Y'))->whereMonth('created_at', '=', date('m'))->get();
         return view('admin.penjualan')->with('layout', $layout)->with('penjualan', $penjualan)->with('date', $date);
@@ -41,7 +41,7 @@ class LaporanPenjualan extends Controller
 
     public function laporan_bulanan()
     {
-        $date = date("y-m");
+        $date = date("Y-m");
         $penjualan = Penjualan::whereYear('created_at', '=', date('Y'))->whereMonth('created_at', '=', date('m'))->get();
         $cabang = Cabang::all();
         $kategori = Kategori::all();

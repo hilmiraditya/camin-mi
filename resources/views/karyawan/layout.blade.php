@@ -71,7 +71,7 @@
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="{{url('satean.jpg')}}" class="user-image" alt="User Image">
-              <span class="hidden-xs">{{$karyawan->name}}</span>
+              <span class="hidden-xs">{{$layout['karyawan']->name}}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
@@ -79,8 +79,8 @@
                 <img src="{{url('satean.jpg')}}" class="img-circle" alt="User Image">
 
                 <p>
-                  {{$karyawan->name}}
-                  <small>Cabang {{$karyawan->Cabang->nama}}</small>
+                  {{$layout['karyawan']->name}}
+                  <small>Cabang {{$layout['karyawan']->Cabang->nama}}</small>
                 </p>
               </li>
               <!-- Menu Footer-->
@@ -115,14 +115,18 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            @foreach($kategori as $kategori)
-            <li><a href="#"><i class="fa fa-circle-o"></i>{{$kategori->nama}}</a></li>
+            @foreach($layout['kategori'] as $kategori)
+            <li>
+              <a href="{{url('Karyawan/Menu'.'/'.$kategori->id)}}">
+                <i class="fa fa-circle-o"></i>{{$kategori->nama}}
+              </a>
+            </li>
             @endforeach
           </ul>
         </li>
         <li>
-          <a href="{{url('karyawan/transaksi')}}">
-            <i class="fa fa-money"></i><span>Transaksi</span>
+          <a href="{{url('Karyawan/TransaksiCabang'.'/'.$layout['karyawan']->cabang_id)}}">
+            <i class="fa fa-money"></i><span>Transaksi Cabang {{$layout['karyawan']->Cabang->nama}}</span>
           </a>
         </li>
       </ul>

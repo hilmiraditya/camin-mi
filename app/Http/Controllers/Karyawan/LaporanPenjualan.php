@@ -7,13 +7,13 @@ use App\Http\Controllers\Controller;
 
 use App\Traits\KaryawanDefaultLayout;
 
-class Dashboard extends Controller
+class LaporanPenjualan extends Controller
 {
+    //
     use KaryawanDefaultLayout;
 
-    public function index()
+    public function index($id)
     {
-        $layout = $this->default();
-        return view('karyawan.index')->with('layout', $layout);
+    	echo "berhasil";
     }
 }

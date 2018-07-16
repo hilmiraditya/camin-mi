@@ -211,7 +211,7 @@
         <h4 class="modal-title" id="exampleModalLabel">Hapus Stok</h5>
       </div>
       <div class="modal-body">
-        Semua makanan yang ada di dalam kategori ini juga ikut dihapus.
+        Semua makanan yang ada di dalam kategori ini juga ikut dihapus dan laporan transaksi yang telah dilakukan akan dihapus juga.
       </div>
       <div class="modal-footer">
         <a href="{{url('/Admin/HapusMenu').'/'.$kategori->id}}" class="btn btn-primary">Lanjut</a>

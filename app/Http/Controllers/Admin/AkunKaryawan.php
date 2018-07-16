@@ -62,8 +62,7 @@ class AkunKaryawan extends Controller
     {
         $validator  = $request->validate([
             'name'      => 'required',
-            'email'     => 'unique:users,email|required',
-            'password'  => 'required'
+            'email'     => 'required'
         ]);
         $karyawan = User::find($id);
  

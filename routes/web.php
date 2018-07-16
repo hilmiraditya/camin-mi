@@ -60,10 +60,14 @@ Route::group(['prefix' => 'Admin'], function () {
 });
 
 Route::group(['prefix' => 'Karyawan'], function () {
+
 	//dashboard
 	Route::get('Dashboard', 'Karyawan\Dashboard@index');
 
 	//kategori-menu
 	Route::get('Menu/{id}', 'Karyawan\MenuRestoran@index');
+
+	//lihat transaksi cabang
+	Route::get('TransaksiCabang/{id}', 'Karyawan\LaporanPenjualan@index');
 
 });

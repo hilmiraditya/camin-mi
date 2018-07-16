@@ -56,7 +56,8 @@
                             </thead>
                             <tbody>
                                 <!-- foreach ($order->lineItems as $line) or some such thing here -->
-                                @foreach($penjualan->where('cabang_id', $cabang->id) as $penjualan)
+                                <?php $hasil = $penjualan->where('cabang_id', $cabang->id);?>
+                                @foreach($hasil as $penjualan)
                                 <tr>
                                     <td>{{$penjualan->id}}</td>
                                     <td class="text-center">{{$penjualan->Katalog->nama}}
@@ -72,7 +73,8 @@
                                     <td class="thick-line text-center"></td>
                                     <td class="thick-line text-right"></td>
                                 </tr>
-                                @foreach($kategori as $kategori)
+                                <?php $Kategori = $kategori;?>
+                                @foreach($Kategori as $kategori)
                                 <tr>
                                     <td class="no-line"></td>
                                     <td class="no-line"></td>
