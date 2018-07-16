@@ -54,9 +54,9 @@ Route::group(['prefix' => 'Admin'], function () {
 	//nyoba pdf
 	Route::get('NyobaPDF', 'Admin\LaporanPenjualan@nyobapdf');
 
-
-	//kirimemail
-	Route::get('KirimEmail', 'Admin\Email@index');
+	//download laporan pdf
+	Route::get('LaporanHarian', 'Admin\LaporanPenjualan@laporan_harian');
+	Route::get('LaporanBulanan', 'Admin\LaporanPenjualan@laporan_bulanan');
 });
 
 Route::group(['prefix' => 'Karyawan'], function () {

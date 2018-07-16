@@ -67,10 +67,8 @@
               </table>
             </div>
             <div align="center">
-              <a class="btn btn-primary" href="{{url('Admin/NyobaPDF')}}">Download PDF</a>
-              <button type="button" class="btn btn-success" data-toggle="modal" data-target="#tambahakun">
-              Download Laporan
-              </button>
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#downloadlaporan">Download Laporan</button>
+              <button type="button" class="btn btn-success" data-toggle="modal" data-target="#kirimemail">Kirim Email</button>
             </div>
             <br>
             <!-- /.box-body -->
@@ -91,54 +89,46 @@
 
 @section('modal')
 <!-- Modal -->
-<div class="modal fade" id="tambahakun" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div>
+<div class="modal fade" id="kirimemail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
   <form action="/action_page.php">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="exampleModalLabel">Tambah Akun Karyawan</h4>
+        <h4 class="modal-title" id="exampleModalLabel">Kirim Laporan ke Email</h4>
       </div>
       <div class="modal-body">
         <div class="form-group">
-          <label>Nama Lengkap :</label>
-          <input type="nama" class="form-control" id="nama">
-        </div>
-        <div class="form-group">
-          <label>Alamat Email :</label>
+          <label>Email :</label>
           <input type="email" class="form-control" id="email">
-        </div>
-        <div class="form-group">
-          <label>Password :</label>
-          <input type="password" class="form-control" id="pwd">
-        </div>
-        <div class="form-group">
-          <label>Ketik Ulang Password :</label>
-          <input type="password" class="form-control" id="pwd">
-        </div>
-        <div class="form-group">
-          <label>Cabang :</label>
-          <br>
-          <label class="radio-inline">
-            <input type="radio" name="optradio">Cabang 1
-          </label>
-          <label class="radio-inline">
-            <input type="radio" name="optradio">Cabang 2
-          </label>
-          <label class="radio-inline">
-            <input type="radio" name="optradio">Cabang 3
-          </label>
-        </div>
-        <div class="form-group">
-          <label>Upload Foto Profil : </label>
-          <br>
-          <input type="file" name="pic" accept="image/*">
         </div>
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">Tambah Akun</button>
-        <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">Cancel</button>
+        <button type="submit" class="btn btn-primary">Kirim</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">Batal</button>
       </div>
     </form> 
     </div>
   </div>
+</div>
+<!-- Download Laporan -->
+<div>
+<div class="modal fade" id="downloadlaporan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="exampleModalLabel">Kirim Laporan ke Email</h4>
+      </div>
+      <div class="modal-body">
+        <strong>Download Laporan ke Berkas</strong>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-primary" href="{{url('Admin/LaporanHarian')}}">Hari Ini</a>
+        <a class="btn btn-primary" href="{{url('Admin/LaporanBulanan')}}">Bulan Ini</a>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">Batal</button>
+      </div>
+    </form> 
+    </div>
+  </div>
+</div>
 @endsection
