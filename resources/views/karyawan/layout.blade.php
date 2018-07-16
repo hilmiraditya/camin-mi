@@ -124,10 +124,26 @@
             @endforeach
           </ul>
         </li>
-        <li>
-          <a href="{{url('Karyawan/TransaksiCabang'.'/'.$layout['karyawan']->cabang_id)}}">
-            <i class="fa fa-money"></i><span>Transaksi Cabang {{$layout['karyawan']->Cabang->nama}}</span>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-money"></i>
+            <span>Transaksi Cabang</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
           </a>
+          <ul class="treeview-menu">
+            <li>
+              <a href="{{url('Karyawan/LaporanPenjualan/Harian'.'/'.$layout['karyawan']->cabang_id)}}">
+                <i class="fa fa-circle-o"></i>Harian
+              </a>
+            </li>
+            <li>
+              <a href="{{url('Karyawan/LaporanPenjualan/Bulanan'.'/'.$layout['karyawan']->cabang_id)}}">
+                <i class="fa fa-circle-o"></i>Bulanan
+              </a>
+            </li>
+          </ul>
         </li>
       </ul>
     </section>

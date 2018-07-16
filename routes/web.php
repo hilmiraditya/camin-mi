@@ -68,6 +68,7 @@ Route::group(['prefix' => 'Karyawan'], function () {
 	Route::get('Menu/{id}', 'Karyawan\MenuRestoran@index');
 
 	//lihat transaksi cabang
-	Route::get('TransaksiCabang/{id}', 'Karyawan\LaporanPenjualan@index');
+	Route::get('LaporanPenjualan/Harian/{id}', 'Karyawan\LaporanPenjualan@harian');
+	Route::get('LaporanPenjualan/Bulanan/{id}', 'Karyawan\LaporanPenjualan@bulanan');
 
 });

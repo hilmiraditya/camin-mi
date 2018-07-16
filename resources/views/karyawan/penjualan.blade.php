@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('karyawan.layout')
 @section('title', 'Laporan Penjualan')
 @section('content')
     <!-- Content Header (Page header) -->
@@ -9,7 +9,7 @@
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i>Point Of Sales</a></li>
-        <li><a href="#">Admin</a></li>
+        <li><a href="#">Karyawan</a></li>
         <li class="active">Laporan Transaksi</li>
       </ol>
     </section>
@@ -66,10 +66,6 @@
                 </tfoot>
               </table>
             </div>
-            <div align="center">
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#downloadlaporan">Download Laporan</button>
-              <button type="button" class="btn btn-success" data-toggle="modal" data-target="#kirimemail">Kirim Email</button>
-            </div>
             <br>
             <!-- /.box-body -->
           </div>
@@ -85,50 +81,4 @@
       <!-- /.row -->
     </section>
     <!-- /.content -->
-@endsection
-
-@section('modal')
-<!-- Modal -->
-<div>
-<div class="modal fade" id="kirimemail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-  <form action="/action_page.php">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="exampleModalLabel">Kirim Laporan ke Email</h4>
-      </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <label>Email :</label>
-          <input type="email" class="form-control" id="email">
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">Kirim</button>
-        <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">Batal</button>
-      </div>
-    </form> 
-    </div>
-  </div>
-</div>
-<!-- Download Laporan -->
-<div>
-<div class="modal fade" id="downloadlaporan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="exampleModalLabel">Download Laporan</h4>
-      </div>
-      <div class="modal-body">
-        <strong>Download Laporan Transaksi yang telah dilakukan</strong>
-      </div>
-      <div class="modal-footer">
-        <a class="btn btn-primary" href="{{url('Admin/LaporanHarian')}}">Hari Ini</a>
-        <a class="btn btn-primary" href="{{url('Admin/LaporanBulanan')}}">Bulan Ini</a>
-        <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">Batal</button>
-      </div>
-    </form> 
-    </div>
-  </div>
-</div>
 @endsection
