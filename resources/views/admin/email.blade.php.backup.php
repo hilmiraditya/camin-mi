@@ -27,11 +27,11 @@
     		<br>
     		<img style="width: 100px;height: 100px;" src="https://image.ibb.co/gjM09J/satean.jpg">
     		<h3>Laporan Penjualan </h3>
-    		<strong>Periode : {{$data['date']}} </strong>
+    		<strong>Periode : {{$date}} </strong>
     	</div>
     	<hr>
     <div class="row">
-        @foreach($data['cabang'] as $cabang)
+        @foreach($cabang as $cabang)
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -40,7 +40,7 @@
                 <div class="panel-body">
                     <div class="table-responsive">
                         <table class="table table-condensed">
-                            @if($data['penjualan']->where('cabang_id', $cabang->id)->count() == NULL)
+                            @if($penjualan->where('cabang_id', $cabang->id)->count() == NULL)
                             <div align="center">
                                 <h5>Belum Ada Transaksi</h5>
                             </div>
@@ -48,7 +48,6 @@
                             <thead>
                                 <tr>
                                     <td><strong>ID Transaksi</strong></td>
-                                    <td class="text-center"><strong>Atas Nama</strong></td>
                                     <td class="text-center"><strong>Menu</strong></td>
                                     <td class="text-center"><strong>Kategori</strong></td>
                                     <td class="text-center"><strong>Jumlah</strong></td>
@@ -57,15 +56,11 @@
                             </thead>
                             <tbody>
                                 <!-- foreach ($order->lineItems as $line) or some such thing here -->
-                                @foreach($data['penjualan']->where('cabang_id', $cabang->id) as $penjualan)
+                                <?php $hasil = $penjualan->where('cabang_id', $cabang->id);?>
+                                @foreach($hasil as $penjualan)
                                 <tr>
                                     <td>{{$penjualan->id}}</td>
-                                    @if($penjualan->keterangan == NULL)
-                                    <td class="text-center">Tidak Diisi</td>
-                                    @else
-                                    <td class="text-center">{{$penjualan->keterangan}}</td>
-                                    @endif
-                                    <td class="text-center">{{$penjualan->Katalog->nama}}</td>
+                                    <td class="text-center">{{$penjualan->Katalog->nama}}
                                     <td class="text-center">{{$penjualan->Katalog->Kategori->nama}}</td>
                                     <td class="text-center">{{$penjualan->jumlah}}</td>
                                     <td class="text-right">{{$penjualan->created_at}}</td>
@@ -75,19 +70,18 @@
                                     <td class="thick-line"></td>
                                     <td class="thick-line"></td>
                                     <td class="thick-line"></td>
-                                    <td class="thick-line"></td>
                                     <td class="thick-line text-center"></td>
                                     <td class="thick-line text-right"></td>
                                 </tr>
-                                @foreach($data['kategori'] as $kategori)
+                                <?php $Kategori = $kategori;?>
+                                @foreach($Kategori as $kategori)
                                 <tr>
-                                    <td class="no-line"></td>
                                     <td class="no-line"></td>
                                     <td class="no-line"></td>
                                     <td class="no-line"></td>
                                     <td class="no-line text-center"><strong>Total {{$kategori->nama}} Terjual</strong></td>
                                     <td class="no-line text-right">
-                                        {{$data['penjualan']->where('kategori_id', $kategori->id)->where('cabang_id', $cabang->id)->sum('jumlah')}}
+                                        {{$penjualan->where('cabang_id', $cabang->id)->where('kategori_id', $kategori->id)->sum('jumlah')}}
                                     </td>
                                 </tr>
                                 @endforeach

@@ -41,26 +41,32 @@ class LaporanPenjualan extends Controller
 
     public function laporan_bulanan()
     {
-        $date = date("Y-m");
-        $penjualan = Penjualan::whereYear('created_at', '=', date('Y'))->whereMonth('created_at', '=', date('m'))->get();
-        $cabang = Cabang::all();
-        $kategori = Kategori::all();
+        $data = [
+            'date' => date("Y-m"),
+            'penjualan' => Penjualan::whereYear('created_at', '=', date('Y'))->whereMonth('created_at', '=', date('m'))->get(),
+            'cabang' => Cabang::all(),
+            'kategori' => Kategori::all()
+        ];
 
-        $pdf = PDF::loadview('admin.email', ['penjualan' => $penjualan, 'cabang' => $cabang, 'kategori' => $kategori, 'date' => $date]);
-
-        return $pdf->download('Laporan'.$date.'.pdf');
+        //$pdf = PDF::loadview('admin.email', ['penjualan' => $penjualan, 'cabang' => $cabang, 'kategori' => $kategori, 'date' => $date]);
+        //return view('admin.email')->with('data', $data);
+        //return $pdf->download('Laporan'.$date.'.pdf');
+        $pdf = PDF::loadview('admin.email',compact('data'));
+        return $pdf->download('Laporan'.date("Y-m").'.pdf');
     }
 
     public function laporan_harian()
     {
-        $date= date("Y-m-d");
-        $penjualan = Penjualan::whereYear('created_at', '=', date('Y'))->whereMonth('created_at', '=', date('m'))->whereDay('created_at', '=', date('d'))->get();
-        $cabang = Cabang::all();
-        $kategori = Kategori::all();
-
-        $pdf = PDF::loadview('admin.email', ['penjualan' => $penjualan, 'cabang' => $cabang, 'kategori' => $kategori, 'date' => $date]);
-
-        return $pdf->download('Laporan'.$date.'.pdf');
+        $data = [
+            'date' => date("Y-m-d"),
+            'penjualan' => Penjualan::whereYear('created_at', '=', date('Y'))->whereMonth('created_at', '=', date('m'))->whereDay('created_at', '=', date('d'))->get(),
+            'cabang' => Cabang::all(),
+            'kategori' => Kategori::all()
+        ];
+        //dd($data['penjualan']->where('kategori_id', 13)->where('cabang_id', 14)->sum('jumlah'));
+        //return view('admin.email')->with('data', $data);
+        $pdf = PDF::loadview('admin.email',compact('data'));
+        return $pdf->download('Laporan'.date("Y-m-d").'.pdf');
     }
 
     public function delete($id)
