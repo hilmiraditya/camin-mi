@@ -35,8 +35,8 @@ class MenuRestoran extends Controller
     {
         $validator  = $Request->validate([
             'nama'      => 'unique:katalog,nama|required',
-            'harga'     => 'required',
-            'keuntungan' => 'required'
+            'harga'     => 'required|integer',
+            'keuntungan' => 'required|integer'
         ]);
 
         $menu = new Katalog;
@@ -66,8 +66,8 @@ class MenuRestoran extends Controller
     {
         $validator  = $Request->validate([
             'nama'      => 'required',
-            'harga'     => 'required',
-            'keuntungan' => 'required'
+            'harga'     => 'required|integer',
+            'keuntungan' => 'required|integer'
         ]);
 
         $id = $Request->get('id');
@@ -76,6 +76,7 @@ class MenuRestoran extends Controller
 
         if($Request->hasFile('gambar'))
         {
+            File::delete(public_path('fotomenu/'.$menu->gambar));
             $gambar = $Request->file('gambar');
             $namafile = time().'.'.$gambar->getClientOriginalExtension();
             $folder = public_path('/fotomenu');
@@ -103,9 +104,8 @@ class MenuRestoran extends Controller
     public function delete($id, $kategori_id)
     {
         $menu = Katalog::find($id);
-        $menu->delete();
-
         File::delete(public_path('fotomenu/'.$menu->gambar));
+        $menu->delete();
         return redirect('Admin/Menu'.'/'.$kategori_id);
     }
 }

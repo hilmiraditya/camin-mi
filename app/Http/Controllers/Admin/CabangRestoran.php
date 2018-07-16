@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 use App\Traits\DefaultLayout;
 use App\User;
@@ -34,7 +35,7 @@ class CabangRestoran extends Controller
     $validator  = $request->validate([
       'nama'      => 'required',
       'alamat'     => 'unique:cabang,alamat|required',
-      'no'  => 'required'
+      'no' => 'numeric'
     ]);
     $cabang = new Cabang;
 
@@ -59,12 +60,13 @@ class CabangRestoran extends Controller
     $validator  = $request->validate([
       'nama'      => 'required',
       'alamat'     => 'required',
-      'no'  => 'required'
+      'no' => 'numeric'
     ]);
     $cabang = Cabang::find($request->get('id'));
 
     if($request->hasFile('gambar'))
     {
+      File::delete(public_path('fotocabang/'.$cabang->gambar));
       $gambar = $request->file('gambar');
       $namafile = time().'.'.$gambar->getClientOriginalExtension();
       $folder = public_path('/fotocabang');
@@ -82,9 +84,8 @@ class CabangRestoran extends Controller
   public function delete($id)
   {
     $cabang = Cabang::find($id);
+    File::delete(public_path('fotocabang/'.$cabang->gambar));
     $cabang->delete();
-
-
     return redirect('Admin/Cabang');
   }
 }
