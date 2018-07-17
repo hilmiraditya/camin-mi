@@ -38,9 +38,7 @@ class laporanharian extends Command
      */
     public function handle()
     {
-        Mail::raw('Text', function ($message){
-            $message->to('raditya113@gmail.com');
-        });
-        $this->info('Email Berhasil Dikirim');
+        //
+        $this->info('Email Harian Berhasil Dikirim');
     }
 }

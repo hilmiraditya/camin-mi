@@ -6,12 +6,15 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Traits\DefaultLayout;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Mail;
 
 use App\Penjualan;
 use App\Katalog;
 use App\Cabang;
 use App\Kategori;
+use App\User;
 
+Use App\Mail\LaporanTransaksi;
 use PDF;
 
 class LaporanPenjualan extends Controller
@@ -67,6 +70,34 @@ class LaporanPenjualan extends Controller
         //return view('admin.email')->with('data', $data);
         $pdf = PDF::loadview('admin.email',compact('data'));
         return $pdf->download('Laporan'.date("Y-m-d").'.pdf');
+    }
+
+    public function email_harian()
+    {
+        $emailAdress = User::where('isAdmin', 1)->first()->email;
+        $data = [
+            'date' => date("Y-m-d"),
+            'penjualan' => Penjualan::whereYear('created_at', '=', date('Y'))->whereMonth('created_at', '=', date('m'))->whereDay('created_at', '=', date('d'))->get(),
+            'cabang' => Cabang::all(),
+            'kategori' => Kategori::all()
+        ];
+        Mail::to($emailAdress)->send(new LaporanTransaksi($data));
+
+        return Redirect::back()->with('message', 'Laporan Penjualan periode '.$data['date'].' telah dikirim ke '.$emailAdress);
+    }
+
+    public function email_bulanan()
+    {
+        $emailAdress = User::where('isAdmin', 1)->first()->email;
+        $data = [
+            'date' => date("Y-m"),
+            'penjualan' => Penjualan::whereYear('created_at', '=', date('Y'))->whereMonth('created_at', '=', date('m'))->get(),
+            'cabang' => Cabang::all(),
+            'kategori' => Kategori::all()
+        ];
+        Mail::to($emailAdress)->send(new LaporanTransaksi($data));
+
+        return Redirect::back()->with('message', 'Laporan Penjualan periode '.$data['date'].' telah dikirim ke '.$emailAdress);
     }
 
     public function delete($id)

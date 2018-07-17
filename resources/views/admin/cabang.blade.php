@@ -17,6 +17,11 @@
     <section class="content">
     <div class="row">
       <div class="col-md-12">
+      @if(session()->has('message'))
+        <div class="alert alert-success">
+          {{ session()->get('message') }}
+        </div>
+      @endif
       @if (count($errors) > 0)
         <div class = "alert alert-danger">
           <ul>

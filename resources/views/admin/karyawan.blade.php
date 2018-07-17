@@ -16,6 +16,13 @@
 
       <!-- Main content -->
       <section class="content">
+      @if(session()->has('message'))
+      <div class="row"><div class="col-xs-12">
+        <div class="alert alert-success">
+          {{ session()->get('message') }}
+        </div>
+      </div></div>
+      @endif
       @if (count($errors) > 0)
       <div class="row"><div class="col-xs-12">
         <div class = "alert alert-danger">
@@ -157,6 +164,7 @@
   <!-- Edit Akun Modal -->
   <div>
   @foreach($karyawanUpdate as $karyawanUpdate)
+  <div>
   <div class="modal fade" id="editakun{{$karyawanUpdate->id}}" tabindex="-2" role="dialog" aria-labelledby="edit-akun" aria-hidden="true">
     <div class="modal-dialog" role="document">
     <form method="GET" action="{{url('Admin/UpdateAkun').'/'.$karyawanUpdate->id}}">
@@ -206,6 +214,7 @@
       </form> 
       </div>
     </div>
+  </div>
   @endforeach
 </div>
   <!-- Hapus Akun Modal -->

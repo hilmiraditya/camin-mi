@@ -113,6 +113,11 @@
     <section class="sidebar">
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
+        <li>
+          <a href="{{url('/Karyawan/Dashboard')}}">
+            <i class="fa fa-dashboard"></i><span>Dashboard</span>
+          </a>
+        </li>
         <li class="treeview">
           <a href="#">
             <i class="fa fa-cutlery"></i>
@@ -131,6 +136,7 @@
             @endforeach
           </ul>
         </li>
+        @if($layout['user']->isAdmin == 0)
         <li class="treeview">
           <a href="#">
             <i class="fa fa-money"></i>
@@ -152,6 +158,7 @@
             </li>
           </ul>
         </li>
+        @endif
       </ul>
     </section>
     <!-- /.sidebar -->

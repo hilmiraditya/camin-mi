@@ -41,7 +41,8 @@ class AkunKaryawan extends Controller
         $validator  = $request->validate([
             'name'      => 'required',
             'email'     => 'unique:users,email|required',
-            'password'  => 'required'
+            'password'  => 'required',
+            'nohape' => 'numeric'
         ]);
 
         $karyawan = new User;
@@ -55,14 +56,15 @@ class AkunKaryawan extends Controller
 
         $karyawan->save();
 
-        return redirect('Admin/AkunKaryawan');
+        return redirect('Admin/AkunKaryawan')->with('message', 'Akun karyawan berhasil ditambah');
     }
 
     public function update(Request $request, $id)
     {
         $validator  = $request->validate([
             'name'      => 'required',
-            'email'     => 'required'
+            'email'     => 'required',
+            'nohape' => 'numeric'
         ]);
         $karyawan = User::find($id);
  
@@ -74,11 +76,15 @@ class AkunKaryawan extends Controller
             $password = $request->get('password');
             $karyawan->password = bcrypt($password);
         }
-        $karyawan->cabang_id = $request->get('cabang_id');
+
+        if($request->get('cabang_id') != NULL)
+        {
+            $karyawan->cabang_id = $request->get('cabang_id');
+        }
 
         $karyawan->save();
 
-        return redirect('Admin/AkunKaryawan');
+        return redirect('Admin/AkunKaryawan')->with('message', 'Akun karyawan berhasil diubah');
     }
 
 
@@ -86,6 +92,6 @@ class AkunKaryawan extends Controller
     {
         $karyawan = User::find($id);
         $karyawan->delete();
-        return redirect('Admin/AkunKaryawan');
+        return redirect('Admin/AkunKaryawan')->with('message', 'Akun karyawan berhasil dihapus');
     }
 }

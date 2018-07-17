@@ -38,6 +38,6 @@ class laporanbulanan extends Command
     public function handle()
     {
         //
-        $this->info('Command bisa الحمد لله');
+        $this->info('Email Harian Berhasil Dikirim');
     }
 }

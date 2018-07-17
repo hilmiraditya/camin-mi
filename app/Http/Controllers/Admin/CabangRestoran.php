@@ -52,7 +52,7 @@ class CabangRestoran extends Controller
     $cabang->alamat = $request->get('alamat');
     $cabang->no = $request->get('no');
     $cabang->save();
-    return redirect('Admin/Cabang');
+    return redirect('Admin/Cabang')->with('message', 'Cabang berhasil ditambah');
   }
 
   public function update(Request $request)
@@ -78,7 +78,7 @@ class CabangRestoran extends Controller
     $cabang->alamat = $request->get('alamat');
     $cabang->no = $request->get('no');
     $cabang->save();
-    return redirect('Admin/Cabang');
+    return redirect('Admin/Cabang')->with('message', 'Cabang berhasil diubah');
   }
 
   public function delete($id)
@@ -86,6 +86,6 @@ class CabangRestoran extends Controller
     $cabang = Cabang::find($id);
     File::delete(public_path('fotocabang/'.$cabang->gambar));
     $cabang->delete();
-    return redirect('Admin/Cabang');
+    return redirect('Admin/Cabang')->with('message', 'Cabang berhasil dihapus');
   }
 }

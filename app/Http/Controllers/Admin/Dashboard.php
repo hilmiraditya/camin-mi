@@ -22,7 +22,7 @@ class Dashboard extends Controller
         $data = [
             'cabang'  => Cabang::all()->count(),
             'akun'   => User::where('isAdmin',0)->count(),
-            'penjualan' => Penjualan::all()->count(),
+            'penjualan' => Penjualan::all()->sum('jumlah'),
             'menu' => Katalog::all()->count()
         ];
         return view('admin.index')->with('data', $data)->with('layout', $layout);

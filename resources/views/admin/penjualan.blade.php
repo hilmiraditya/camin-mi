@@ -18,6 +18,11 @@
     <section class="content">
       <div class="row">
         <div class="col-xs-12">
+          @if(session()->has('message'))
+            <div class="alert alert-success">
+              {{ session()->get('message') }}
+            </div>
+          @endif
           @if($penjualan->count() > 0)
           <div class="box">
             <!-- /.box-header -->
@@ -68,7 +73,7 @@
             </div>
             <div align="center">
               <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#downloadlaporan">Download Laporan</button>
-              <button type="button" class="btn btn-success" data-toggle="modal" data-target="#kirimemail">Kirim Email</button>
+              <button type="button" class="btn btn-success" data-toggle="modal" data-target="#emaillaporan">Kirim Email</button>
             </div>
             <br>
             <!-- /.box-body -->
@@ -88,23 +93,20 @@
 @endsection
 
 @section('modal')
-<!-- Modal -->
+<!-- Email Laporan -->
 <div>
-<div class="modal fade" id="kirimemail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="emaillaporan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
-  <form action="/action_page.php">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="exampleModalLabel">Kirim Laporan ke Email</h4>
+        <h4 class="modal-title" id="exampleModalLabel">Kirim Email Laporan</h4>
       </div>
       <div class="modal-body">
-        <div class="form-group">
-          <label>Email :</label>
-          <input type="email" class="form-control" id="email">
-        </div>
+        <strong>Kirim Laporan Transaksi yang telah dilakukan ke email Admin</strong>
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">Kirim</button>
+        <a class="btn btn-primary" href="{{url('Admin/EmailHarian')}}">Hari Ini</a>
+        <a class="btn btn-primary" href="{{url('Admin/EmailBulanan')}}">Bulan Ini</a>
         <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">Batal</button>
       </div>
     </form> 

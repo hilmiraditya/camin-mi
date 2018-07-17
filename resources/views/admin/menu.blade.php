@@ -17,6 +17,13 @@
 
     <!-- Main content -->
     <section class="content">
+      @if(session()->has('message'))
+      <div class="row"><div class="col-xs-12">
+        <div class="alert alert-success">
+          {{ session()->get('message') }}
+        </div>
+      </div></div>
+      @endif
       @if (count($errors) > 0)
       <div class="row"><div class="col-xs-12">
         <div class = "alert alert-danger">
@@ -112,10 +119,6 @@
           <input type="text" class="form-control" name="harga">
         </div>
         <div class="form-group">
-          <label>Keuntungan :</label>
-          <input type="text" class="form-control" name="keuntungan">
-        </div>
-        <div class="form-group">
           <label>Keterangan :</label>
           <input type="text" class="form-control" id="keterangan">
         </div>
@@ -152,10 +155,6 @@
         <div class="form-group">
           <label>Harga :</label>
           <input type="text" class="form-control" name="harga" value="{{$editKatalog->harga}}" placeholder="{{$editKatalog->harga}}">
-        </div>
-        <div class="form-group">
-          <label>Keuntungan :</label>
-          <input type="text" class="form-control" name="keuntungan" value="{{$editKatalog->keuntungan}}" placeholder="{{$editKatalog->keuntungan}}">
         </div>
         <div class="form-group">
           <label>Diskon :</label>

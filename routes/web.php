@@ -57,6 +57,9 @@ Route::group(['prefix' => 'Admin'], function () {
 	//download laporan pdf
 	Route::get('LaporanHarian', 'Admin\LaporanPenjualan@laporan_harian');
 	Route::get('LaporanBulanan', 'Admin\LaporanPenjualan@laporan_bulanan');
+
+	Route::get('EmailHarian', 'Admin\LaporanPenjualan@email_harian');
+	Route::get('EmailBulanan', 'Admin\LaporanPenjualan@email_bulanan');
 });
 
 Route::group(['prefix' => 'Karyawan'], function () {
