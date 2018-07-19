@@ -58,6 +58,7 @@ Route::group(['prefix' => 'Admin'], function () {
 	Route::get('LaporanHarian', 'Admin\LaporanPenjualan@laporan_harian');
 	Route::get('LaporanBulanan', 'Admin\LaporanPenjualan@laporan_bulanan');
 
+	//email
 	Route::get('EmailHarian', 'Admin\LaporanPenjualan@email_harian');
 	Route::get('EmailBulanan', 'Admin\LaporanPenjualan@email_bulanan');
 });
@@ -74,4 +75,9 @@ Route::group(['prefix' => 'Karyawan'], function () {
 	Route::get('LaporanPenjualan/Harian/{id}', 'Karyawan\LaporanPenjualan@harian');
 	Route::get('LaporanPenjualan/Bulanan/{id}', 'Karyawan\LaporanPenjualan@bulanan');
 
+	//pembayaran kantong belanja
+	Route::get('KantongBelanja', 'Karyawan\KantongBelanja@index');
+
+	//transaksi sukses
+	Route::get('TransaksiSukses', 'Karyawan\KantongBelanja@sukses');
 });

@@ -9,11 +9,21 @@ class KantongBelanja extends Model
     protected $table = 'kantong_belanja';
 
     protected $fillable = [
-    	'jumlah', 'keterangan', 'katalog_id'
+    	'jumlah', 'keterangan', 'katalog_id', 'users_id', 'total_harga'
     ];
 
     public function katalog()
     {
     	return $this->belongsTo('App\Katalog');
+    }
+
+    public function Cabang()
+    {
+    	return $this->belongsTo('App\Cabang');
+    }
+
+    public function User()
+    {
+        return $this->belongsTo('App\User');
     }
 }

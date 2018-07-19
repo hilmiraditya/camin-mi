@@ -54,7 +54,6 @@
               </div>
             </div>
             <div class="box-footer with-border">
-              <!-- nyoba -->
               <div align="row">
                 <div class="col-md-4"></div>
                 <div class="col-md-4" align="center">

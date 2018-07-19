@@ -20,4 +20,9 @@ class Cabang extends Model
     {
     	return $this->hasMany('App\Penjualan');
     }
+
+    public function KantongBelanja()
+    {
+        return $this->hasMany('App\KantongBelanja');
+    }
 }

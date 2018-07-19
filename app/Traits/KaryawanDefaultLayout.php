@@ -4,6 +4,7 @@ namespace App\Traits;
 
 use Illuminate\Support\Facades\Auth;
 use App\Kategori;
+use App\KantongBelanja;
 
 trait KaryawanDefaultLayout
 {
@@ -15,6 +16,7 @@ trait KaryawanDefaultLayout
 	public function default()
 	{
     	$layout = [
+    		'kantongbelanja' => KantongBelanja::where('users_id', Auth::user()->id)->get(),
     		'user' => Auth::user(),
     		'listkategori' => Kategori::all()
     	];

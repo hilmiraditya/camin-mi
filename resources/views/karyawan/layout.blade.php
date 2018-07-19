@@ -5,6 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Point Of Sales | @yield('title')</title>
   <!-- Tell the browser to be responsive to screen width -->
+  <link rel="icon" href="{{url('satean.jpg')}}">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
   <link rel="stylesheet" href="{{url('adminlte/bower_components/bootstrap/dist/css/bootstrap.min.css')}}">
@@ -62,12 +63,13 @@
 
         <ul class="nav navbar-nav">
           <!-- User Account: style can be found in dropdown.less -->
+          @if(!Request::is('Karyawan/KantongBelanja') && !Request::is('Karyawan/TransaksiSukses'))
           <li class="dropdown messages-menu">
             <a href="#" data-toggle="modal" data-target="#exampleModalLong">
               <i class="fa fa-shopping-bag"></i>
-              <span class="label label-success">1000</span>
             </a>
           </li>
+          @endif
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="{{url('satean.jpg')}}" class="user-image" alt="User Image">
@@ -107,6 +109,7 @@
       </div>
     </nav>
   </header>
+  @if(!Request::is('Karyawan/KantongBelanja') && !Request::is('Karyawan/TransaksiSukses'))
   <!-- Left side column. contains the logo and sidebar -->
   <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
@@ -163,7 +166,7 @@
     </section>
     <!-- /.sidebar -->
   </aside>
-
+  @endif
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     @yield('content')
@@ -236,45 +239,51 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="exampleModalLongTitle">Modal title</h4>
+        <h4 class="modal-title" id="exampleModalLongTitle">
+          <i class="fa fa-shopping-bag"></i> Kantong Belanja
+        </h4>
       </div>
       <div class="modal-body">
+@if($layout['kantongbelanja']->count() > 0)
 <table class="table table-striped">
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th scope="col">No</th>
+      <th scope="col">Nama</th>
+      <th scope="col">Jumlah</th>
+      <th scope="col">Total</th>
     </tr>
   </thead>
   <tbody>
+    @foreach($layout['kantongbelanja'] as $kantongbelanja)
     <tr>
       <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
+      <td>{{$kantongbelanja->katalog->nama}}</td>
+      <td>{{$kantongbelanja->jumlah}}</td>
+      <td>{{$kantongbelanja->total_harga}}</td>
     </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-    </tr>
+    @endforeach
   </tbody>
+    <tr>
+      <th scope="row"></th>
+      <td></td>
+      <td><b>Total</b></td>
+      <td><b>{{$layout['kantongbelanja']->sum('total_harga')}}</b></td>      
+    </tr>
 </table>
+@else
+<div align="center">
+  <h4>Kantong Belanja Masih Kosong</h4>
+</div>
+@endif
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <a href="{{url('/karyawan/pembayaran')}}">
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </a>
+        @if($layout['kantongbelanja']->count() > 0)
+        <a href="{{url('/Admin/Pembayaran')}}" class="btn btn-success">Lanjut ke Pembayaran</a>
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Batalkan Transaksi</button>
+        @endif
+        <a href="{{url('/Karyawan/KantongBelanja')}}" class="btn btn-success">Test View</a>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
       </div>
     </div>
   </div>

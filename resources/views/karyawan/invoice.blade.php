@@ -32,42 +32,21 @@
           <table class="table table-striped">
             <thead>
             <tr>
-              <th>Qty</th>
-              <th>Product</th>
-              <th>Serial #</th>
-              <th>Description</th>
-              <th>Subtotal</th>
-            </tr>
+              <th>No</th>
+              <th>Nama</th>
+              <th>Jumlah</th>
+              <th>Total</th>
+             </tr>
             </thead>
             <tbody>
+            @foreach($layout['kantongbelanja'] as $kantongbelanja)
             <tr>
-              <td>1</td>
-              <td>Call of Duty</td>
-              <td>455-981-221</td>
-              <td>El snort testosterone trophy driving gloves handsome</td>
-              <td>$64.50</td>
+              <th scope="row">1</th>
+              <td>{{$kantongbelanja->katalog->nama}}</td>
+              <td>{{$kantongbelanja->jumlah}}</td>
+              <td>{{$kantongbelanja->total_harga}}</td>
             </tr>
-            <tr>
-              <td>1</td>
-              <td>Need for Speed IV</td>
-              <td>247-925-726</td>
-              <td>Wes Anderson umami biodiesel</td>
-              <td>$50.00</td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>Monsters DVD</td>
-              <td>735-845-642</td>
-              <td>Terry Richardson helvetica tousled street art master</td>
-              <td>$10.70</td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>Grown Ups Blue Ray</td>
-              <td>422-568-642</td>
-              <td>Tousled lomo letterpress</td>
-              <td>$25.99</td>
-            </tr>
+            @endforeach
             </tbody>
           </table>
         </div>
@@ -90,10 +69,14 @@
         </div>
         <!-- /.col -->
         <div class="col-xs-6">
-          <p class="lead">Amount Due 2/22/2014</p>
+          <p class="lead">Keterangan :</p>
 
           <div class="table-responsive">
             <table class="table">
+              <tr>
+                <th>Atas Nama :</th>
+                <td><input type="bayar" class="form-control" id="bayar"></td>
+              </tr>
               <tr>
                 <th style="width:50%">Total :</th>
                 <td>$250.30</td>
@@ -102,13 +85,10 @@
                 <th>Bayar :</th>
                 <td><input type="bayar" class="form-control" id="bayar"></td>
               </tr>
-              <tr>
-                <th>Kembali :</th>
-                <td>$5.80</td>
-              </tr>
             </table>
           </div>
           <div align="center">
+            <a href="{{url('/Karyawan/TransaksiSukses')}}" class="btn btn-success">Test View</a>
             <button class="btn btn-primary">Bayar</button>
             <button class="btn btn-danger">Batalkan Transaksi</button>
           </div>

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class PenjualanTambahan extends Migration
+class IdUsersPenjualan extends Migration
 {
     /**
      * Run the migrations.
@@ -14,9 +14,8 @@ class PenjualanTambahan extends Migration
     public function up()
     {
         Schema::table('penjualan', function($table) {
-            $table->unsignedInteger('kategori_id');
-            $table->unsignedInteger('cabang_id');
-            $table->foreign('cabang_id')->references('id')->on('cabang')->onDelete('cascade');
+            $table->unsignedInteger('users_id')->nullable();
+            $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -28,8 +27,7 @@ class PenjualanTambahan extends Migration
     public function down()
     {
         Schema::table('penjualan', function($table) {
-            $table->dropColumn('kategori_id');
-            $table->dropColumn('cabang_id');
+            $table->dropColumn('users_id');
         });
     }
 }

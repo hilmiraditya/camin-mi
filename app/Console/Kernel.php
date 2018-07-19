@@ -15,8 +15,8 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         //
         Commands\laporanharian::class,
-        Commands\laporanbulanan::class,
-        Commands\hapuslaporanbulanan::class
+        //Commands\laporanbulanan::class,
+        //Commands\hapuslaporanbulanan::class
     ];
     
     /**
@@ -27,9 +27,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('laporan:harian')->hourlyAt(15);
-        $schedule->command('laporan:bulanan')->everyMinute();
-        $schedule->command('laporan:hapus')->everyMinute();
+        //$schedule->command('laporan:harian')->dailyAt('17:20');
+        $schedule->call('App\Http\Controllers\Admin\LaporanPenjualan@email_harian')->dailyAt('17:20');
+        //$schedule->command('laporan:bulanan')->endOfMonth();
+        //$schedule->command('laporan:hapus')->endOfMonth();
         // $schedule->command('inspire')
         //          ->hourly();
     }

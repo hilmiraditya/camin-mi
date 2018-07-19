@@ -10,7 +10,7 @@
           <h3>Transaksi Berhasil, Kembali Rp. 30.000,-</h3>
           <h4>No. Transaksi : <b>#ID30473930</b></h4>
           <br>
-          <a class="btn btn-success">Kembali Ke Dashboard</a>
+          <a class="btn btn-success" href="{{url('Karyawan/Dashboard')}}">Kembali Ke Dashboard</a>
         </div>
     </section>
 @endsection
