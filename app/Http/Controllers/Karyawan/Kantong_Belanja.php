@@ -20,10 +20,11 @@ class Kantong_Belanja extends Controller
 
     public function tambah(Request $request)
     {
+        $layout = $this->default();
         $validator  = $request->validate([
             'jumlah'      => 'required|numeric',
         ]);
-    	$cek = KantongBelanja::where('katalog_id', $request->get('katalog_id'))->first();
+    	$cek = KantongBelanja::where('users_id', $layout['user']->id)->where('katalog_id', $request->get('katalog_id'))->first();
     	if ($cek == NULL)
     	{
     		$kantongbelanja = new KantongBelanja;
@@ -35,7 +36,10 @@ class Kantong_Belanja extends Controller
     	}
     	else
     	{
-    	   //do here
+    	   $kantongbelanja = KantongBelanja::where('users_id', $layout['user']->id)->where('katalog_id', $request->get('katalog_id'))->first();
+           $kantongbelanja->jumlah = $kantongbelanja->jumlah + $request->get('jumlah');
+           $kantongbelanja->total_harga = $kantongbelanja->jumlah*$request->get('harga');
+           $kantongbelanja->save();
     	}
     	return Redirect::back()->with('message', 'Item Berhasil Ditambah');
     }
