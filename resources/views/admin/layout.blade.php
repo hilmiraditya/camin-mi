@@ -75,13 +75,18 @@
 
                 <p>
                   {{$layout['user']->name}}
-                  <small>Satean</small>
+                  <small>Mode : Admin</small>
+                  @if($layout['user']->cabang_id != NULL)<small>Cabang : {{$layout['user']->Cabang->nama}}</small>
+                  @else
+                    <small>Belum Ditentukan</small>
+                  @endif
                 </p>
               </li>
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div align="center">
-                  <a href="{{url('/Karyawan/Dashboard')}}" class="btn btn-default btn-flat">Mode Karyawan</a>
+                  <a href="#" data-toggle="modal" data-target="#ubahcabang" class="btn btn-default btn-flat">Cabang</a>
+                  <a href="{{url('/Karyawan/Dashboard')}}" class="btn btn-default btn-flat">Karyawan</a>
                   <a class="btn btn-default btn-flat" href="{{ route('logout') }}"] onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                     Logout
                   </a>
@@ -237,6 +242,35 @@
           <div class="form-group">
             <label>Nama Kategori :</label>
             <input type="text" class="form-control" name="nama">
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Simpan</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- Ubah Data Modal -->
+<div class="modal fade" id="ubahcabang" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Tambah Kategori Menu</h5>
+      </div>
+      <form method="POST" action="{{url('Admin/UbahCabang')}}">
+      <div class="modal-body">
+          @csrf
+          <div class="form-group">
+            <label>Cabang :</label>
+            <br>
+            @foreach($layout['cabang'] as $cabang)
+              <label class="radio-inline">
+                <input type="radio" name="cabang_id" value="{{$cabang->id}}">
+                  {{$cabang->nama}}
+              </label>
+            @endforeach
           </div>
       </div>
       <div class="modal-footer">

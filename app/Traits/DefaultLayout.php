@@ -2,8 +2,10 @@
 
 namespace App\Traits;
 
+use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Kategori;
+use App\Cabang;
 
 trait DefaultLayout
 {
@@ -17,10 +19,10 @@ trait DefaultLayout
 	public function default()
 	{
     	$layout = [
-    		'user' => User::where('isAdmin', 1)->first(),
-    		'listkategori' => Kategori::all()
+    		'user' => Auth::user(),
+    		'listkategori' => Kategori::all(),
+            'cabang' => Cabang::all()
     	];
-
     	return $layout;
 	}
 }

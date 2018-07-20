@@ -23,6 +23,9 @@ Route::group(['prefix' => 'Admin'], function () {
 	//dashboard
 	Route::get('Dashboard', 'Admin\Dashboard@index');
 
+	//ubah cabang admin
+	Route::post('UbahCabang', 'Admin\CabangAdmin@index');
+
 	//karyawan	
 	Route::get('AkunKaryawan', 'Admin\AkunKaryawan@index');
 	Route::post('TambahAkun', 'Admin\AkunKaryawan@create');
@@ -42,7 +45,7 @@ Route::group(['prefix' => 'Admin'], function () {
 
 	//kategori-menu
 	Route::get('Menu/{id}', 'Admin\MenuRestoran@index');
-	Route::post('TambahMenu', 'Admin\MenuRestoran@create');
+	Route::post('Tam`bahMenu', 'Admin\MenuRestoran@create');
 	Route::get('HapusMenu/{id}/{katalog_id}', 'Admin\MenuRestoran@delete');
 	Route::post('UbahMenu', 'Admin\MenuRestoran@update');
 
