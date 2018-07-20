@@ -252,15 +252,17 @@
       <th scope="col">Nama</th>
       <th scope="col">Jumlah</th>
       <th scope="col">Total</th>
+      <th scope="col">Opsi</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody id="kantongbelanja_list" name="list_kantongbelanja">
     @foreach($layout['kantongbelanja'] as $kantongbelanja)
-    <tr>
+    <tr id="kantongbelanja{{$kantongbelanja->id}}">
       <th scope="row">1</th>
       <td>{{$kantongbelanja->katalog->nama}}</td>
       <td>{{$kantongbelanja->jumlah}}</td>
-      <td>{{$kantongbelanja->total_harga}}</td>
+      <td>{{"Rp " . number_format($kantongbelanja->total_harga,2,',','.')}}</td>
+      <td><a class="btn btn-sm btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
     </tr>
     @endforeach
   </tbody>
@@ -268,7 +270,7 @@
       <th scope="row"></th>
       <td></td>
       <td><b>Total</b></td>
-      <td><b>{{$layout['kantongbelanja']->sum('total_harga')}}</b></td>      
+      <td>{{"Rp " . number_format($layout['kantongbelanja']->sum('total_harga'),2,',','.')}}</td>  
     </tr>
 </table>
 @else

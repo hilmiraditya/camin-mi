@@ -50,7 +50,6 @@
         <!-- /.col -->
       </div>
       <!-- /.row -->
-
       <div class="row">
         <!-- accepted payments column -->
         <div class="col-xs-6">
@@ -79,13 +78,13 @@
               <tr>
                 <th style="width:50%">Total :</th>
                 <td>
-{{"Rp ".number_format($layout['kantongbelanja']->where('users_id', $layout['user']->id)->sum('total_harga'),2,',','.') }}
+{{"Rp ".number_format($hasil=$layout['kantongbelanja']->where('users_id', $layout['user']->id)->sum('total_harga'),2,',','.') }}
                 </td>
               </tr>
               <tr>
                 <th>Bayar :</th>
-                <td><input type="text" class="form-control" id="input_bayar" name="total"></td>
-                <input type="hidden" name="bayar" value="{{$hasil}}">
+                <td><input type="text" class="form-control" id="input_bayar" name="bayar"></td>
+                <input type="hidden" name="total" value="{{$hasil}}">
               </tr>
             </table>
           </div>
@@ -114,11 +113,9 @@
 <script>
   function bayar(uang) 
   {
-    //var lama = document.getElementById("input_bayar").value;
     var lama = +document.getElementById("input_bayar").value;
     var hasil = uang + lama;
     document.getElementById("input_bayar").value = hasil;
-    //document.getElementById('result').
   }
 
   function bersihin()

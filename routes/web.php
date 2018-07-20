@@ -75,8 +75,9 @@ Route::group(['prefix' => 'Karyawan'], function () {
 	Route::get('LaporanPenjualan/Harian/{id}', 'Karyawan\LaporanPenjualan@harian');
 	Route::get('LaporanPenjualan/Bulanan/{id}', 'Karyawan\LaporanPenjualan@bulanan');
 
-	//pembayaran kantong belanja
-	Route::get('KantongBelanja', 'Karyawan\KantongBelanja@index');
+	//kantong belanja
+	Route::post('TambahItem', 'Karyawan\Kantong_Belanja@tambah');
+	Route::get('KantongBelanja', 'Karyawan\Kantong_Belanja@index');
 
 	//transaksi sukses
 	Route::post('Bayar', 'Karyawan\Pembayaran@index');

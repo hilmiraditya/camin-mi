@@ -19,10 +19,6 @@ class MenuRestoran extends Controller
     	$layout = $this->default();
         $kategori = Kategori::where('id', $id)->first();
     	$katalog = Katalog::where('kategori_id', $id)->get();
-
-    	return view('karyawan.menu')
-    		->with('layout', $layout)
-    		->with('kategori', $kategori)
-    		->with('katalog', $katalog);
+    	return view('karyawan.menu')->with('layout', $layout)->with('kategori', $kategori)->with('katalog', $katalog);
     }
 }

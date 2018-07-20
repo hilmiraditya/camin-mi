@@ -21,7 +21,6 @@ trait KaryawanDefaultLayout
     		'user' => Auth::user(),
     		'listkategori' => Kategori::all()
     	];
-
     	return $layout;
 	}
 }

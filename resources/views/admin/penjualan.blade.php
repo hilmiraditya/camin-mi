@@ -53,7 +53,9 @@
                   <td>{{$penjualan->Katalog->nama}}</td>
                   <td>{{$penjualan->Katalog->Kategori->nama}}
                   <td>{{$penjualan->jumlah}}</td>
-                  <td>{{$penjualan->Cabang->nama}}</td>
+                  @if($penjualan->cabang_id == NULL)<td><a class="btn btn-xs btn-primary">Admin</a>
+                  @else<td>{{$penjualan->Cabang->nama}}</td>
+                  @endif
                   <td>{{$penjualan->created_at}}</td>
                   <td>
                     <a href="{{url('Admin/HapusLaporanPenjualan'.'/'.$penjualan->id)}}" class="btn btn-xs btn-danger">Hapus</a>

@@ -31,7 +31,7 @@ class Pembayaran extends Controller
     		$penjualan->save();
     	}
     	KantongBelanja::where('users_id', $layout['user']->id)->truncate();
-    	$kembali = $request->get('total') - $request->get('bayar');
+    	$kembali = $request->get('bayar') - $request->get('total');
     	return view('karyawan.sukses')
     		->with('kembali', $kembali)
     		->with('nama', $nama)
