@@ -45,7 +45,7 @@ Route::group(['prefix' => 'Admin'], function () {
 
 	//kategori-menu
 	Route::get('Menu/{id}', 'Admin\MenuRestoran@index');
-	Route::post('Tam`bahMenu', 'Admin\MenuRestoran@create');
+	Route::post('TambahMenu', 'Admin\MenuRestoran@create');
 	Route::get('HapusMenu/{id}/{katalog_id}', 'Admin\MenuRestoran@delete');
 	Route::post('UbahMenu', 'Admin\MenuRestoran@update');
 
@@ -81,6 +81,8 @@ Route::group(['prefix' => 'Karyawan'], function () {
 	//kantong belanja
 	Route::post('TambahItem', 'Karyawan\Kantong_Belanja@tambah');
 	Route::get('KantongBelanja', 'Karyawan\Kantong_Belanja@index');
+	Route::get('BatalkanBelanja', 'Karyawan\Kantong_Belanja@hapus_semua');
+	Route::get('HapusItem/{id}', 'Karyawan\Kantong_Belanja@hapus');
 
 	//transaksi sukses
 	Route::post('Bayar', 'Karyawan\Pembayaran@index');

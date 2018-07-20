@@ -39,4 +39,18 @@ class Kantong_Belanja extends Controller
     	}
     	return Redirect::back()->with('message', 'Item Berhasil Ditambah');
     }
+
+    public function hapus_semua()
+    {
+        $layout = $this->default();
+        KantongBelanja::where('users_id', $layout['user']->id)->truncate();
+        return Redirect::back()->with('message', 'Transaksi Berhasil Dibatalkan');        
+    }
+
+    public function hapus($id)
+    {
+        $kantongbelanja = KantongBelanja::find($id);
+        $kantongbelanja->delete();
+        return Redirect::back()->with('message', 'Item Berhasil Dihapus');
+    }
 }

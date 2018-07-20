@@ -15,8 +15,12 @@ class Pembayaran extends Controller
 
     public function index(Request $request)
     {
+        $validator  = $request->validate([
+            'nama'      => 'required',
+            'bayar'     => 'numeric|required'
+        ]);
     	$layout = $this->default();
-    	$nama = $request->get('atasnama');
+    	$nama = $request->get('nama');
     	$id_transaksi = mt_rand(100,1000);
     	foreach($layout['kantongbelanja'] as $input_belanja)
     	{
@@ -32,10 +36,6 @@ class Pembayaran extends Controller
     	}
     	KantongBelanja::where('users_id', $layout['user']->id)->truncate();
     	$kembali = $request->get('bayar') - $request->get('total');
-    	return view('karyawan.sukses')
-    		->with('kembali', $kembali)
-    		->with('nama', $nama)
-    		->with('id_transaksi', $id_transaksi)
-    		->with('layout', $layout);
+    	return view('karyawan.sukses')->with('kembali', $kembali)->with('nama', $nama)->with('id_transaksi', $id_transaksi)->with('layout', $layout);
     }
 }

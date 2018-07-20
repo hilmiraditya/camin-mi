@@ -255,14 +255,15 @@
       <th scope="col">Opsi</th>
     </tr>
   </thead>
+  <?php $a=1; ?>
   <tbody id="kantongbelanja_list" name="list_kantongbelanja">
     @foreach($layout['kantongbelanja'] as $kantongbelanja)
     <tr id="kantongbelanja{{$kantongbelanja->id}}">
-      <th scope="row">1</th>
+      <th scope="row">{{$a++}}</th>
       <td>{{$kantongbelanja->katalog->nama}}</td>
       <td>{{$kantongbelanja->jumlah}}</td>
       <td>{{"Rp " . number_format($kantongbelanja->total_harga,2,',','.')}}</td>
-      <td><a class="btn btn-sm btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+      <td><a href="{{url('Karyawan/HapusItem'.'/'.$kantongbelanja->id)}}" class="btn btn-sm btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
     </tr>
     @endforeach
   </tbody>
@@ -270,7 +271,8 @@
       <th scope="row"></th>
       <td></td>
       <td><b>Total</b></td>
-      <td>{{"Rp " . number_format($layout['kantongbelanja']->sum('total_harga'),2,',','.')}}</td>  
+      <td>{{"Rp " . number_format($layout['kantongbelanja']->sum('total_harga'),2,',','.')}}</td> 
+      <td></td> 
     </tr>
 </table>
 @else
@@ -281,10 +283,9 @@
       </div>
       <div class="modal-footer">
         @if($layout['kantongbelanja']->count() > 0)
-        <a href="{{url('/Admin/Pembayaran')}}" class="btn btn-success">Lanjut ke Pembayaran</a>
-        <button type="button" class="btn btn-warning" data-dismiss="modal">Batalkan Transaksi</button>
+        <a href="{{url('/Karyawan/KantongBelanja')}}" class="btn btn-success">Lanjut Ke Pembayaran</a>
+        <a href="{{url('/Karyawan/BatalkanBelanja')}}" class="btn btn-warning">Batalkan Transaksi</a>
         @endif
-        <a href="{{url('/Karyawan/KantongBelanja')}}" class="btn btn-success">Test View</a>
         <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
       </div>
     </div>

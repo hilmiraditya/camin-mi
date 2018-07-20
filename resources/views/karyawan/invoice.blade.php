@@ -12,6 +12,17 @@
 
     <!-- Main content -->
     <section class="invoice">
+      @if (count($errors) > 0)
+      <div class="row"><div class="col-xs-12">
+        <div class = "alert alert-danger">
+          <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+          </ul>
+        </div>
+      </div></div>
+      @endif
       <!-- title row -->
       <div class="row">
         <div class="col-xs-12">
@@ -73,7 +84,7 @@
             <table class="table">
               <tr>
                 <th>Atas Nama :</th>
-                <td><input type="text" class="form-control" name="atasnama" placeholder="Nama Masih Kosong"></td>
+                <td><input type="text" class="form-control" name="nama" placeholder="Nama Masih Kosong"></td>
               </tr>
               <tr>
                 <th style="width:50%">Total :</th>

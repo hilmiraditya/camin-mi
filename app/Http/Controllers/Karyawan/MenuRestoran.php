@@ -11,9 +11,8 @@ use App\Katalog;
 
 class MenuRestoran extends Controller
 {
-    //
     use KaryawanDefaultLayout;
-
+    
     public function index($id)
     {
     	$layout = $this->default();
