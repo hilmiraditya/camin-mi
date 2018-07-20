@@ -7,8 +7,10 @@
           <br>
           <img src="{{url('sukses.png')}}" style="width: 150px;height: 150px;">
           <br>
-          <h3>Transaksi Berhasil, Kembali Rp. 30.000,-</h3>
-          <h4>No. Transaksi : <b>#ID30473930</b></h4>
+          <h3>
+          Transaksi atas nama <b>{{$nama}}</b> berhasil, Kembali {{"Rp " . number_format($kembali,2,',','.')}}
+        </h3>
+          <h4>ID Transaksi : <b>{{$id_transaksi}}</b></h4>
           <br>
           <a class="btn btn-success" href="{{url('Karyawan/Dashboard')}}">Kembali Ke Dashboard</a>
         </div>

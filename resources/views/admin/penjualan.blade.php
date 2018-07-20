@@ -38,6 +38,7 @@
                   <th>Jumlah</th>
                   <th>Cabang</th>
                   <th>Tanggal</th>
+                  <th>Opsi</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -48,12 +49,15 @@
                   @if($penjualan->keterangan == NULL) <td><a class="btn btn-xs btn-warning">Tidak diisi</a></td>
                   @else<td>{{$penjualan->keterangan}}</td>
                   @endif
-                  <td>{{$penjualan->id}}</td>
+                  <td>{{$penjualan->id_transaksi}}</td>
                   <td>{{$penjualan->Katalog->nama}}</td>
                   <td>{{$penjualan->Katalog->Kategori->nama}}
                   <td>{{$penjualan->jumlah}}</td>
                   <td>{{$penjualan->Cabang->nama}}</td>
                   <td>{{$penjualan->created_at}}</td>
+                  <td>
+                    <a href="{{url('Admin/HapusLaporanPenjualan'.'/'.$penjualan->id)}}" class="btn btn-xs btn-danger">Hapus</a>
+                  </td>
                 </tr>
                 @endforeach
                 </tbody>
@@ -67,6 +71,7 @@
                   <th>Jumlah</th>
                   <th>Keuntungan</th>
                   <th>Tanggal</th>
+                  <th>Opsi</th>
                 </tr>
                 </tfoot>
               </table>

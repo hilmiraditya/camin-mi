@@ -79,5 +79,5 @@ Route::group(['prefix' => 'Karyawan'], function () {
 	Route::get('KantongBelanja', 'Karyawan\KantongBelanja@index');
 
 	//transaksi sukses
-	Route::get('TransaksiSukses', 'Karyawan\KantongBelanja@sukses');
+	Route::post('Bayar', 'Karyawan\Pembayaran@index');
 });

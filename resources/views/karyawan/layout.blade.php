@@ -63,7 +63,7 @@
 
         <ul class="nav navbar-nav">
           <!-- User Account: style can be found in dropdown.less -->
-          @if(!Request::is('Karyawan/KantongBelanja') && !Request::is('Karyawan/TransaksiSukses'))
+          @if(!Request::is('Karyawan/KantongBelanja') && !Request::is('Karyawan/Bayar'))
           <li class="dropdown messages-menu">
             <a href="#" data-toggle="modal" data-target="#exampleModalLong">
               <i class="fa fa-shopping-bag"></i>
@@ -109,7 +109,7 @@
       </div>
     </nav>
   </header>
-  @if(!Request::is('Karyawan/KantongBelanja') && !Request::is('Karyawan/TransaksiSukses'))
+  @if(!Request::is('Karyawan/KantongBelanja') && !Request::is('Karyawan/Bayar'))
   <!-- Left side column. contains the logo and sidebar -->
   <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
@@ -289,6 +289,6 @@
   </div>
 </div>
 @yield('modal')
-
+@yield('script')
 </body>
 </html>

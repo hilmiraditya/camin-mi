@@ -17,11 +17,6 @@ class KantongBelanja extends Model
     	return $this->belongsTo('App\Katalog');
     }
 
-    public function Cabang()
-    {
-    	return $this->belongsTo('App\Cabang');
-    }
-
     public function User()
     {
         return $this->belongsTo('App\User');

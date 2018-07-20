@@ -21,11 +21,6 @@ class LaporanPenjualan extends Controller
 {
     use DefaultLayout;
 
-    public function __construct()
-    {
-        date_default_timezone_set('Asia/Bangkok');
-    }
-
     public function harian()
     {
     	$date= date("Y-m-d");
@@ -50,10 +45,6 @@ class LaporanPenjualan extends Controller
             'cabang' => Cabang::all(),
             'kategori' => Kategori::all()
         ];
-
-        //$pdf = PDF::loadview('admin.email', ['penjualan' => $penjualan, 'cabang' => $cabang, 'kategori' => $kategori, 'date' => $date]);
-        //return view('admin.email')->with('data', $data);
-        //return $pdf->download('Laporan'.$date.'.pdf');
         $pdf = PDF::loadview('admin.email',compact('data'));
         return $pdf->download('Laporan'.date("Y-m").'.pdf');
     }
@@ -66,8 +57,6 @@ class LaporanPenjualan extends Controller
             'cabang' => Cabang::all(),
             'kategori' => Kategori::all()
         ];
-        //dd($data['penjualan']->where('kategori_id', 13)->where('cabang_id', 14)->sum('jumlah'));
-        //return view('admin.email')->with('data', $data);
         $pdf = PDF::loadview('admin.email',compact('data'));
         return $pdf->download('Laporan'.date("Y-m-d").'.pdf');
     }
@@ -82,7 +71,6 @@ class LaporanPenjualan extends Controller
             'kategori' => Kategori::all()
         ];
         Mail::to($emailAdress)->send(new LaporanTransaksi($data));
-
         return Redirect::back()->with('message', 'Laporan Penjualan periode '.$data['date'].' telah dikirim ke '.$emailAdress);
     }
 
@@ -96,14 +84,14 @@ class LaporanPenjualan extends Controller
             'kategori' => Kategori::all()
         ];
         Mail::to($emailAdress)->send(new LaporanTransaksi($data));
-
         return Redirect::back()->with('message', 'Laporan Penjualan periode '.$data['date'].' telah dikirim ke '.$emailAdress);
     }
 
     public function delete($id)
     {
     	$penjualan = Penjualan::find($id);
+        $id_transaksi = $penjualan->first();
     	$penjualan->delete();
-    	return Redirect::back();
+    	return Redirect::back()->with('message', 'Transaksi Berhasil Dihapus');
     }
 }
