@@ -71,7 +71,7 @@
                   <th>Nama Menu</th>
                   <th>Kategori</th>
                   <th>Jumlah</th>
-                  <th>Keuntungan</th>
+                  <th>Cabang</th>
                   <th>Tanggal</th>
                   <th>Opsi</th>
                 </tr>
