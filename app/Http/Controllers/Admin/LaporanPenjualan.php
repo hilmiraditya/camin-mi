@@ -87,6 +87,11 @@ class LaporanPenjualan extends Controller
         return Redirect::back()->with('message', 'Laporan Penjualan periode '.$data['date'].' telah dikirim ke '.$emailAdress);
     }
 
+    public function hapus_penjualan()
+    {
+        $penjualan = Penjualan::truncate();
+    }
+
     public function delete($id)
     {
     	$penjualan = Penjualan::find($id);

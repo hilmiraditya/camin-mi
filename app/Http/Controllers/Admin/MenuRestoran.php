@@ -35,7 +35,8 @@ class MenuRestoran extends Controller
     {
         $validator  = $Request->validate([
             'nama'      => 'unique:katalog,nama|required',
-            'harga'     => 'required|integer'
+            'harga'     => 'required|integer',
+            'gambar' => 'max:1024'
         ]);
 
         $menu = new Katalog;
@@ -65,7 +66,8 @@ class MenuRestoran extends Controller
     {
         $validator  = $Request->validate([
             'nama'      => 'required',
-            'harga'     => 'required|integer'
+            'harga'     => 'required|integer',
+            'gambar' => 'max:1024'
         ]);
 
         $id = $Request->get('id');

@@ -3,22 +3,23 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use App\Penjualan;
 
-class laporanbulanan extends Command
+class hapus_laporan extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'laporan:bulanan';
+    protected $signature = 'laporan:hapus';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Kirim email laporan bulanan';
+    protected $description = 'Hapus data laporan penjualan';
 
     /**
      * Create a new command instance.
@@ -37,7 +38,7 @@ class laporanbulanan extends Command
      */
     public function handle()
     {
-        //
-        $this->info('Email Harian Berhasil Dikirim');
+        $penjualan = Penjualan::truncate();
+        $this->info('Laporan penjualan berhasil dihapus');
     }
 }

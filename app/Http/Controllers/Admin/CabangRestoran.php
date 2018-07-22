@@ -35,7 +35,8 @@ class CabangRestoran extends Controller
     $validator  = $request->validate([
       'nama'      => 'required',
       'alamat'     => 'unique:cabang,alamat|required',
-      'no' => 'numeric'
+      'no' => 'numeric',
+      'gambar' => 'max:1024'
     ]);
     $cabang = new Cabang;
 
@@ -60,7 +61,8 @@ class CabangRestoran extends Controller
     $validator  = $request->validate([
       'nama'      => 'required',
       'alamat'     => 'required',
-      'no' => 'numeric'
+      'no' => 'numeric',
+      'gambar' => 'max:1024'
     ]);
     $cabang = Cabang::find($request->get('id'));
 
