@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
 use App\Traits\DefaultLayout;
+use Illuminate\Support\Facades\Hash;
 use App\Cabang;
 use App\Users;
 
@@ -17,11 +18,17 @@ class CabangAdmin extends Controller
     {
     	$layout = $this->default();
         $validator  = $request->validate([
-            'cabang_id'      => 'required'
+            'nama'      => 'required',
+            'email'     => 'required|email'
         ]);
     	$admin = $layout['user'];
-    	$admin->cabang_id = $request->get('cabang_id');
+    	$admin->name = $request->get('nama');
+        $admin->email = $request->get('email');
+        if ($request->get('password') != NULL)
+        {
+            $admin->password = Hash::make($request->get('password'));
+        }
     	$admin->save();
-    	return Redirect::back()->with('message', 'Posisi cabang pada Admin berhasil diubah');
+    	return Redirect::back()->with('message', 'Akun Karyawan berhasil diubah');
     }
 }

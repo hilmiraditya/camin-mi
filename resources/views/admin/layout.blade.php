@@ -85,8 +85,7 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div align="center">
-                  <a href="#" data-toggle="modal" data-target="#ubahcabang" class="btn btn-default btn-flat">Cabang</a>
-                  <a href="{{url('/Karyawan/Dashboard')}}" class="btn btn-default btn-flat">Karyawan</a>
+                  <a href="#" data-toggle="modal" data-target="#ubahakun" class="btn btn-default btn-flat">Ubah Akun</a>
                   <a class="btn btn-default btn-flat" href="{{ route('logout') }}"] onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                     Logout
                   </a>
@@ -253,45 +252,34 @@
   </div>
 </div>
 <!-- Ubah Data Modal -->
-<div class="modal fade" id="ubahcabang" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="ubahakun" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
-    @if($layout['user']->cabang_id != NULL)
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Ubah Cabang pada Akun Admin</h5>
       </div>
-      <form method="POST" action="{{url('Admin/UbahCabang')}}">
+      <form method="POST" action="{{url('Admin/UbahAkunAdmin')}}">
       <div class="modal-body">
           @csrf
           <div class="form-group">
-            <label>Cabang :</label>
-            <br>
-            @foreach($layout['cabang'] as $cabang)
-              <label class="radio-inline">
-                <input type="radio" name="cabang_id" value="{{$cabang->id}}">
-                  {{$cabang->nama}}
-              </label>
-            @endforeach
+            <label>Nama :</label>
+            <input class="form-control" type="text" name="nama" value="{{$layout['user']->name}}">
+          </div>
+          <div class="form-group">
+            <label>Email :</label>
+            <input class="form-control" type="text" name="email" value="{{$layout['user']->email}}">
+          </div>
+          <div class="form-group">
+            <label>Password :</label>
+            <input class="form-control" type="password" name="password">
           </div>
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">Simpan</button>
+        <button type="submit" class="btn btn-primary">Ubah</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
       </div>
       </form>
     </div>
-    @else
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Cabang Belum Ada, Harap Input Cabang Terlebih Dahulu</h5>
-      </div>
-      <div class="modal-body" align="center">
-        <a class="btn btn-primary" href="{{url('Admin/Cabang')}}">Tambah Cabang</a>
-      </div>
-      <div class="modal-footer">
-      </div>
-    </div>
-    @endif
   </div>
 </div>
 </body>

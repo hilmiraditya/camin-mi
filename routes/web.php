@@ -24,7 +24,7 @@ Route::group(['prefix' => 'Admin'], function () {
 	Route::get('Dashboard', 'Admin\Dashboard@index');
 
 	//ubah cabang admin
-	Route::post('UbahCabang', 'Admin\CabangAdmin@index');
+	Route::post('UbahAkunAdmin', 'Admin\CabangAdmin@index');
 
 	//karyawan	
 	Route::get('AkunKaryawan', 'Admin\AkunKaryawan@index');
@@ -82,6 +82,7 @@ Route::group(['prefix' => 'Karyawan'], function () {
 	Route::post('TambahItem', 'Karyawan\Kantong_Belanja@tambah');
 	Route::get('KantongBelanja', 'Karyawan\Kantong_Belanja@index');
 	Route::get('BatalkanBelanja', 'Karyawan\Kantong_Belanja@hapus_semua');
+	Route::get('BatalkanTransaksi', 'Karyawan\Kantong_Belanja@batalkan_transaksi');
 	Route::get('HapusItem/{id}', 'Karyawan\Kantong_Belanja@hapus');
 
 	//transaksi sukses

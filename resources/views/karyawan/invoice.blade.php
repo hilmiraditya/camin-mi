@@ -100,9 +100,8 @@
             </table>
           </div>
           <div align="center">
-            <a href="{{url('/Karyawan/Pembayaran')}}" class="btn btn-success">Test View</a>
             <button type="submit" class="btn btn-primary">Bayar</button>
-            <button class="btn btn-danger">Batalkan Transaksi</button>
+            <a href="{{url('Karyawan/BatalkanTransaksi')}}" class="btn btn-danger">Batalkan Transaksi</a>
           </div>
         </form>
         </div>

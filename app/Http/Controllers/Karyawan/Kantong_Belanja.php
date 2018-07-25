@@ -47,8 +47,15 @@ class Kantong_Belanja extends Controller
     public function hapus_semua()
     {
         $layout = $this->default();
-        KantongBelanja::where('users_id', $layout['user']->id)->truncate();
-        return Redirect::back()->with('message', 'Transaksi Berhasil Dibatalkan');        
+        KantongBelanja::where('users_id', $layout['user']->id)->delete();
+        return Redirect::back()->with('message', 'Transaksi Berhasil Dibatalkan');
+    }
+
+    public function batalkan_transaksi()
+    {
+        $layout = $this->default();
+        KantongBelanja::where('users_id', $layout['user']->id)->delete();
+        return redirect('Karyawan/Dashboard')->with('message', 'Transaksi Berhasil Dibatalkan');
     }
 
     public function hapus($id)
