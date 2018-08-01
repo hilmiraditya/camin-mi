@@ -19,7 +19,6 @@ class AkunKaryawan extends Controller
         $karyawan = User::where('isAdmin', 0)->get();
         $karyawanUpdate = User::where('isAdmin', 0)->get();
         $cekJumlahKaryawan = User::where('isAdmin', 0)->count();
-
         return view('admin.karyawan')
                 ->with('karyawan', $karyawan)
                 ->with('karyawanUpdate', $karyawanUpdate)
@@ -38,16 +37,14 @@ class AkunKaryawan extends Controller
 
         $karyawan = new User;
 
+        $karyawan->alamat = $request->get('alamat');
         $karyawan->no_handphone = $request->get('nohape');
         $karyawan->name = $request->get('name');
         $karyawan->email = $request->get('email');
         $password = $request->get('password');
         $karyawan->password = bcrypt($password);
-        $karyawan->cabang_id = $request->get('cabang_id');
-
         $karyawan->save();
-
-        return redirect('Admin/AkunKaryawan')->with('message', 'Akun karyawan berhasil ditambah');
+        return redirect('Admin/AkunKaryawan')->with('message', 'Akun Pengguna berhasil ditambah');
     }
 
     public function update(Request $request, $id)
@@ -58,7 +55,6 @@ class AkunKaryawan extends Controller
             'nohape' => 'numeric'
         ]);
         $karyawan = User::find($id);
- 
         $karyawan->no_handphone = $request->get('nohape');
         $karyawan->name = $request->get('name');
         $karyawan->email = $request->get('email');
@@ -67,15 +63,8 @@ class AkunKaryawan extends Controller
             $password = $request->get('password');
             $karyawan->password = bcrypt($password);
         }
-
-        if($request->get('cabang_id') != NULL)
-        {
-            $karyawan->cabang_id = $request->get('cabang_id');
-        }
-
         $karyawan->save();
-
-        return redirect('Admin/AkunKaryawan')->with('message', 'Akun karyawan berhasil diubah');
+        return redirect('Admin/AkunKaryawan')->with('message', 'Akun Pengguna berhasil diubah');
     }
 
 
@@ -83,6 +72,6 @@ class AkunKaryawan extends Controller
     {
         $karyawan = User::find($id);
         $karyawan->delete();
-        return redirect('Admin/AkunKaryawan')->with('message', 'Akun karyawan berhasil dihapus');
+        return redirect('Admin/AkunKaryawan')->with('message', 'Akun Pengguna berhasil dihapus');
     }
 }

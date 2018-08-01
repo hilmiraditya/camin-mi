@@ -46,6 +46,8 @@
                     <th>Nama</th>
                     <th>Email</th>
                     <th>No. Handphone</th>
+                    <th>Tempat Tinggal</th>
+                    <th>Tanggal Akun Dibuat</th>
                     <th>Edit</th>
                   </tr>
                   </thead>
@@ -63,6 +65,8 @@
                     @else
                       <td>{{$karyawan->no_handphone}}</td>
                     @endif
+                    <td>{{$karyawan->alamat}}</td>
+                    <td>{{$karyawan->created_at}}</td>
                     <td>
                       <button class="btn btn-xs btn-primary" type="button" data-toggle="modal" data-target="#editakun{{$karyawan->id}}">
                           Edit Akun
@@ -102,7 +106,7 @@
   <div>
   <div class="modal fade" id="tambahakun" tabindex="-3" role="dialog" aria-labelledby="tambah-akun" aria-hidden="true">
     <div class="modal-dialog" role="document">
-    <form method="POST" action="{{url('/Admin/TambahAkun')}}">
+    <form name="karyawantambah" method="POST" action="{{url('/Admin/TambahAkun')}}">
       @csrf
       <div class="modal-content">
         <div class="modal-header">
@@ -125,6 +129,23 @@
             <label>Password :</label>
             <input type="password" class="form-control" name="password">
           </div>
+          <div class="form-group">
+            <label>Tempat Tinggal :</label>
+            <br>
+            <select name="alamat" form="karyawantambah">
+              <option value="Ruang Himpunan">Ruang Himpunan</option>
+              <option value="Lab AJK">Lab AJK</option>
+              <option value="Lab LP1">Lab LP1</option>
+              <option value="Lab Alpro">Lab Alpro</option>
+              <option value="Lab MI">Lab MI</option>
+              <option value="Lab DTK">Lab DTK</option>
+              <option value="Lab RPL">Lab RPL</option>
+              <option value="Lab NCC">Lab NCC</option>
+              <option value="Lab KCV">Lab KCV</option>
+              <option value="Lab LP2">Lab LP2</option>
+              <option value="Ruang Danzo">Ruang Danzo</option>
+            </select>
+          </div>
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-primary">Tambah Akun</button>
@@ -141,7 +162,7 @@
   <div>
   <div class="modal fade" id="editakun{{$karyawanUpdate->id}}" tabindex="-2" role="dialog" aria-labelledby="edit-akun" aria-hidden="true">
     <div class="modal-dialog" role="document">
-    <form method="GET" action="{{url('Admin/UpdateAkun').'/'.$karyawanUpdate->id}}">
+    <form name="karyawan" method="GET" action="{{url('Admin/UpdateAkun').'/'.$karyawanUpdate->id}}">
       @csrf
       <div class="modal-content">
         <div class="modal-header">
@@ -163,6 +184,23 @@
           <div class="form-group">
             <label>Password :</label>
             <input type="password" class="form-control" name="password">
+          </div>
+          <div class="form-group">
+            <label>Tempat Tinggal :</label>
+            <br>
+            <select name="alamat" form="karyawan">
+              <option value="Ruang Himpunan">Ruang Himpunan</option>
+              <option value="Lab AJK">Lab AJK</option>
+              <option value="Lab LP1">Lab LP1</option>
+              <option value="Lab Alpro">Lab Alpro</option>
+              <option value="Lab MI">Lab MI</option>
+              <option value="Lab DTK">Lab DTK</option>
+              <option value="Lab RPL">Lab RPL</option>
+              <option value="Lab NCC">Lab NCC</option>
+              <option value="Lab KCV">Lab KCV</option>
+              <option value="Lab LP2">Lab LP2</option>
+              <option value="Ruang Danzo">Ruang Danzo</option>
+            </select>
           </div>
         </div>
         <div class="modal-footer">
