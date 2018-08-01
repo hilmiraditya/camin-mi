@@ -9,7 +9,7 @@ class Kategori extends Model
     protected $table = 'kategori';
 
     protected $fillable = [
-    	'nama'
+    	'nama', 'keterangan', 'no_telpon', 'alamat', 'gambar'
     ];
 
     public function Katalog()

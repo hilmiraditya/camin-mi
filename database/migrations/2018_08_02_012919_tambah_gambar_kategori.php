@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class KatalogTambahan extends Migration
+class TambahGambarKategori extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class KatalogTambahan extends Migration
      */
     public function up()
     {
-        Schema::table('katalog', function($table) {
-            $table->integer('keuntungan');
+        Schema::table('kategori', function($table) {
+            $table->string('gambar');
         });
     }
 
@@ -25,8 +25,8 @@ class KatalogTambahan extends Migration
      */
     public function down()
     {
-        Schema::table('katalog', function($table) {
-            $table->dropColumn('keuntungan');
+        Schema::table('kategori', function($table) {
+            $table->dropColumn('gambar');
         });
     }
 }

@@ -112,15 +112,10 @@
             <i class="fa fa-users"></i><span>Akun Pengguna</span>
           </a>
         </li>
-        <li>
-          <a href="{{url('Admin/Cabang')}}">
-            <i class="fa fa-location-arrow"></i><span>Cabang</span>
-          </a>
-        </li>
         <li class="treeview">
           <a href="#">
             <i class="fa fa-cutlery"></i>
-            <span>Menu</span>
+            <span>Restoran</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -129,7 +124,7 @@
             <li><a href="#" data-toggle="modal" data-target="#tambahkategori"></i>Tambah Restoran</a></li>
             @foreach($layout['listkategori'] as $menu)
             <li>
-              <a href="{{url('Admin/Menu'.'/'.$menu->id)}}"><i class="fa fa-circle-o"></i>{{$menu->nama}}</a>
+              <a href="{{url('Admin/Menu'.'/'.$menu->id)}}"><i class="fa fa-circle-o"></i>Restoran {{$menu->nama}}</a>
             </li>
             @endforeach
           </ul>
@@ -163,9 +158,9 @@
   <!-- /.content-wrapper -->
   <footer class="main-footer">
     <div class="pull-right hidden-xs">
-      <b>Version</b> 1.0
+      <b>Kelompok </b> 1
     </div>
-    <strong>&copy; 2018 Penugasan Calmin Lab Manajemen Informasi Teknik Informatika ITS</a></strong>
+    <strong>&copy; 2018 Lab. Manajemen Informasi Teknik Informatika ITS</a></strong>
   </footer>
 </div>
 <!-- ./wrapper -->
@@ -229,14 +224,30 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Tambah Kategori Menu</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Tambah Restoran</h5>
       </div>
-      <form method="POST" action="{{url('Admin/TambahKategori')}}">
+      <form method="POST" action="{{url('Admin/TambahKategori')}}" enctype="multipart/form-data">
       <div class="modal-body">
           @csrf
           <div class="form-group">
-            <label>Nama Kategori :</label>
+            <label>Nama Restoran :</label>
             <input type="text" class="form-control" name="nama">
+          </div>
+          <div class="form-group">
+            <label>No. Telepon :</label>
+            <input type="text" class="form-control" name="no_telepon">
+          </div>
+          <div class="form-group">
+            <label>Alamat :</label>
+            <input type="text" class="form-control" name="alamat">
+          </div>
+          <div class="form-group">
+            <label>Keterangan :</label>
+            <input type="text" class="form-control" name="keterangan">
+          </div>
+          <div class="form-group">
+            <label>Foto :</label>
+            <input type="file" accept="image/*" name="gambar" id="gambar"/>
           </div>
       </div>
       <div class="modal-footer">
@@ -254,11 +265,11 @@
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Ubah Cabang pada Akun Admin</h5>
       </div>
-      <form method="POST" action="{{url('Admin/UbahAkunAdmin')}}">
+      <form method="POST" action="{{url('Admin/UbahAkunAdmin')}}" enctype="multipart/form-data">
       <div class="modal-body">
           @csrf
           <div class="form-group">
-            <label>Nama :</label>
+            <label>Nama Restoran :</label>
             <input class="form-control" type="text" name="nama" value="{{$layout['user']->name}}">
           </div>
           <div class="form-group">

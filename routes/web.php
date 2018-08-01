@@ -32,13 +32,6 @@ Route::group(['prefix' => 'Admin'], function () {
 	Route::get('HapusAkun/{id}', 'Admin\AkunKaryawan@delete');
 	Route::get('UpdateAkun/{id}', 'Admin\AkunKaryawan@update');
 
-	//cabang
-	Route::get('Cabang', 'Admin\CabangRestoran@index');
-	Route::post('TambahCabang', 'Admin\CabangRestoran@create');
-	Route::get('TambahCabang', 'Admin\CabangRestoran@create');
-	Route::get('HapusCabang/{id}', 'Admin\CabangRestoran@delete');
-	Route::post('UpdateCabang', 'Admin\CabangRestoran@update');
-
 	//kategori
 	Route::post('TambahKategori', 'Admin\KategoriMenu@create');
 	Route::get('HapusMenu/{id}', 'Admin\KategoriMenu@delete');

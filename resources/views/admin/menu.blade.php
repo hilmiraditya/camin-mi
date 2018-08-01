@@ -5,18 +5,41 @@
     <section class="content-header">
       <h1>
         Menu
-        <small>{{$kategori->nama}}</small>
+        <small>Restoran {{$kategori->nama}}</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Point Of Sales</a></li>
         <li><a href="#">Admin</a></li>
         <li><a href="#">Menu</a></li>
-        <li class="active">{{$kategori->nama}}</li>
+        <li class="active">Restoran {{$kategori->nama}}</li>
       </ol>
     </section>
 
     <!-- Main content -->
     <section class="content">
+    <div class="row">
+      <div class="col-md-12">
+        <a>
+          @if($kategori->gambar == NULL)
+          <img src="{{url('adminlte/restaurant.png')}}" alt="Lights" style="width:100% ;height:200px;">
+          @else
+          <img src="{{url('fotorestoran').'/'.$kategori->gambar}}" alt="Lights" style="width:100% ;height:200px;">
+          @endif
+        </a>
+      </div>
+    </div>
+      <br>
+      <div align="center">
+        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#inforestoran">
+          Info Restoran
+        </button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambahmenu">
+          Tambah Menu
+        </button>
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#hapuskategori">
+          Hapus Restoran
+        </button>
+      </div>
       @if(session()->has('message'))
       <div class="row"><div class="col-xs-12">
         <div class="alert alert-success">
@@ -37,6 +60,7 @@
       @endif
       <div class="row" align="center">
         @if($cekKatalog > 0)
+        <br>
         @foreach($katalog as $katalog)
         <div class="col-md-6">
           <!-- Line chart -->
@@ -78,19 +102,10 @@
         @else
         <div class="col-md-12" align="center">
           <br>
-          <h4>Belum ada menu pada kategori {{$kategori->nama}}</h4>
+          <h4>Belum ada menu pada Restoran {{$kategori->nama}}</h4>
           <br>
         </div>
         @endif
-
-        <div class="col-md-12" align="center">
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambahmenu">
-            Tambah Menu
-          </button>
-          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#hapuskategori">
-            Hapus
-          </button>
-        </div>
 
       </div>
       <!-- /.row -->
@@ -200,21 +215,41 @@
 </div>
 </div>
 @endforeach
-
-
 <!-- Modal untuk hapus Kategori -->
 <div class="modal fade" id="hapuskategori" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="exampleModalLabel">Hapus Stok</h5>
+        <h4 class="modal-title" id="exampleModalLabel">Hapus Restoran</h5>
       </div>
       <div class="modal-body">
-        Semua makanan yang ada di dalam kategori ini juga ikut dihapus dan laporan transaksi yang telah dilakukan akan dihapus juga.
+        Semua menu yang ada di dalam restoran ini juga ikut dihapus dan laporan transaksi yang telah dilakukan akan dihapus juga.
       </div>
       <div class="modal-footer">
         <a href="{{url('/Admin/HapusMenu').'/'.$kategori->id}}" class="btn btn-primary">Lanjut</a>
         <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal untuk info restoran-->
+<div class="modal fade" id="inforestoran" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="exampleModalLabel">Info restoran </h4>
+      </div>
+      <div class="modal-body">
+        <h5>Nama Restoran : <b>{{$kategori->nama}}</b></h5>
+        <br>
+        <h5>No. Telefon : <b>{{$kategori->no_telepon}}</h5>
+        <br>
+        <h5>Alamat : <b>{{$kategori->alamat}}</h5>
+        <br>
+        <h5>Keterangan : <b>{{$kategori->keterangan}}</h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
       </div>
     </div>
   </div>

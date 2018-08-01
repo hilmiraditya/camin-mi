@@ -60,7 +60,7 @@
           <div class="small-box bg-red">
             <div class="inner">
               <h3>{{ $data['akun'] }}</h3>
-              <p>Akun Karyawan</p>
+              <p>Akun Pengguna</p>
             </div>
             <div class="icon">
               <i class="ion ion-ios-people"></i>

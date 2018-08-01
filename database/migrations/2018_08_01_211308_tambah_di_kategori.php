@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Cabang extends Migration
+class TambahDiKategori extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,10 @@ class Cabang extends Migration
      */
     public function up()
     {
-        Schema::create('cabang', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('nama');
-            $table->string('gambar')->nullable();
+        Schema::table('kategori', function($table) {
             $table->string('alamat');
-            $table->string('keterangan')->nullable();
-            $table->string('no');
-            $table->timestamps();
+            $table->string('keterangan');
+            $table->string('no_telpon');
         });
     }
 
@@ -31,6 +27,10 @@ class Cabang extends Migration
      */
     public function down()
     {
-        Schema::drop('cabang');
+        Schema::table('kategori', function($table) {
+            $table->dropColumn('no_telpon');
+            $table->dropColumn('alamat');
+            $table->dropColumn('keterangan');
+        });
     }
 }

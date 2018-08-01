@@ -15,8 +15,6 @@ class PenjualanTambahan extends Migration
     {
         Schema::table('penjualan', function($table) {
             $table->unsignedInteger('kategori_id');
-            $table->unsignedInteger('cabang_id')->nullable();
-            $table->foreign('cabang_id')->references('id')->on('cabang')->onDelete('cascade');
         });
     }
 
@@ -29,7 +27,6 @@ class PenjualanTambahan extends Migration
     {
         Schema::table('penjualan', function($table) {
             $table->dropColumn('kategori_id');
-            $table->dropColumn('cabang_id')->nullable();
         });
     }
 }

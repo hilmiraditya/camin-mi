@@ -22,6 +22,10 @@ class MenuRestoran extends Controller
         $cekKatalog = Katalog::where('kategori_id', $id)->count();
     	$katalog = Katalog::where('kategori_id', $id)->get();
         $editKatalog = Katalog::where('kategori_id', $id)->get();
+        $data = [
+            'kategori' => Kategori::where('id', $id)->first(),
+            'katalog' => Katalog::where('kategori_id', $id)->get()
+        ];
 
     	return view('admin.menu')
     		->with('katalog', $katalog)
@@ -51,7 +55,6 @@ class MenuRestoran extends Controller
         }
 
         $menu->nama = $Request->get('nama');
-        $menu->keuntungan = $Request->get('keuntungan');
         $menu->harga = $Request->get('harga');
         $menu->keterangan = $Request->get('keterangan');
         $menu->kategori_id = $Request->get('kategori_id');
