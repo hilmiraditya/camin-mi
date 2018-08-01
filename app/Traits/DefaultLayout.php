@@ -21,7 +21,6 @@ trait DefaultLayout
     	$layout = [
     		'user' => Auth::user(),
     		'listkategori' => Kategori::all(),
-            'cabang' => Cabang::all()
     	];
     	return $layout;
 	}

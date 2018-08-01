@@ -7,10 +7,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\Model;
 
 use App\Traits\DefaultLayout;
-use App\Cabang;
 use App\User;
 use App\Penjualan;
 use App\Katalog;
+use App\Kategori;
 
 class Dashboard extends Controller
 {
@@ -20,7 +20,7 @@ class Dashboard extends Controller
     {
         $layout = $this->default();
         $data = [
-            'cabang'  => Cabang::all()->count(),
+            'restoran' => Kategori::all()->count(),
             'akun'   => User::where('isAdmin',0)->count(),
             'penjualan' => Penjualan::all()->sum('jumlah'),
             'menu' => Katalog::all()->count()

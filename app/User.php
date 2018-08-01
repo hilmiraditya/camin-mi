@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'no_handphone', 'name', 'email', 'password', 'cabang_id', 'isAdmin'
+        'no_handphone', 'name', 'email', 'password', 'isAdmin'
     ];
 	
     /**
@@ -27,11 +27,6 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-
-    public function Cabang()
-    {
-        return $this->belongsTo('App\Cabang');
-    }
 
     public function Penjualan()
     {

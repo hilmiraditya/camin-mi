@@ -45,9 +45,9 @@
           <!-- small box -->
           <div class="small-box bg-aqua">
             <div class="inner">
-              <h3>{{ $data['cabang'] }}</h3>
+              <h3>{{ $data['restoran'] }}</h3>
 
-              <p>Cabang</p>
+              <p>Restoran</p>
             </div>
             <div class="icon">
               <i class="ion ion-home"></i>
