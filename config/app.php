@@ -160,7 +160,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
+        RenatoMarinho\LaravelPageSpeed\ServiceProvider::class,
         Evercode1\TraitMaker\TraitMakerServiceProvider::class,
 
     ],
