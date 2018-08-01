@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 use App\Traits\DefaultLayout;
 
 use App\User;
-use App\Cabang;
 
 class AkunKaryawan extends Controller
 {
@@ -19,19 +18,11 @@ class AkunKaryawan extends Controller
         $layout = $this->default();
         $karyawan = User::where('isAdmin', 0)->get();
         $karyawanUpdate = User::where('isAdmin', 0)->get();
-        
-        $tambah_karyawan_cabang = Cabang::all();
-        $edit_karyawan_cabang = Cabang::all();
-
-        $cekJumlahCabang = Cabang::all()->count();
         $cekJumlahKaryawan = User::where('isAdmin', 0)->count();
 
         return view('admin.karyawan')
                 ->with('karyawan', $karyawan)
                 ->with('karyawanUpdate', $karyawanUpdate)
-                ->with('tambah_karyawan_cabang', $tambah_karyawan_cabang)
-                ->with('edit_karyawan_cabang', $edit_karyawan_cabang)
-                ->with('cekJumlahCabang', $cekJumlahCabang)
                 ->with('cekJumlahKaryawan', $cekJumlahKaryawan)
                 ->with('layout', $layout);
     }

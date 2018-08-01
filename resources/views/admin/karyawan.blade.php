@@ -45,7 +45,6 @@
                     <th>No</th>
                     <th>Nama</th>
                     <th>Email</th>
-                    <th>Cabang</th>
                     <th>No. Handphone</th>
                     <th>Edit</th>
                   </tr>
@@ -57,15 +56,6 @@
                     <td><?php echo $a++;?></td>
                     <td>{{$karyawan->name}}</td>
                     <td>{{$karyawan->email}}</td>
-                    @if($karyawan->cabang_id == NULL)
-                      <td>
-                        <a class="btn btn-xs btn-warning">Belum Ditentukan oleh Admin !</a>
-                      </td>
-                    @else
-                      <td>
-                        {{$karyawan->Cabang->nama}}
-                      </td>
-                    @endif
                     @if($karyawan->no_handphone == NULL) 
                       <td>
                         <a class="btn btn-xs btn-warning">Belum Diisi !</a>
@@ -116,7 +106,7 @@
       @csrf
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title" id="exampleModalLabel">Tambah Akun Karyawan</h4>
+          <h4 class="modal-title" id="exampleModalLabel">Tambah Akun Pengguna</h4>
         </div>
         <div class="modal-body">
           <div class="form-group">
@@ -134,22 +124,6 @@
           <div class="form-group">
             <label>Password :</label>
             <input type="password" class="form-control" name="password">
-          </div>
-          <div class="form-group">
-            <label>Cabang :</label>
-            <br>
-            @if($cekJumlahCabang > 0)
-              @foreach($tambah_karyawan_cabang as $cabang)
-              <label class="radio-inline">
-                <input type="radio" name="cabang_id" value="{{$cabang->id}}">
-                  {{$cabang->nama}}
-              </label>
-              @endforeach
-            @else
-            <label class="radio-inline">
-              Belum Ada Cabang
-            </label>
-            @endif
           </div>
         </div>
         <div class="modal-footer">
@@ -171,7 +145,7 @@
       @csrf
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title" id="exampleModalLabel">Edit Akun Karyawan</h4>
+          <h4 class="modal-title" id="exampleModalLabel">Edit Akun Pengguna</h4>
         </div>
         <div class="modal-body">
           <div class="form-group">
@@ -189,22 +163,6 @@
           <div class="form-group">
             <label>Password :</label>
             <input type="password" class="form-control" name="password">
-          </div>
-          <div class="form-group">
-            <label>Cabang :</label>
-            <br>
-            @if($cekJumlahCabang > 0)
-              @foreach($edit_karyawan_cabang as $cabang)
-              <label class="radio-inline">
-                <input type="radio" name="cabang_id" value="{{$cabang->id}}">
-                  {{$cabang->nama}}
-              </label>
-              @endforeach
-            @else
-            <label class="radio-inline">
-              Belum Ada Cabang
-            </label>
-            @endif
           </div>
         </div>
         <div class="modal-footer">
