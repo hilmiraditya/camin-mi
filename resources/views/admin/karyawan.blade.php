@@ -4,12 +4,12 @@
       <!-- Content Header (Page header) -->
       <section class="content-header">
         <h1>
-          Akun Karyawan
+          Akun Pengguna
         </h1>
         <ol class="breadcrumb">
           <li><a href="#"><i class="fa fa-dashboard"></i> Point Of Sales</a></li>
           <li><a href="#">Admin</a></li>
-          <li class="active">Akun Karyawan</li>
+          <li class="active">Akun Pengguna</li>
         </ol>
       </section>
   
@@ -94,7 +94,7 @@
             </div>
             @else
             <div align="center">
-              <h4>Belum ada Akun Karyawan</h4>
+              <h4>Belum ada Akun Pengguna</h4>
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambahakun">
                   Tambah Akun
                 </button>

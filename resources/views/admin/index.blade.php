@@ -5,7 +5,6 @@
     <section class="content-header">
       <h1>
         Dashboard
-        <small>Semua Cabang</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Point Of Sales</a></li>
@@ -15,6 +14,13 @@
 
     <!-- Main content -->
     <section class="content">
+      @if(session()->has('message'))
+      <div class="row"><div class="col-xs-12">
+        <div class="alert alert-success">
+          {{ session()->get('message') }}
+        </div>
+      </div></div>
+      @endif
       @if (count($errors) > 0)
       <div class="row"><div class="col-xs-12">
         <div class = "alert alert-danger">
@@ -26,6 +32,13 @@
         </div>
       </div></div>
       @endif
+      <div class="row"><div class="col-xs-12">
+        <div class = "alert alert-warning">
+          <ul>
+            <li>Setiap hari pukul 23.55 akan ada email masuk ke email admin yang berisi laporan transaksi pada hari itu</li>
+          </ul>
+        </div>
+      </div></div>
       <!-- Small boxes (Stat box) -->
       <div class="row">
         <div class="col-lg-3 col-xs-6">

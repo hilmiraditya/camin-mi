@@ -50,9 +50,9 @@
     <!-- Logo -->
     <a class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini">POS</span>
+      <span class="logo-mini">TC-FF</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg">Point Of Sales</span>
+      <span class="logo-lg">TC Fast Food</span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -76,10 +76,6 @@
                 <p>
                   {{$layout['user']->name}}
                   <small>Mode : Admin</small>
-                  @if($layout['user']->cabang_id != NULL)<small>Cabang : {{$layout['user']->Cabang->nama}}</small>
-                  @else
-                    <small>Belum Ditentukan</small>
-                  @endif
                 </p>
               </li>
               <!-- Menu Footer-->
@@ -113,7 +109,7 @@
         </li>
         <li>
           <a href="{{url('Admin/AkunKaryawan')}}">
-            <i class="fa fa-users"></i><span>Akun Karyawan</span>
+            <i class="fa fa-users"></i><span>Akun Pengguna</span>
           </a>
         </li>
         <li>
@@ -130,7 +126,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#" data-toggle="modal" data-target="#tambahkategori"></i>Tambah Kategori</a></li>
+            <li><a href="#" data-toggle="modal" data-target="#tambahkategori"></i>Tambah Restoran</a></li>
             @foreach($layout['listkategori'] as $menu)
             <li>
               <a href="{{url('Admin/Menu'.'/'.$menu->id)}}"><i class="fa fa-circle-o"></i>{{$menu->nama}}</a>
@@ -141,16 +137,16 @@
         <li class="treeview">
           <a href="#">
             <i class="fa fa-pie-chart"></i>
-            <span>Laporan Transaksi</span>
+            <span>Transaksi</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
             <li>
-              <a href="{{url('Admin/LaporanPenjualan/Harian')}}"><i class="fa fa-circle-o"></i>Harian
+              <a href="{{url('Admin/LaporanPenjualan/Harian')}}"><i class="fa fa-circle-o"></i>Sedang Berjalan
               </a>
-              <a href="{{url('Admin/LaporanPenjualan/Bulanan')}}"><i class="fa fa-circle-o"></i>Bulanan
+              <a href="{{url('Admin/LaporanPenjualan/Bulanan')}}"><i class="fa fa-circle-o"></i>Selesai
               </a>
             </li>
           </ul>
@@ -169,7 +165,7 @@
     <div class="pull-right hidden-xs">
       <b>Version</b> 1.0
     </div>
-    <strong>&copy; 2018 Developed By <a href="mailto:raditya113@icloud.com" target="_top">Me</a></strong>
+    <strong>&copy; 2018 Penugasan Calmin Lab Manajemen Informasi Teknik Informatika ITS</a></strong>
   </footer>
 </div>
 <!-- ./wrapper -->
