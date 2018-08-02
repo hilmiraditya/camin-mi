@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>TC Fast Food | Login</title>
-  <!-- Tell the browser to be responsive to screen width -->
+  <title>TC Fast Food | Register</title>
   <link rel="icon" href="{{url('satean.jpg')}}">
+  <!-- Tell the browser to be responsive to screen width -->
   <meta content=" initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
   <link rel="stylesheet" href="{{url('adminlte/bower_components/bootstrap/dist/css/bootstrap.min.css')}}">
@@ -31,21 +31,12 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <!-- /.login-logo -->
-  <div class="login-box-body">
+  <div class="login-box-body" style="z-index: 1;">
     <div align="center">
       <img src="{{url('satean.jpg')}}" style="width: 100px;height: 100px;">
     </div>
     <br>
-    <p class="login-box-msg">Halaman Login</p>
-      @if (session()->has('message'))
-      <div class="row">
-        <div class = "alert alert-success">
-          <ul>
-            <li>{{ session()->get('message') }}</li>
-          </ul>
-        </div>
-      </div>
-      @endif
+    <p class="login-box-msg">Registrasi Member Baru</p>
       @if (count($errors) > 0)
       <div class="row">
         <div class = "alert alert-danger">
@@ -57,21 +48,44 @@
         </div>
       </div>
       @endif
-      <form class="form-horizontal" role="form" method="POST" action="{{ route('login') }}">
-      {{ csrf_field() }}
+      <form class="form-horizontal" role="form" method="POST" action="{{url('/registerAkun')}}">
+      @csrf
       <div class="form-group has-feedback">
-        <input id="email" type="email" class="form-control" name="email" placeholder="Email Address">
+        <input id="name" type="text" class="form-control" name="name" placeholder="Nama Lengkap">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input id="email" type="email" class="form-control" name="email" placeholder="Alamat Email">
+        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input id="no_handphone" type="no_handphone" class="form-control" name="no_handphone" placeholder="Nomor Handphone">
+        <span class=" glyphicon glyphicon-phone form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <select name="alamat" id="alamat" class="form-control">
+          <option value="Ruang Himpunan">Ruang Himpunan</option>
+          <option value="Lab AJK">Lab AJK</option>
+          <option value="Lab LP1">Lab LP1</option>
+          <option value="Lab Alpro">Lab Alpro</option>
+          <option value="Lab MI">Lab MI</option>
+          <option value="Lab DTK">Lab DTK</option>
+          <option value="Lab RPL">Lab RPL</option>
+          <option value="Lab NCC">Lab NCC</option>
+          <option value="Lab KCV">Lab KCV</option>
+          <option value="Lab LP2">Lab LP2</option>
+          <option value="Ruang Danzo">Ruang Danzo</option>
+        </select>
+        <span class="glyphicon glyphicon-home form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
         <input id="password" type="password" class="form-control" name="password" placeholder="Password">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
-        <!-- /.col -->
         <div align="center">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
-          <a href="{{url('/register')}}" class="btn btn-warning btn-block btn-flat">Register</a>
+          <button type="submit" class="btn btn-primary btn-block btn-flat">{{ __('Register') }}</button>
+          <a href="{{url('/login')}}" class="btn btn-warning btn-block btn-flat">Saya sudah punya akun</a>
         </div>
         <!-- /.col -->
       </div>
@@ -80,7 +94,6 @@
   </div>
   <!-- /.login-box-body -->
 </div>
-<!-- /.login-box -->
 </body>
 
 <!-- jQuery 3 -->

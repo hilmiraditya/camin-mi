@@ -11,6 +11,8 @@
 |
 */
 
+Route::post('registerAkun', 'RegisterAkunController@index');
+
 Route::get('/', function () {
     return redirect('/login');
 })->middleware('auth');

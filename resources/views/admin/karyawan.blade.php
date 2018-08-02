@@ -33,7 +33,6 @@
           </ul>
         </div>
       </div></div>
-      <!-- sampe line sini beres gaada masalah -->
       @endif
             @if($cekJumlahKaryawan > 0)
             <div class="box">
@@ -65,7 +64,7 @@
                     @else
                       <td>{{$karyawan->no_handphone}}</td>
                     @endif
-                    <td>{{$karyawan->alamat}}</td>
+                    <td><a class="btn btn-xs btn-success">{{$karyawan->alamat}}</a></td>
                     <td>{{$karyawan->created_at}}</td>
                     <td>
                       <button class="btn btn-xs btn-primary" type="button" data-toggle="modal" data-target="#editakun{{$karyawan->id}}">
@@ -132,7 +131,7 @@
           <div class="form-group">
             <label>Tempat Tinggal :</label>
             <br>
-            <select name="alamat" form="karyawantambah">
+            <select name="alamat" id="alamat" class="form-control">
               <option value="Ruang Himpunan">Ruang Himpunan</option>
               <option value="Lab AJK">Lab AJK</option>
               <option value="Lab LP1">Lab LP1</option>
@@ -188,7 +187,7 @@
           <div class="form-group">
             <label>Tempat Tinggal :</label>
             <br>
-            <select name="alamat" form="karyawan">
+            <select name="alamat" id="alamat" class="form-control">
               <option value="Ruang Himpunan">Ruang Himpunan</option>
               <option value="Lab AJK">Lab AJK</option>
               <option value="Lab LP1">Lab LP1</option>

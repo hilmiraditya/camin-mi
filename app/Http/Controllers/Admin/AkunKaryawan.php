@@ -32,7 +32,8 @@ class AkunKaryawan extends Controller
             'name'      => 'required',
             'email'     => 'unique:users,email|required',
             'password'  => 'required',
-            'nohape' => 'numeric'
+            'nohape' => 'numeric',
+            'alamat' => 'required'
         ]);
 
         $karyawan = new User;
@@ -55,6 +56,7 @@ class AkunKaryawan extends Controller
             'nohape' => 'numeric'
         ]);
         $karyawan = User::find($id);
+        $karyawan->alamat = $request->get('alamat');
         $karyawan->no_handphone = $request->get('nohape');
         $karyawan->name = $request->get('name');
         $karyawan->email = $request->get('email');
