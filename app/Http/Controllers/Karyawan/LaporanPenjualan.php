@@ -33,4 +33,26 @@ class LaporanPenjualan extends Controller
         $penjualan =  Penjualan::where('cabang_id',$id)->whereYear('created_at', '=', date('Y'))->whereMonth('created_at', '=', date('m'))->get();
         return view('karyawan.penjualan')->with('layout', $layout)->with('penjualan', $penjualan)->with('date', $date);
     }
-}
+
+    public function sedang_berjalan()
+    {
+        $layout = $this->default();
+        $penjualan = Penjualan::Where('keterangan', '!=', 2)->Where('keterangan', '!=', -1)->Where('keterangan', '!=', -2)->get();
+        return view('karyawan.penjualan')->with('layout', $layout)->with('penjualan', $penjualan);
+    }
+
+    public function selesai()
+    {
+        $layout = $this->default();
+        $penjualan = Penjualan::where('keterangan', 2)->get();
+        return view('karyawan.penjualan')->with('layout', $layout)->with('penjualan', $penjualan);
+    }
+
+    public function batal()
+    {
+        $layout = $this->default();
+        $penjualan = Penjualan::orWhere('keterangan', -1)->orWhere('keterangan', -2)->get();
+        return view('karyawan.penjualan')->with('layout', $layout)->with('penjualan', $penjualan);        
+    }
+
+}  

@@ -139,6 +139,9 @@
           </a>
           <ul class="treeview-menu">
             <li>
+              <a href="{{url('Karyawan/LaporanPenjualan/Harian'.'/'.$layout['user']->cabang_id)}}">
+                <i class="fa fa-circle-o"></i>Request dari Pengguna
+              </a>
               <a href="{{url('Admin/LaporanPenjualan/Harian')}}"><i class="fa fa-circle-o"></i>Sedang Berjalan
               </a>
               <a href="{{url('Admin/LaporanPenjualan/Bulanan')}}"><i class="fa fa-circle-o"></i>Selesai

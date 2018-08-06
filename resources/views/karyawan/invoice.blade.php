@@ -3,11 +3,6 @@
 @section('content')
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Point Of Sales</a></li>
-        <li><a href="#">Karyawan</a></li>
-        <li class="active">Pembayaran</li>
-      </ol>
     </section>
 
     <!-- Main content -->
@@ -33,7 +28,6 @@
         </div>
         <!-- /.col -->
       </div>
-      @if($layout['kantongbelanja']->count() > 0)
       <!-- Table row -->
       <div class="row">
         <div class="col-xs-12 table-responsive">
@@ -41,16 +35,19 @@
             <thead>
             <tr>
               <th>No</th>
-              <th>Nama</th>
+              <th>Menu</th>
+              <th>Nama Restoran</th>
               <th>Jumlah</th>
               <th>Total</th>
              </tr>
             </thead>
             <tbody>
+            <?php $a=1; ?>
             @foreach($layout['kantongbelanja'] as $kantongbelanja)
             <tr>
-              <th scope="row">1</th>
+              <th scope="row">{{$a++}}</th>
               <td>{{$kantongbelanja->katalog->nama}}</td>
+              <td>{{$kantongbelanja->katalog->kategori->nama}}</td>
               <td>{{$kantongbelanja->jumlah}}</td>
               <td>{{ "Rp " . number_format($kantongbelanja->total_harga,2,',','.') }}</td>
             </tr>
@@ -64,73 +61,56 @@
       <div class="row">
         <!-- accepted payments column -->
         <div class="col-xs-6">
-          <p class="lead">Pilih Uang :</p>
-          <button onclick="bayar(500)" style="margin-bottom: 3px;" type="button" class="btn btn-success">Rp. 500,-</button>
-          <button onclick="bayar(1000)" style="margin-bottom: 3px;" type="button" class="btn btn-success">Rp. 1.000,-</button>
-          <button onclick="bayar(2000)" style="margin-bottom: 3px;" type="button" class="btn btn-success">Rp. 2.000,-</button>
-          <button onclick="bayar(5000)" style="margin-bottom: 3px;" type="button" class="btn btn-success">Rp. 5.000,-</button>
-          <button onclick="bayar(10000)" style="margin-bottom: 3px;" type="button" class="btn btn-success">Rp. 10.000,-</button>
-          <button onclick="bayar(20000)" style="margin-bottom: 3px;" type="button" class="btn btn-success">Rp. 20.000,-</button>
-          <button onclick="bayar(50000)" style="margin-bottom: 3px;" type="button" class="btn btn-success">Rp. 50.000,-</button>
-          <button onclick="bayar(100000)" style="margin-bottom: 3px;" type="button" class="btn btn-success">Rp. 100.000,-</button>
-          <button onclick="bersihin()" style="margin-bottom: 3px;" type="button" class="btn btn-danger">Hapus</button>
-        </div>
-        <!-- /.col -->
-        <div class="col-xs-6">
-          <p class="lead">Keterangan :</p>
+          <p class="lead">Detail Penerima order :</p>
           <form method="post" action={{url('Karyawan/Bayar')}}>
           @csrf
           <div class="table-responsive">
             <table class="table">
               <tr>
-                <th>Atas Nama :</th>
-                <td><input type="text" class="form-control" name="nama" placeholder="Nama Masih Kosong"></td>
-              </tr>
-              <tr>
-                <th style="width:50%">Total :</th>
+                <th style="width:50%">Nama :</th>
                 <td>
-{{"Rp ".number_format($hasil=$layout['kantongbelanja']->where('users_id', $layout['user']->id)->sum('total_harga'),2,',','.') }}
+                  {{$layout['user']->name}}
                 </td>
               </tr>
               <tr>
-                <th>Bayar :</th>
-                <td><input type="text" class="form-control" id="input_bayar" name="bayar"></td>
-                <input type="hidden" name="total" value="{{$hasil}}">
+                <th style="width:50%">Tempat Tinggal :</th>
+                <td>
+                  {{$layout['user']->alamat}}
+                </td>
+              </tr>
+              <tr>
+                <th style="width:50%">No. Telfon :</th>
+                <td>
+                  {{$layout['user']->no_handphone}}
+                </td>
               </tr>
             </table>
           </div>
+        </form>
+        </div>
+        <!-- /.col -->
+        <div class="col-xs-6">
+          <p class="lead">Keterangan :</p>
+          <div class="table-responsive">
+            <table class="table">
+              <tr>
+                <th style="width:50%">Total :</th>
+                <td>
+                  {{"Rp ".number_format($hasil=$layout['kantongbelanja']->where('users_id', $layout['user']->id)->sum('total_harga'),2,',','.') }}
+                </td>
+              </tr>
+            </table>
+          </div>
+          <br><br>
           <div align="center">
-            <button type="submit" class="btn btn-primary">Bayar</button>
+            <a href="{{url('Karyawan/ProsesTransaksi')}}" class="btn btn-primary">Proses Transaksi</a>
             <a href="{{url('Karyawan/BatalkanTransaksi')}}" class="btn btn-danger">Batalkan Transaksi</a>
           </div>
-        </form>
         </div>
         <!-- /.col -->
       </div>
       <!-- /.row -->
     </section>
-    @else
-    <div align="center">
-      <h4>Kantong Belanja Masih Kosong</h4>
-      <a href="{{url('/Karyawan/Dashboard')}}" class="btn btn-sm btn-success">Kembali ke Dashboard</a>
-    </div>
-    @endif
     <!-- /.content -->
     <div class="clearfix"></div>
-@endsection
-
-@section('script')
-<script>
-  function bayar(uang) 
-  {
-    var lama = +document.getElementById("input_bayar").value;
-    var hasil = uang + lama;
-    document.getElementById("input_bayar").value = hasil;
-  }
-
-  function bersihin()
-  {
-    document.getElementById("input_bayar").value = 0;    
-  }
-</script>
 @endsection

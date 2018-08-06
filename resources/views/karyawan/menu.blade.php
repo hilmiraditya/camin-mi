@@ -5,13 +5,13 @@
     <section class="content-header">
       <h1>
         Menu
-        <small>{{$kategori->nama}}</small>
+        <small>{{$data['kategori']->nama}}</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Point Of Sales</a></li>
         <li><a href="#">Admin</a></li>
         <li><a href="#">Menu</a></li>
-        <li class="active">{{$kategori->nama}}</li>
+        <li class="active">{{$data['kategori']->nama}}</li>
       </ol>
     </section>
 
@@ -36,8 +36,8 @@
       </div></div>
       @endif
       <div class="row" align="center">
-        @if($katalog->count() > 0)
-        @foreach($katalog as $katalog)
+        @if($data['katalog']->count() > 0)
+        @foreach($data['katalog'] as $katalog)
         <div class="col-md-6">
           <!-- Line chart -->
           <div class="box box-primary">
@@ -68,17 +68,17 @@
                 <div class="col-sm-4" align="center">
                   <div class="input-group">
                     <span class="input-group-btn">
-                      <button type="button" class="btn btn-danger btn-number"  data-type="minus" onclick="kurang()">
+                      <button type="button" class="btn btn-danger btn-number"  data-type="minus" onclick="kurang({{$katalog->id}})">
                         <span class="glyphicon glyphicon-minus"></span>
                       </button>
                     </span>
                     <input type="hidden" name="katalog_id" value="{{$katalog->id}}">
                     <input type="hidden" name="users_id" value="{{$layout['user']->id}}">
                     <input type="hidden" name="harga" value="{{$katalog->harga}}">
-                    <input type="text" id="input_menu" name="jumlah" class="form-control input-number" value="0">
+                    <input type="text" id="input_menu{{$katalog->id}}" name="jumlah" class="form-control input-number" value="0">
 
                     <span class="input-group-btn">
-                      <button type="button" class="btn btn-success btn-number" data-type="plus" onclick="tambah()">
+                      <button type="button" class="btn btn-success btn-number" data-type="plus" onclick="tambah({{$katalog->id}})">
                         <span class="glyphicon glyphicon-plus"></span>
                       </button>
                     </span>
@@ -94,11 +94,12 @@
             </div>
           </div>
         <!-- /.col -->
+        </div>
         @endforeach
         @else
         <div class="col-md-12" align="center">
           <br>
-          <h4>Belum ada menu pada kategori {{$kategori->nama}}</h4>
+          <h4>Belum ada menu pada kategori {{$data['kategori']->nama}}</h4>
           <br>
         </div>
         @endif
@@ -110,23 +111,23 @@
 
 @section('script')
 <script>
-  function tambah()
+  function tambah($menu)
   {
-    if (document.getElementById("input_menu").value < 30)
+    if (document.getElementById("input_menu" + $menu).value < 30)
     {
-      var lama = +document.getElementById("input_menu").value;
+      var lama = +document.getElementById("input_menu" + $menu).value;
       var hasil = lama + 1;
-      document.getElementById("input_menu").value = hasil;
+      document.getElementById("input_menu" + $menu).value = hasil;
     }
   }
 
-  function kurang()
+  function kurang($menu)
   {
-    if (document.getElementById("input_menu").value > 1)
+    if (document.getElementById("input_menu" + $menu).value > 1)
     {
-      var lama = +document.getElementById("input_menu").value;
+      var lama = +document.getElementById("input_menu" + $menu).value;
       var hasil = lama - 1;
-      document.getElementById("input_menu").value = hasil;
+      document.getElementById("input_menu" + $menu).value = hasil;
     }
   }
 </script>

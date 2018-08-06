@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Point Of Sales | @yield('title')</title>
+  <title>TC Fast Food | @yield('title')</title>
   <!-- Tell the browser to be responsive to screen width -->
   <link rel="icon" href="{{url('satean.jpg')}}">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -49,9 +49,9 @@
     <!-- Logo -->
     <a class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini">POS</span>
+      <span class="logo-mini">TC-FF</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg">Point Of Sales</span>
+      <span class="logo-lg">TC Fast Food</span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -63,7 +63,7 @@
 
         <ul class="nav navbar-nav">
           <!-- User Account: style can be found in dropdown.less -->
-          @if(!Request::is('Karyawan/KantongBelanja') && !Request::is('Karyawan/Bayar'))
+          @if(!Request::is('Pengguna/KantongBelanja') && !Request::is('Pengguna/ProsesTransaksi'))
           <li class="dropdown messages-menu">
             <a href="#" data-toggle="modal" data-target="#exampleModalLong">
               <i class="fa fa-shopping-bag"></i>
@@ -82,19 +82,12 @@
 
                 <p>
                   {{$layout['user']->name}}
-                  @if($layout['user']->isAdmin == 0)
-                  <small>Cabang {{$layout['user']->Cabang->nama}}</small>
-                  @else
-                  <small>Admin dalam Mode Karyawan</small>
-                  @endif
                 </p>
               </li>
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div align="center">
-                  @if($layout['user']->isAdmin == 1)
-                  <a href="{{url('/Admin/Dashboard')}}" class="btn btn-default btn-flat">Kembali ke Mode Admin</a>
-                  @endif
+                  <a href="#" data-toggle="modal" data-target="#ubahakun" class="btn btn-default btn-flat">Ubah Akun</a>
                   <a class="btn btn-default btn-flat" href="{{ route('logout') }}"] onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                     Logout
                   </a>
@@ -109,7 +102,7 @@
       </div>
     </nav>
   </header>
-  @if(!Request::is('Karyawan/KantongBelanja') && !Request::is('Karyawan/Bayar'))
+  @if(!Request::is('Pengguna/KantongBelanja') && !Request::is('Pengguna/ProsesTransaksi'))
   <!-- Left side column. contains the logo and sidebar -->
   <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
@@ -117,7 +110,7 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li>
-          <a href="{{url('/Karyawan/Dashboard')}}">
+          <a href="{{url('/Pengguna/Dashboard')}}">
             <i class="fa fa-dashboard"></i><span>Dashboard</span>
           </a>
         </li>
@@ -132,7 +125,7 @@
           <ul class="treeview-menu">
             @foreach($layout['listkategori'] as $kategori)
             <li>
-              <a href="{{url('Karyawan/Menu'.'/'.$kategori->id)}}">
+              <a href="{{url('Pengguna/Menu'.'/'.$kategori->id)}}">
                 <i class="fa fa-circle-o"></i>{{$kategori->nama}}
               </a>
             </li>
@@ -143,20 +136,25 @@
         <li class="treeview">
           <a href="#">
             <i class="fa fa-money"></i>
-            <span>Transaksi Cabang</span>
+            <span>Transaksi</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
             <li>
-              <a href="{{url('Karyawan/LaporanPenjualan/Harian'.'/'.$layout['user']->cabang_id)}}">
-                <i class="fa fa-circle-o"></i>Harian
+              <a href="{{url('Pengguna/Dibatalkan')}}">
+                <i class="fa fa-circle-o"></i>Dibatalkan
               </a>
             </li>
             <li>
-              <a href="{{url('Karyawan/LaporanPenjualan/Bulanan'.'/'.$layout['user']->cabang_id)}}">
-                <i class="fa fa-circle-o"></i>Bulanan
+              <a href="{{url('Pengguna/SedangBerjalan')}}">
+                <i class="fa fa-circle-o"></i>Sedang Berjalan
+              </a>
+            </li>
+            <li>
+              <a href="{{url('Pengguna/Selesai')}}">
+                <i class="fa fa-circle-o"></i>Selesai
               </a>
             </li>
           </ul>
@@ -174,9 +172,9 @@
   <!-- /.content-wrapper -->
   <footer class="main-footer">
     <div class="pull-right hidden-xs">
-      <b>Version</b> 1.0
+      <b>Kelompok </b> 1
     </div>
-    <strong>&copy; 2018 Developed By <a href="mailto:raditya113@icloud.com" target="_top">Me</a></strong>
+    <strong>&copy; 2018 Lab. Manajemen Informasi Teknik Informatika ITS</a></strong>
   </footer>
 </div>
 <!-- ./wrapper -->
@@ -263,7 +261,7 @@
       <td>{{$kantongbelanja->katalog->nama}}</td>
       <td>{{$kantongbelanja->jumlah}}</td>
       <td>{{"Rp " . number_format($kantongbelanja->total_harga,2,',','.')}}</td>
-      <td><a href="{{url('Karyawan/HapusItem'.'/'.$kantongbelanja->id)}}" class="btn btn-sm btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+      <td><a href="{{url('Pengguna/HapusItem'.'/'.$kantongbelanja->id)}}" class="btn btn-sm btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
     </tr>
     @endforeach
   </tbody>
@@ -283,11 +281,51 @@
       </div>
       <div class="modal-footer">
         @if($layout['kantongbelanja']->count() > 0)
-        <a href="{{url('/Karyawan/KantongBelanja')}}" class="btn btn-success">Lanjut Ke Pembayaran</a>
-        <a href="{{url('/Karyawan/BatalkanBelanja')}}" class="btn btn-warning">Batalkan Transaksi</a>
+        <a href="{{url('/Pengguna/KantongBelanja')}}" class="btn btn-success">Lanjut Ke Pembayaran</a>
+        <a href="{{url('/Pengguna/BatalkanBelanja')}}" class="btn btn-warning">Batalkan Transaksi</a>
         @endif
         <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
       </div>
+    </div>
+  </div>
+</div>
+<!-- Ubah Data Modal -->
+<div class="modal fade" id="ubahakun" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Ubah Cabang pada Akun Admin</h5>
+      </div>
+      <form method="POST" action="{{url('Pengguna/UbahAkunPengguna')}}" enctype="multipart/form-data">
+      <div class="modal-body">
+          @csrf
+          <input type="hidden" name="id" value="{{$layout['user']->id}}">
+          <div class="form-group">
+            <label>Nama :</label>
+            <input class="form-control" type="text" name="name" value="{{$layout['user']->name}}">
+          </div>
+          <div class="form-group">
+            <label>Email :</label>
+            <input class="form-control" type="text" value="{{$layout['user']->email}}" disabled>
+          </div>
+          <div class="form-group">
+            <label>No. Handphone :</label>
+            <input class="form-control" type="text" name="no_handphone" value="{{$layout['user']->no_handphone}}">
+          </div>
+          <div class="form-group">
+            <label>Alamat :</label>
+            <input class="form-control" type="text" name="alamat" value="{{$layout['user']->alamat}}">
+          </div>
+          <div class="form-group">
+            <label>Password :</label>
+            <input class="form-control" type="password" name="password">
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Ubah</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+      </div>
+      </form>
     </div>
   </div>
 </div>

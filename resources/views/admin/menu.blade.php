@@ -30,14 +30,11 @@
     </div>
       <br>
       <div align="center">
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#inforestoran">
+          Lihat Lokasi
+        </button>
         <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#inforestoran">
           Info Restoran
-        </button>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambahmenu">
-          Tambah Menu
-        </button>
-        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#hapuskategori">
-          Hapus Restoran
         </button>
       </div>
       @if(session()->has('message'))
@@ -106,7 +103,16 @@
           <br>
         </div>
         @endif
-
+        <div class="col-md-12" align="center">
+          <br>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambahmenu">
+            Tambah Menu
+          </button>
+          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#hapuskategori">
+            Hapus Restoran
+          </button>
+          <br>
+        </div>
       </div>
       <!-- /.row -->
     </section>

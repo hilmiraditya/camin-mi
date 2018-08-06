@@ -4,8 +4,8 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Laporan Transaksi
-        <small>{{$date}}</small>
+        Transaksi
+        <small>Sedang Berjalan</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i>Point Of Sales</a></li>

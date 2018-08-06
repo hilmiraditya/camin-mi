@@ -12,12 +12,23 @@
       </ol>
     </section>
     <section class="content">
-    @if(session()->has('message'))
+      @if(session()->has('message'))
       <div class="row"><div class="col-xs-12">
         <div class="alert alert-success">
           {{ session()->get('message') }}
         </div>
       </div></div>
-    @endif
+      @endif
+      @if (count($errors) > 0)
+      <div class="row"><div class="col-xs-12">
+        <div class = "alert alert-danger">
+          <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+          </ul>
+        </div>
+      </div></div>
+      @endif
     </section>
 @endsection

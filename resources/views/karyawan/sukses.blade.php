@@ -8,7 +8,7 @@
           <img src="{{url('sukses.png')}}" style="width: 150px;height: 150px;">
           <br>
           <h3>
-          Transaksi atas nama <b>{{$nama}}</b> berhasil, Kembali <b>{{"Rp " . number_format($kembali,2,',','.')}}</b>
+          Transaksi berhasil, silahkan menunggu</b>
         </h3>
           <h4>ID Transaksi : <b>{{$id_transaksi}}</b></h4>
           <br>

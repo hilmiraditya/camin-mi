@@ -91,8 +91,7 @@ class MenuRestoran extends Controller
         {
             $menu->diskon = $Request->get('diskon');
         }
-
-        $menu->keuntungan = $Request->get('keuntungan');
+        
         $menu->nama = $Request->get('nama');
         $menu->harga = $Request->get('harga');
         $menu->keterangan = $Request->get('keterangan');
