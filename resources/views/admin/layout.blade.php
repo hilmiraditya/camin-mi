@@ -139,12 +139,15 @@
           </a>
           <ul class="treeview-menu">
             <li>
-              <a href="{{url('Karyawan/LaporanPenjualan/Harian'.'/'.$layout['user']->cabang_id)}}">
+              <a href="{{url('Admin/Transaksi/Request')}}">
                 <i class="fa fa-circle-o"></i>Request dari Pengguna
               </a>
-              <a href="{{url('Admin/LaporanPenjualan/Harian')}}"><i class="fa fa-circle-o"></i>Sedang Berjalan
+              <a href="{{url('Admin/Transaksi/SedangBerjalan')}}"><i class="fa fa-circle-o"></i>Sedang Berjalan
               </a>
-              <a href="{{url('Admin/LaporanPenjualan/Bulanan')}}"><i class="fa fa-circle-o"></i>Selesai
+              <a href="{{url('Admin/Transaksi/Dibatalkan')}}">
+                <i class="fa fa-circle-o"></i>Dibatalkan
+              </a>
+              <a href="{{url('Admin/Transaksi/Selesai')}}"><i class="fa fa-circle-o"></i>Selesai
               </a>
             </li>
           </ul>

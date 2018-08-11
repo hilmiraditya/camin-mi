@@ -2,10 +2,13 @@
 
 namespace App;
 
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 
 class KantongBelanja extends Model
 {
+    use Notifiable;
+
     protected $table = 'kantong_belanja';
 
     protected $fillable = [

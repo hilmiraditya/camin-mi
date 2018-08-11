@@ -44,6 +44,31 @@ class Kantong_Belanja extends Controller
     	return Redirect::back()->with('message', 'Item Berhasil Ditambah');
     }
 
+    public function tambah_ajax()
+    {
+        $layout = $this->default();
+        $rules = array (
+            'jumlah' => 'required|numeric'
+        );
+        $validator = Validator::make ( Input::all (), $rules );
+        if ($validator->fails ())
+        return Response::json ( array (       
+                'errors' => $validator->getMessageBag ()->toArray ()
+        ));
+        else {
+            //$data = new Data ();
+            //$data->name = $request->name;
+            //$data->save ();
+            $data = new KantongBelanja;
+            $data->jumlah = $request->get('jumlah');
+            $data->katalog_id = $request->get('katalog_id');
+            $data->users_id = $request->get('users_id');
+            $data->total_harga = $request->get('jumlah')*$request->get('harga');
+            $data->save();
+            return response ()->json ( $data );
+        }
+    }
+
     public function hapus_semua()
     {
         $layout = $this->default();

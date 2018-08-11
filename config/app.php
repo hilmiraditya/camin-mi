@@ -161,6 +161,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+
+        //package tambahan
         RenatoMarinho\LaravelPageSpeed\ServiceProvider::class,
         Evercode1\TraitMaker\TraitMakerServiceProvider::class,
 
@@ -212,6 +214,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
+        //package tambahan
         'PDF' => Barryvdh\DomPDF\Facade::class,
         'GMaps' => FarhanWazir\GoogleMaps\Facades\GMapsFacade::class,
     ],

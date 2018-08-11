@@ -17,6 +17,27 @@
 
     <!-- Main content -->
     <section class="content">
+    <div class="row">
+      <div class="col-md-12">
+        <a>
+          @if($data['kategori']->gambar == NULL)
+          <img src="{{url('adminlte/restaurant.png')}}" alt="Lights" style="width:100% ;height:200px;">
+          @else
+          <img src="{{url('fotorestoran').'/'.$data['kategori']->gambar}}" alt="Lights" style="width:100% ;height:200px;">
+          @endif
+        </a>
+      </div>
+    </div>
+      <br>
+      <div align="center">
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#inforestoran">
+          Lihat Lokasi
+        </button>
+        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#inforestoran">
+          Info Restoran
+        </button>
+      </div>
+      <br>
       @if(session()->has('message'))
       <div class="row"><div class="col-xs-12">
         <div class="alert alert-success">
@@ -61,8 +82,8 @@
               </div>
             </div>
             <div class="box-footer with-border">
-              <form method="POST" action="{{url('Karyawan/TambahItem')}}">
-              @csrf
+              <form method="POST" action="{{url('Pengguna/TambahItem')}}">
+                @csrf
               <div align="row">
                 <div class="col-sm-4"></div>
                 <div class="col-sm-4" align="center">
@@ -72,11 +93,10 @@
                         <span class="glyphicon glyphicon-minus"></span>
                       </button>
                     </span>
-                    <input type="hidden" name="katalog_id" value="{{$katalog->id}}">
-                    <input type="hidden" name="users_id" value="{{$layout['user']->id}}">
-                    <input type="hidden" name="harga" value="{{$katalog->harga}}">
+                    <input type="hidden"  id="katalog{{$katalog->id}}" name="katalog_id" value="{{$katalog->id}}">
+                    <input type="hidden" id="users_id{{$katalog->id}}" name="users_id" value="{{$layout['user']->id}}">
+                    <input type="hidden" id="harga{{$katalog->id}}" name="harga" value="{{$katalog->harga}}">
                     <input type="text" id="input_menu{{$katalog->id}}" name="jumlah" class="form-control input-number" value="0">
-
                     <span class="input-group-btn">
                       <button type="button" class="btn btn-success btn-number" data-type="plus" onclick="tambah({{$katalog->id}})">
                         <span class="glyphicon glyphicon-plus"></span>
@@ -131,4 +151,60 @@
     }
   }
 </script>
+
+<script type="text/javascript">
+$("#tambah_menu_oi").click(function(){ 
+    $.ajax({
+        type: 'post',
+        url: '/Pengguna/TambahItemAjax',
+        data: {
+            '_token': $('input[name=_token]').val(),
+            'katalog_id': $('input[name=katalog_id]').val(),
+            'users_id': $('input[name=users_id]').val(),
+            'harga': $('input[name=harga]').val(),
+            'jumlah': $('input[name=jumlah]').val(),
+        },
+        success: function(data) {
+            if ((data.errors))
+            {
+                $('.error').removeClass('hidden');
+                $('.error').text(data.errors.name);
+            } 
+            else 
+            {
+                $('.error').remove();
+            }
+        },
+    });
+    $('#katalog_id' + data.id).val('');
+    $('#users_id' + data.id).val('');
+    $('#harga' + data.id).val('');
+    $('#jumlah'+ data.id).val('');
+});
+</script>
+@endsection
+
+@section('modal')
+<!-- Modal untuk info restoran-->
+<div class="modal fade" id="inforestoran" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="exampleModalLabel">Info restoran </h4>
+      </div>
+      <div class="modal-body">
+        <h5>Nama Restoran : <b>{{$data['kategori']->nama}}</b></h5>
+        <br>
+        <h5>No. Telefon : <b>{{$data['kategori']->no_telepon}}</h5>
+        <br>
+        <h5>Alamat : <b>{{$data['kategori']->alamat}}</h5>
+        <br>
+        <h5>Keterangan : <b>{{$data['kategori']->keterangan}}</h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
+      </div>
+    </div>
+  </div>
+</div>
 @endsection

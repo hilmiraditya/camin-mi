@@ -5,21 +5,28 @@ namespace App\Http\Controllers\Karyawan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Traits\KaryawanDefaultLayout;
+use Illuminate\Support\Facades\Auth;
+
+use App\Notifications\StatusPesanan;
+use Illuminate\Notifications\Notifiable;
 
 use App\Penjualan;
 use App\KantongBelanja;
 
 class Pembayaran extends Controller
 {
-    use KaryawanDefaultLayout;
+    use KaryawanDefaultLayout, Notifiable;
 
     public function index(Request $request)
     {
+        //kirim notifikasi
+        Auth::user()->notify(new StatusPesanan);
+        dd('Notifnya bisa cui wkwk'); 
+              
         //$validator  = $request->validate([
         //    'nama'      => 'required',
         //    'bayar'     => 'numeric|required'
         //]);
-
     	$layout = $this->default();
     	//$nama = $request->get('nama');
     	$id_transaksi = mt_rand(100,1000);
@@ -35,8 +42,6 @@ class Pembayaran extends Controller
     	}
     	KantongBelanja::where('users_id', $layout['user']->id)->delete();
     	//$kembali = $request->get('bayar') - $request->get('total');
-    	return view('karyawan.sukses')
-            ->with('id_transaksi', $id_transaksi)
-            ->with('layout', $layout);
+    	return view('karyawan.sukses')->with('id_transaksi', $id_transaksi)->with('layout', $layout);
     }
 }

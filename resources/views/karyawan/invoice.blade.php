@@ -103,8 +103,8 @@
           </div>
           <br><br>
           <div align="center">
-            <a href="{{url('Karyawan/ProsesTransaksi')}}" class="btn btn-primary">Proses Transaksi</a>
-            <a href="{{url('Karyawan/BatalkanTransaksi')}}" class="btn btn-danger">Batalkan Transaksi</a>
+            <a href="{{url('Pengguna/ProsesTransaksi')}}" class="btn btn-primary">Proses Transaksi</a>
+            <a href="{{url('Pengguna/BatalkanTransaksi')}}" class="btn btn-danger">Batalkan Transaksi</a>
           </div>
         </div>
         <!-- /.col -->

@@ -12,7 +12,7 @@
         </h3>
           <h4>ID Transaksi : <b>{{$id_transaksi}}</b></h4>
           <br>
-          <a class="btn btn-success" href="{{url('Karyawan/Dashboard')}}">Kembali Ke Dashboard</a>
+          <a class="btn btn-success" href="{{url('Pengguna/Dashboard')}}">Kembali Ke Dashboard</a>
         </div>
     </section>
 @endsection

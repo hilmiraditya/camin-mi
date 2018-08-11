@@ -5,7 +5,6 @@
     <section class="content-header">
       <h1>
         Transaksi
-        <small>Sedang Berjalan</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i>Point Of Sales</a></li>
@@ -23,6 +22,16 @@
               {{ session()->get('message') }}
             </div>
           @endif
+          <div class="alert alert-warning">
+            <h4>List Proses Transaksi</h4>
+            <a>
+              <a class="btn btn-xs btn-primary">Pending</a>
+              <a class="btn btn-xs btn-info">Sedang Di Proses</a> 
+              <a class="btn btn-xs btn-success">Selesai</a>
+              <a class="btn btn-xs btn-danger">Dibatalkan Admin</a>
+              <a class="btn btn-xs btn-danger">Dibatalkan Pengguna</a>
+            </a>
+          </div>
           @if($penjualan->count() > 0)
           <div class="box">
             <!-- /.box-header -->
@@ -31,14 +40,15 @@
                 <thead>
                 <tr>
                   <th>No</th>
-                  <th>Atas Nama</th>
                   <th>ID Transaksi</th>
-                  <th>Nama Menu</th>
-                  <th>Kategori</th>
+                  <th>Nama Pemesan</th>
+                  <th>Menu</th>
+                  <th>Restoran</th>
                   <th>Jumlah</th>
-                  <th>Cabang</th>
                   <th>Tanggal</th>
-                  <th>Opsi</th>
+                  <th>Status</th>
+                  @if(!Request::is('Admin/Transaksi/Dibatalkan') && !Request::is('Admin/Transaksi/Selesai'))<th>Opsi</th>
+                  @endif
                 </tr>
                 </thead>
                 <tbody>
@@ -46,34 +56,41 @@
                 @foreach($penjualan as $penjualan)
                 <tr>
                   <td>{{$a++}}</td>
-                  @if($penjualan->keterangan == NULL) <td><a class="btn btn-xs btn-warning">Tidak diisi</a></td>
-                  @else<td>{{$penjualan->keterangan}}</td>
-                  @endif
                   <td>{{$penjualan->id_transaksi}}</td>
+                  <td>{{$penjualan->Users->name}}</td>
                   <td>{{$penjualan->Katalog->nama}}</td>
-                  <td>{{$penjualan->Katalog->Kategori->nama}}
+                  <td>{{$penjualan->Katalog->Kategori->nama}}</td>
                   <td>{{$penjualan->jumlah}}</td>
-                  @if($penjualan->cabang_id == NULL)<td><a class="btn btn-xs btn-primary">Admin</a>
-                  @else<td>{{$penjualan->Cabang->nama}}</td>
-                  @endif
                   <td>{{$penjualan->created_at}}</td>
-                  <td>
-                    <a href="{{url('Admin/HapusLaporanPenjualan'.'/'.$penjualan->id)}}" class="btn btn-xs btn-danger">Hapus</a>
-                  </td>
+                  @if($penjualan->keterangan == 0)<td><a class="btn btn-xs btn-primary">Pending</a></td>
+                  @elseif($penjualan->keterangan == -1)<td><a class="btn btn-xs btn-danger">Dibatalkan Pengguna</a></td>
+                  @elseif($penjualan->keterangan == -2)<td><a class="btn btn-xs btn-danger">Dibatalkan Admin</a></td>
+                  @elseif($penjualan->keterangan == 1)<td><a class="btn btn-xs btn-info">Sedang Diproses</a></td>
+                  @elseif($penjualan->keterangan == 2)<td><a class="btn btn-xs btn-success">Selesai</a></td>
+                  @endif
+                  @if(!Request::is('Admin/Transaksi/Dibatalkan') && !Request::is('Admin/Transaksi/Selesai'))
+                    <td>
+                      <a href="{{url('Admin/Proses/'.$penjualan->id)}}" class="btn btn-xs btn-success">Proses Selanjutnya</a>
+                      @if(!Request::is('Admin/Transaksi/SedangBerjalan'))
+                      <a class="btn btn-xs btn-danger">Batalkan</a>
+                      @endif
+                    </td>
+                  @endif
                 </tr>
                 @endforeach
                 </tbody>
                 <tfoot>
                 <tr>
                   <th>No</th>
-                  <th>Atas Nama</th>
                   <th>ID Transaksi</th>
-                  <th>Nama Menu</th>
-                  <th>Kategori</th>
+                  <th>Nama Pengguna</th>
+                  <th>Menu</th>
+                  <th>Restoran</th>
                   <th>Jumlah</th>
-                  <th>Cabang</th>
                   <th>Tanggal</th>
-                  <th>Opsi</th>
+                  <th>Status</th>
+                  @if(!Request::is('Admin/Transaksi/Dibatalkan') && !Request::is('Admin/Transaksi/Selesai'))<th>Opsi</th>
+                  @endif
                 </tr>
                 </tfoot>
               </table>

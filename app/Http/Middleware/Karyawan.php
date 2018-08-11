@@ -18,7 +18,6 @@ class Karyawan
         if(auth()->user()->isAdmin == 0)
         {
             return $next($request);
-            //return 'karyawan goblok';
         }
         return redirect('/');
     }

@@ -29,7 +29,7 @@ class HomeController extends Controller
         }
         else if(auth()->user()->isAdmin == 0)
         {
-            return redirect('/Karyawan/Dashboard');
+            return redirect('/Pengguna/Dashboard');
         }
     }
 }

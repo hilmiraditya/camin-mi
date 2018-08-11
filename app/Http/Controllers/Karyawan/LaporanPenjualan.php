@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Traits\KaryawanDefaultLayout;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Auth;
 
 use App\Penjualan;
 
@@ -37,21 +38,21 @@ class LaporanPenjualan extends Controller
     public function sedang_berjalan()
     {
         $layout = $this->default();
-        $penjualan = Penjualan::Where('keterangan', '!=', 2)->Where('keterangan', '!=', -1)->Where('keterangan', '!=', -2)->get();
+        $penjualan = Penjualan::Where('keterangan', '!=', 2)->Where('keterangan', '!=', -1)->Where('keterangan', '!=', -2)->where('users_id', Auth::user()->id)->get();
         return view('karyawan.penjualan')->with('layout', $layout)->with('penjualan', $penjualan);
     }
 
     public function selesai()
     {
         $layout = $this->default();
-        $penjualan = Penjualan::where('keterangan', 2)->get();
+        $penjualan = Penjualan::where('keterangan', 2)->where('users_id', Auth::user()->id)->get();
         return view('karyawan.penjualan')->with('layout', $layout)->with('penjualan', $penjualan);
     }
 
     public function batal()
     {
         $layout = $this->default();
-        $penjualan = Penjualan::orWhere('keterangan', -1)->orWhere('keterangan', -2)->get();
+        $penjualan = Penjualan::where('users_id', Auth::user()->id)->orWhere('keterangan', -1)->orWhere('keterangan', -2)->get();
         return view('karyawan.penjualan')->with('layout', $layout)->with('penjualan', $penjualan);        
     }
 

@@ -45,12 +45,16 @@ Route::group(['prefix' => 'Admin'], function () {
 	Route::post('UbahMenu', 'Admin\MenuRestoran@update');
 
 	//laporanpenjualan
-	Route::get('LaporanPenjualan/Harian', 'Admin\LaporanPenjualan@harian');
-	Route::get('LaporanPenjualan/Bulanan', 'Admin\LaporanPenjualan@bulanan');
-	Route::get('HapusLaporanPenjualan/{id}', 'Admin\LaporanPenjualan@delete');
+	Route::get('Transaksi/Request', 'Admin\LaporanPenjualan@request');
+	Route::get('Transaksi/SedangBerjalan', 'Admin\LaporanPenjualan@sedang_berjalan');
+	Route::get('Transaksi/Dibatalkan', 'Admin\LaporanPenjualan@dibatalkan');
+	Route::get('Transaksi/Selesai', 'Admin\LaporanPenjualan@selesai');
 
 	//nyoba pdf
 	Route::get('NyobaPDF', 'Admin\LaporanPenjualan@nyobapdf');
+
+	//proses transaksi
+	Route::get('Proses/{id}', 'Admin\LaporanPenjualan@proses');
 
 	//download laporan pdf
 	Route::get('LaporanHarian', 'Admin\LaporanPenjualan@laporan_harian');
@@ -79,6 +83,7 @@ Route::group(['prefix' => 'Pengguna'], function () {
 
 	//kantong belanja
 	Route::post('TambahItem', 'Karyawan\Kantong_Belanja@tambah');
+	Route::post('TambahItemAjax', 'Karyawan\Kantong_Belanja@tambah_ajax');
 	Route::get('KantongBelanja', 'Karyawan\Kantong_Belanja@index');
 	Route::get('BatalkanBelanja', 'Karyawan\Kantong_Belanja@hapus_semua');
 	Route::get('BatalkanTransaksi', 'Karyawan\Kantong_Belanja@batalkan_transaksi');
@@ -86,6 +91,7 @@ Route::group(['prefix' => 'Pengguna'], function () {
 
 	//transaksi sukses
 	Route::get('ProsesTransaksi', 'Karyawan\Pembayaran@index');
+
 });
 
 
