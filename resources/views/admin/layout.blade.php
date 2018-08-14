@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Point Of Sales | @yield('title')</title>
+  <title>({{Auth::user()->unReadnotifications->count()}}) Point Of Sales | @yield('title')</title>
   <!-- Tell the browser to be responsive to screen width -->
   <link rel="icon" href="{{url('satean.jpg')}}">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -62,6 +62,11 @@
       </a>
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
+          <li class="dropdown user user-menu">
+            <a href="#" data-toggle="modal" data-target="#modalnotifikasi">
+              <i class="fa fa-bell"></i><span class="badge badge-secondary">{{Auth::user()->unReadnotifications->count()}}</span>
+            </a>
+          </li>
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -138,8 +143,9 @@
             </span>
           </a>
           <ul class="treeview-menu">
+            <?php $standar=0;?>
             <li>
-              <a href="{{url('Admin/Transaksi/Request')}}">
+              <a href="{{url('Admin/Transaksi/Request/'.$standar)}}">
                 <i class="fa fa-circle-o"></i>Request dari Pengguna
               </a>
               <a href="{{url('Admin/Transaksi/SedangBerjalan')}}"><i class="fa fa-circle-o"></i>Sedang Berjalan
@@ -264,6 +270,57 @@
     </div>
   </div>
 </div>
+
+<!-- Modal Notifikasi-->
+<div class="modal fade" id="modalnotifikasi" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="exampleModalLongTitle">
+          <i class="fa fa-bell"></i> Notifikasi Pesanan
+        </h4>
+      </div>
+      <div class="modal-body">
+@if(Auth::user()->unreadNotifications->count() > 0)
+<table class="table table-striped" id="table_kantong_belanja">
+  <thead>
+    <tr>
+      <th scope="col">No</th>
+      <th scope="col">ID Transaksi</th>
+      <th scope="col">Nama Pemesan</th>
+      <th scope="col">Waktu Pemesanan</th>
+      <th scope="col">Opsi</th>
+    </tr>
+  </thead>
+  <?php $a=1; ?>
+  <tbody id="kantongbelanja_list" name="list_kantongbelanja">
+    @foreach(Auth::user()->unreadNotifications as $notifications)
+    <tr>
+      <td>{{$a++}}
+      <td>{{$notifications->data['id_transaksi']}}</td>
+      <td>{{$notifications->data['nama']}}</td>
+      <td>{{$notifications->data['waktu']}}</td>
+      <td>
+        <a class="btn btn-xs btn-primary" href="{{url('/Admin/Transaksi/Request/'.$notifications->data['id_transaksi'])}}">Lihat Detil</a>
+      </td>
+
+    </tr>
+    @endforeach
+  </tbody>
+</table>
+@else
+<div align="center">
+  <h4>Tidak Ada Notifikasi</h4>
+</div>
+@endif
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- Ubah Data Modal -->
 <div class="modal fade" id="ubahakun" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">

@@ -65,11 +65,6 @@
           <!-- User Account: style can be found in dropdown.less -->
           @if(!Request::is('Pengguna/KantongBelanja') && !Request::is('Pengguna/ProsesTransaksi'))
           <li class="dropdown messages-menu">
-            <a href="#" data-toggle="modal" data-target="#modalnotifikasi">
-              <i class="fa fa-bell"></i>
-            </a>
-          </li>
-          <li class="dropdown messages-menu">
             <a href="#" data-toggle="modal" data-target="#exampleModalLong">
               <i class="fa fa-shopping-bag"></i>
             </a>
@@ -84,7 +79,6 @@
               <!-- User image -->
               <li class="user-header">
                 <img src="{{url('satean.jpg')}}" class="img-circle" alt="User Image">
-
                 <p>
                   {{$layout['user']->name}}
                 </p>
@@ -147,6 +141,11 @@
             </span>
           </a>
           <ul class="treeview-menu">
+            <li>
+              <a href="{{url('Pengguna/Request')}}">
+                <i class="fa fa-circle-o"></i>Request
+              </a>
+            </li>
             <li>
               <a href="{{url('Pengguna/Dibatalkan')}}">
                 <i class="fa fa-circle-o"></i>Dibatalkan
@@ -295,62 +294,6 @@
   </div>
 </div>
 
-<!-- Modal Notifikasi-->
-<div class="modal fade" id="modalnotifikasi" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="exampleModalLongTitle">
-          <i class="fa fa-bell"></i> Notifikasi Pesanan
-        </h4>
-      </div>
-      <div class="modal-body">
-@if($layout['kantongbelanja']->count() > 0)
-<table class="table table-striped" id="table_kantong_belanja">
-  <thead>
-    <tr>
-      <th scope="col">No</th>
-      <th scope="col">Nama Menu</th>
-      <th scope="col">Restoran</th>
-      <th scope="col">Jumlah</th>
-      <th scope="col">Total</th>
-      <th scope="col">Opsi</th>
-    </tr>
-  </thead>
-  <?php $a=1; ?>
-  <tbody id="kantongbelanja_list" name="list_kantongbelanja">
-    @foreach($layout['kantongbelanja'] as $kantongbelanja)
-    <tr id="kantongbelanja{{$kantongbelanja->id}}">
-      <th scope="row">{{$a++}}</th>
-      <td>{{$kantongbelanja->katalog->nama}}</td>
-      <td>{{$kantongbelanja->katalog->kategori->nama}}</td>
-      <td>{{$kantongbelanja->jumlah}}</td>
-      <td>{{"Rp " . number_format($kantongbelanja->total_harga,2,',','.')}}</td>
-      <td><a class="btn btn-xs btn-info">Sedang Di Proses</a></td>
-    </tr>
-    @endforeach
-  </tbody>
-    <tr>
-      <th scope="row"></th>
-      <td></td>
-      <td></td>
-      <td><b>Total</b></td>
-      <td>{{"Rp " . number_format($layout['kantongbelanja']->sum('total_harga'),2,',','.')}}</td> 
-      <td></td> 
-    </tr>
-</table>
-@else
-<div align="center">
-  <h4>Tidak Ada Notifikasi</h4>
-</div>
-@endif
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
-      </div>
-    </div>
-  </div>
-</div>
 
 <!-- Ubah Data Modal -->
 <div class="modal fade" id="ubahakun" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

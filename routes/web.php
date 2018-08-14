@@ -45,7 +45,7 @@ Route::group(['prefix' => 'Admin'], function () {
 	Route::post('UbahMenu', 'Admin\MenuRestoran@update');
 
 	//laporanpenjualan
-	Route::get('Transaksi/Request', 'Admin\LaporanPenjualan@request');
+	Route::get('Transaksi/Request/{id}', 'Admin\LaporanPenjualan@request');
 	Route::get('Transaksi/SedangBerjalan', 'Admin\LaporanPenjualan@sedang_berjalan');
 	Route::get('Transaksi/Dibatalkan', 'Admin\LaporanPenjualan@dibatalkan');
 	Route::get('Transaksi/Selesai', 'Admin\LaporanPenjualan@selesai');
@@ -55,6 +55,9 @@ Route::group(['prefix' => 'Admin'], function () {
 
 	//proses transaksi
 	Route::get('Proses/{id}', 'Admin\LaporanPenjualan@proses');
+
+	//batalkan transaksi
+	Route::get('Batalkan/{id}', 'Admin\LaporanPenjualan@batal_admin');
 
 	//download laporan pdf
 	Route::get('LaporanHarian', 'Admin\LaporanPenjualan@laporan_harian');
@@ -80,6 +83,7 @@ Route::group(['prefix' => 'Pengguna'], function () {
 	Route::get('SedangBerjalan', 'Karyawan\LaporanPenjualan@sedang_berjalan');
 	Route::get('Selesai', 'Karyawan\LaporanPenjualan@selesai');
 	Route::get('Dibatalkan', 'Karyawan\LaporanPenjualan@batal');
+	Route::get('Request', 'Karyawan\LaporanPenjualan@request');
 
 	//kantong belanja
 	Route::post('TambahItem', 'Karyawan\Kantong_Belanja@tambah');
@@ -92,16 +96,7 @@ Route::group(['prefix' => 'Pengguna'], function () {
 	//transaksi sukses
 	Route::get('ProsesTransaksi', 'Karyawan\Pembayaran@index');
 
-});
+	//batalkan transaksi
+	Route::get('Batalkan/{id}', 'Karyawan\LaporanPenjualan@batal_pengguna');
 
-
-Route::get('/map', 'MapController@index');
-Route::get('/mapwkwk', function(){
-    $config = array();
-    $config['center'] = 'New York, USA';
-    GMaps::initialize($config);
-    $map = GMaps::create_map();
-
-    echo $map['js'];
-    echo $map['html'];
 });

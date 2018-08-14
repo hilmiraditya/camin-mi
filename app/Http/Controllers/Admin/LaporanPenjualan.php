@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Traits\DefaultLayout;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Auth;
 
 use App\Penjualan;
 use App\Katalog;
@@ -93,28 +94,55 @@ class LaporanPenjualan extends Controller
     {
         $layout = $this->default();
         $penjualan = Penjualan::where('keterangan', 1)->get();
-        return view('admin.penjualan')->with('layout', $layout)->with('penjualan', $penjualan);
+        return view('admin.penjualan')
+            ->with('layout', $layout)
+            ->with('penjualan', $penjualan)
+            ->with('keterangan', 'Sedang Berjalan');
     }
 
     public function selesai()
     {
         $layout = $this->default();
         $penjualan = Penjualan::where('keterangan', 2)->get();
-        return view('admin.penjualan')->with('layout', $layout)->with('penjualan', $penjualan);
+        return view('admin.penjualan')
+            ->with('layout', $layout)
+            ->with('penjualan', $penjualan)
+            ->with('keterangan', 'Telah Selesai');
     }
 
     public function dibatalkan()
     {
         $layout = $this->default();
         $penjualan = Penjualan::where('keterangan','!=', 1)->Where('keterangan','!=', 2)->Where('keterangan','!=', 0)->get();
-        return view('admin.penjualan')->with('layout', $layout)->with('penjualan', $penjualan);
+        return view('admin.penjualan')
+            ->with('layout', $layout)
+            ->with('penjualan', $penjualan)
+            ->with('keterangan', 'Dibatalkan');
     }
 
-    public function request()
+    public function request($id)
     {
         $layout = $this->default();
         $penjualan = Penjualan::where('keterangan', 0)->get();
-        return view('admin.penjualan')->with('layout', $layout)->with('penjualan', $penjualan);
+
+        if($id != 0)
+        {
+            $penjualanunread = Penjualan::where('id_transaksi', $id)->get();
+            Auth::user()->unreadNotifications->markAsRead();
+            return view('admin.penjualan')
+                ->with('layout', $layout)
+                ->with('penjualan', $penjualan)
+                ->with('penjualanunread', $penjualanunread)
+                ->with('keterangan', 'Request dari Pengguna')
+                ->with('message', 'Lihat pada kolom yang berwarna hijau');
+        }
+        else
+        {
+            return view('admin.penjualan')
+                ->with('layout', $layout)
+                ->with('penjualan', $penjualan)
+                ->with('keterangan', 'Request dari Pengguna');
+        }
     }
 
     public function proses($id)
@@ -147,7 +175,7 @@ class LaporanPenjualan extends Controller
     {
         $layout = $this->default();
         $request = Penjualan::find($id);
-        $request->keterangan = -1;
+        $request->keterangan = -2;
         $request->save();
         return Redirect::back()->with('message', 'Transaksi '.$request->Katalog->nama.' Berhasil Di Batalkan');
     }

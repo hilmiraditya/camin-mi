@@ -7,24 +7,18 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-use App\Penjualan;
-
-class StatusPesanan extends Notification
+class PenggunaStatusPesanan extends Notification
 {
     use Queueable;
 
-    protected $NotifikasiTransaksi;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($NotifikasiTransaksi)
+    public function __construct()
     {
         //
-        $this->id_transaksi = $NotifikasiTransaksi[0];
-        $this->nama = $NotifikasiTransaksi[1];
-        $this->waktu = $NotifikasiTransaksi[2];
     }
 
     /**
@@ -35,7 +29,7 @@ class StatusPesanan extends Notification
      */
     public function via($notifiable)
     {
-        return ['database'];
+        return ['mail'];
     }
 
     /**
@@ -61,9 +55,7 @@ class StatusPesanan extends Notification
     public function toArray($notifiable)
     {
         return [
-            'id_transaksi' => $this->id_transaksi,
-            'nama' => $this->nama,
-            'waktu' => $this->waktu
+            //
         ];
     }
 }

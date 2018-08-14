@@ -38,7 +38,7 @@ class LaporanPenjualan extends Controller
     public function sedang_berjalan()
     {
         $layout = $this->default();
-        $penjualan = Penjualan::Where('keterangan', '!=', 2)->Where('keterangan', '!=', -1)->Where('keterangan', '!=', -2)->where('users_id', Auth::user()->id)->get();
+        $penjualan = Penjualan::Where('keterangan', '!=', 2)->Where('keterangan', '!=', -1)->Where('keterangan', '!=', -2)->Where('keterangan', '!=', 0)->where('users_id', Auth::user()->id)->get();
         return view('karyawan.penjualan')->with('layout', $layout)->with('penjualan', $penjualan);
     }
 
@@ -49,11 +49,28 @@ class LaporanPenjualan extends Controller
         return view('karyawan.penjualan')->with('layout', $layout)->with('penjualan', $penjualan);
     }
 
+    public function request()
+    {
+        $layout = $this->default();
+        $penjualan = Penjualan::where('keterangan', 0)->where('users_id', Auth::user()->id)->get();
+        return view('karyawan.penjualan')->with('layout', $layout)->with('penjualan', $penjualan);
+    }
+
     public function batal()
     {
         $layout = $this->default();
-        $penjualan = Penjualan::where('users_id', Auth::user()->id)->orWhere('keterangan', -1)->orWhere('keterangan', -2)->get();
+        $penjualan = Penjualan::where('users_id', Auth::user()->id)->where('keterangan', -1)->where('keterangan', -2)->get();
         return view('karyawan.penjualan')->with('layout', $layout)->with('penjualan', $penjualan);        
     }
+
+    public function batal_pengguna($id)
+    {
+        $layout = $this->default();
+        $request = Penjualan::find($id);
+        $request->keterangan = -1;
+        $request->save();
+        return Redirect::back()->with('message', 'Transaksi '.$request->Katalog->nama.' Berhasil Di Batalkan');
+    }
+
 
 }  

@@ -7,6 +7,8 @@
         Transaksi
           @if(Request::is('Pengguna/Selesai'))<small>Selesai</small>
           @elseif(Request::is('Pengguna/SedangBerjalan'))<small>Sedang Berjalan</small>
+          @elseif(Request::is('Pengguna/Dibatalkan'))<small>Dibatalkan</small>
+          @elseif(Request::is('Pengguna/Request'))<small>Request</small>
           @endif
       </h1>
       <ol class="breadcrumb">

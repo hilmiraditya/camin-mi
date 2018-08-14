@@ -13,7 +13,7 @@ class Penjualan extends Model
     protected $table = 'Penjualan';
 
     protected $fillable = [
-    	'jumlah', 'keterangan', 'katalog_id', 'kategori_id', 'karyawan_id'
+    	'jumlah', 'katalog_id', 'kategori_id', 'id_transaksi', 'users_id', 'keterangan'
     ];
 
     public function Katalog()
