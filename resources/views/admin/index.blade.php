@@ -32,13 +32,6 @@
         </div>
       </div></div>
       @endif
-      <div class="row"><div class="col-xs-12">
-        <div class = "alert alert-warning">
-          <ul>
-            <li>Setiap hari pukul 23.55 akan ada email masuk ke email admin yang berisi laporan transaksi pada hari itu</li>
-          </ul>
-        </div>
-      </div></div>
       <!-- Small boxes (Stat box) -->
       <div class="row">
         <div class="col-lg-3 col-xs-6">
